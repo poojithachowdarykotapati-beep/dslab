@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Digital Portal - Kotapati Poojitha</title>
+    <!-- Fallback FontAwesome Icons + Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Pyodide for Real Pandas Python Execution -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <!-- Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (typeof tailwind !== 'undefined') {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
+                    }
+                }
+            };
+        }
+    </script>
+    <!-- 100% Offline & CDN-Failure Safe Standalone Stylesheet -->
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background-color: #020617 !important;
+            color: #f1f5f9 !important;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            min-height: 100vh;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: #14b8a6;
+            color: #020617;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        input, textarea, select {
+            font-family: inherit;
+            color: #f1f5f9 !important;
+            background-color: #020617 !important;
+        }
+
+        /* Displays & Visibility */
+        .block { display: block; }
+        .inline-block { display: inline-block; }
+        .flex { display: flex; }
+        .inline-flex { display: inline-flex; }
+        .grid { display: grid; }
+
+        /* Hidden must ALWAYS override standard display classes */
+        .hidden, [hidden], .hidden.flex, .hidden.block, .hidden.grid {
+            display: none !important;
+        }
+
+        /* Flexbox utilities */
+        .flex-1 { flex: 1 1 0% !important; }
+        .flex-col { flex-direction: column !important; }
+        .flex-row { flex-direction: row !important; }
+        .flex-wrap { flex-wrap: wrap !important; }
+        .items-center { align-items: center !important; }
+        .items-start { align-items: flex-start !important; }
+        .items-end { align-items: flex-end !important; }
+        .justify-between { justify-content: space-between !important; }
+        .justify-center { justify-content: center !important; }
+        .justify-end { justify-content: flex-end !important; }
+        .self-start { align-self: flex-start !important; }
+
+        /* Grid layouts */
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+
+        /* Positioning */
+        .relative { position: relative !important; }
+        .fixed { position: fixed !important; }
+        .absolute { position: absolute !important; }
+        .sticky { position: sticky !important; }
+        .inset-0 { top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; }
+        .inset-y-0 { top: 0 !important; bottom: 0 !important; }
+        .top-0 { top: 0 !important; }
+        .left-0 { left: 0 !important; }
+        .right-0 { right: 0 !important; }
+        .bottom-0 { bottom: 0 !important; }
+        .right-4 { right: 1rem !important; }
+        .top-4 { top: 1rem !important; }
+        .-right-10 { right: -2.5rem !important; }
+        .-bottom-10 { bottom: -2.5rem !important; }
+        .z-20 { z-index: 20 !important; }
+        .z-40 { z-index: 40 !important; }
+        .z-50 { z-index: 50 !important; }
+        .pointer-events-none { pointer-events: none !important; }
+
+        /* Sizing */
+        .w-full { width: 100% !important; }
+        .h-full { height: 100% !important; }
+        .min-h-screen { min-height: 100vh !important; }
+        .min-w-0 { min-width: 0 !important; }
+        .w-2 { width: 0.5rem !important; }
+        .h-2 { height: 0.5rem !important; }
+        .w-5 { width: 1.25rem !important; }
+        .h-5 { height: 1.25rem !important; }
+        .w-8 { width: 2rem !important; }
+        .h-8 { height: 2rem !important; }
+        .w-9 { width: 2.25rem !important; }
+        .h-9 { height: 2.25rem !important; }
+        .w-10 { width: 2.5rem !important; }
+        .h-10 { height: 2.5rem !important; }
+        .w-24 { width: 6rem !important; }
+        .h-24 { height: 6rem !important; }
+        .w-64 { width: 16rem !important; }
+        .ml-64 { margin-left: 16rem !important; }
+        .max-w-md { max-width: 28rem !important; }
+        .max-w-lg { max-width: 32rem !important; }
+        .max-w-2xl { max-width: 42rem !important; }
+        .max-w-7xl { max-width: 80rem !important; }
+        .max-w-\[140px\] { max-width: 140px !important; }
+        .h-\[92vh\] { height: 92vh !important; }
+
+        /* Spacing: Gaps & Margins */
+        .gap-2 { gap: 0.5rem !important; }
+        .gap-2\.5 { gap: 0.625rem !important; }
+        .gap-3 { gap: 0.75rem !important; }
+        .gap-3\.5 { gap: 0.875rem !important; }
+        .gap-4 { gap: 1rem !important; }
+        .gap-5 { gap: 1.25rem !important; }
+        .gap-6 { gap: 1.5rem !important; }
+        .gap-8 { gap: 2rem !important; }
+
+        .space-x-1 > * + * { margin-left: 0.25rem !important; }
+        .space-x-1\.5 > * + * { margin-left: 0.375rem !important; }
+        .space-x-2 > * + * { margin-left: 0.5rem !important; }
+        .space-x-3 > * + * { margin-left: 0.75rem !important; }
+        .space-x-3\.5 > * + * { margin-left: 0.875rem !important; }
+        .space-x-4 > * + * { margin-left: 1rem !important; }
+        .space-x-5 > * + * { margin-left: 1.25rem !important; }
+
+        .space-y-1 > * + * { margin-top: 0.25rem !important; }
+        .space-y-1\.5 > * + * { margin-top: 0.375rem !important; }
+        .space-y-2 > * + * { margin-top: 0.5rem !important; }
+        .space-y-3 > * + * { margin-top: 0.75rem !important; }
+        .space-y-4 > * + * { margin-top: 1rem !important; }
+        .space-y-6 > * + * { margin-top: 1.5rem !important; }
+        .space-y-8 > * + * { margin-top: 2rem !important; }
+
+        .p-1 { padding: 0.25rem !important; }
+        .p-2 { padding: 0.5rem !important; }
+        .p-3 { padding: 0.75rem !important; }
+        .p-3\.5 { padding: 0.875rem !important; }
+        .p-4 { padding: 1rem !important; }
+        .p-5 { padding: 1.25rem !important; }
+        .p-6 { padding: 1.5rem !important; }
+        .p-8 { padding: 2rem !important; }
+
+        .px-1 { padding-left: 0.25rem !important; padding-right: 0.25rem !important; }
+        .px-2\.5 { padding-left: 0.625rem !important; padding-right: 0.625rem !important; }
+        .px-3 { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+        .px-3\.5 { padding-left: 0.875rem !important; padding-right: 0.875rem !important; }
+        .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+        .px-5 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+        .px-6 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+        .px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
+
+        .py-0\.5 { padding-top: 0.125rem !important; padding-bottom: 0.125rem !important; }
+        .py-1 { padding-top: 0.25rem !important; padding-bottom: 0.25rem !important; }
+        .py-1\.5 { padding-top: 0.375rem !important; padding-bottom: 0.375rem !important; }
+        .py-2 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+        .py-2\.5 { padding-top: 0.625rem !important; padding-bottom: 0.625rem !important; }
+        .py-3 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+        .py-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+        .py-6 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+        .pt-0 { padding-top: 0 !important; }
+        .pt-2 { padding-top: 0.5rem !important; }
+        .pt-3 { padding-top: 0.75rem !important; }
+        .pt-4 { padding-top: 1rem !important; }
+        .pl-3\.5 { padding-left: 0.875rem !important; }
+        .pl-5 { padding-left: 1.25rem !important; }
+        .pl-10 { padding-left: 2.5rem !important; }
+        .pr-4 { padding-right: 1rem !important; }
+
+        .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+        .mt-0\.5 { margin-top: 0.125rem !important; }
+        .mt-1 { margin-top: 0.25rem !important; }
+        .mt-1\.5 { margin-top: 0.375rem !important; }
+        .mt-2 { margin-top: 0.5rem !important; }
+        .mt-3 { margin-top: 0.75rem !important; }
+        .mt-3\.5 { margin-top: 0.875rem !important; }
+        .mt-4 { margin-top: 1rem !important; }
+        .mt-6 { margin-top: 1.5rem !important; }
+
+        .mb-1 { margin-bottom: 0.25rem !important; }
+        .mb-1\.5 { margin-bottom: 0.375rem !important; }
+        .mb-2 { margin-bottom: 0.5rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+
+        .mr-1 { margin-right: 0.25rem !important; }
+        .mr-1\.5 { margin-right: 0.375rem !important; }
+        .mr-2 { margin-right: 0.5rem !important; }
+        .ml-1 { margin-left: 0.25rem !important; }
+        .ml-2 { margin-left: 0.5rem !important; }
+
+        /* Colors & Theme Backgrounds */
+        .bg-\[\#020617\] { background-color: #020617 !important; }
+        .bg-\[\#070b19\] { background-color: #070b19 !important; }
+        .bg-\[\#070b19\]\/80 { background-color: rgba(7, 11, 25, 0.8) !important; }
+        .bg-\[\#070b19\]\/90 { background-color: rgba(7, 11, 25, 0.9) !important; }
+        .bg-\[\#020617\]\/50 { background-color: rgba(2, 6, 23, 0.5) !important; }
+        .bg-\[\#020617\]\/85 { background-color: rgba(2, 6, 23, 0.85) !important; }
+        .bg-\[\#020617\]\/90 { background-color: rgba(2, 6, 23, 0.9) !important; }
+
+        .bg-teal-500\/10 { background-color: rgba(20, 184, 166, 0.1) !important; }
+        .bg-teal-500\/20 { background-color: rgba(20, 184, 166, 0.2) !important; }
+        .bg-teal-500\/30 { background-color: rgba(20, 184, 166, 0.3) !important; }
+        .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1) !important; }
+        .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2) !important; }
+        .bg-cyan-500\/10 { background-color: rgba(6, 182, 212, 0.1) !important; }
+        .bg-cyan-500\/20 { background-color: rgba(6, 182, 212, 0.2) !important; }
+        .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2) !important; }
+        .bg-rose-500\/20 { background-color: rgba(244, 63, 94, 0.2) !important; }
+        .bg-slate-800 { background-color: #1e293b !important; }
+        .bg-slate-700 { background-color: #334155 !important; }
+        .bg-slate-950\/70 { background-color: rgba(2, 6, 23, 0.7) !important; }
+        .bg-amber-400 { background-color: #fbbf24 !important; }
+        .bg-emerald-400 { background-color: #34d399 !important; }
+        .bg-cyan-400 { background-color: #22d3ee !important; }
+        .bg-rose-400 { background-color: #fb7185 !important; }
+
+        /* Gradient Themes */
+        .bg-gradient-to-r.from-teal-400.to-emerald-400,
+        .bg-gradient-to-tr.from-teal-400.to-emerald-400 {
+            background: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%) !important;
+            color: #020617 !important;
+        }
+
+        .bg-gradient-to-r.from-teal-950\/60 {
+            background: linear-gradient(to right, rgba(4, 47, 46, 0.6), #070b19 50%, rgba(6, 78, 59, 0.5)) !important;
+        }
+
+        .bg-gradient-to-r.from-teal-400.via-emerald-400.to-cyan-400 {
+            background: linear-gradient(to right, #2dd4bf, #34d399, #22d3ee) !important;
+        }
+
+        /* Typography & Text Colors */
+        .text-white { color: #ffffff !important; }
+        .text-slate-100 { color: #f1f5f9 !important; }
+        .text-slate-200 { color: #e2e8f0 !important; }
+        .text-slate-300 { color: #cbd5e1 !important; }
+        .text-slate-400 { color: #94a3b8 !important; }
+        .text-slate-500 { color: #64748b !important; }
+        .text-slate-950 { color: #020617 !important; }
+        .text-teal-300 { color: #5eead4 !important; }
+        .text-teal-400 { color: #2dd4bf !important; }
+        .text-emerald-400 { color: #34d399 !important; }
+        .text-cyan-400 { color: #22d3ee !important; }
+        .text-amber-400 { color: #fbbf24 !important; }
+        .text-rose-400 { color: #fb7185 !important; }
+        .text-teal-500\/10 { color: rgba(20, 184, 166, 0.1) !important; }
+
+        .text-\[10px\] { font-size: 10px !important; line-height: 14px !important; }
+        .text-\[11px\] { font-size: 11px !important; line-height: 15px !important; }
+        .text-xs { font-size: 0.75rem !important; line-height: 1rem !important; }
+        .text-sm { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+        .text-base { font-size: 1rem !important; line-height: 1.5rem !important; }
+        .text-lg { font-size: 1.125rem !important; line-height: 1.75rem !important; }
+        .text-xl { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+        .text-2xl { font-size: 1.5rem !important; line-height: 2rem !important; }
+        .text-9xl { font-size: 8rem !important; line-height: 1 !important; }
+
+        .font-medium { font-weight: 500 !important; }
+        .font-semibold { font-weight: 600 !important; }
+        .font-bold { font-weight: 700 !important; }
+        .font-extrabold { font-weight: 800 !important; }
+        .font-mono { font-family: 'Fira Code', monospace, Consolas, Courier !important; }
+
+        .uppercase { text-transform: uppercase !important; }
+        .tracking-tight { letter-spacing: -0.025em !important; }
+        .tracking-wide { letter-spacing: 0.025em !important; }
+        .tracking-wider { letter-spacing: 0.05em !important; }
+        .tracking-widest { letter-spacing: 0.1em !important; }
+        .leading-relaxed { line-height: 1.625 !important; }
+
+        .text-center { text-align: center !important; }
+        .text-left { text-align: left !important; }
+        .text-right { text-align: right !important; }
+
+        /* Borders & Rounded Corners */
+        .rounded-lg { border-radius: 0.5rem !important; }
+        .rounded-xl { border-radius: 0.75rem !important; }
+        .rounded-2xl { border-radius: 1rem !important; }
+        .rounded-3xl { border-radius: 1.5rem !important; }
+        .rounded-full { border-radius: 9999px !important; }
+
+        .border { border: 1px solid rgba(20, 184, 166, 0.2) !important; }
+        .border-2 { border-width: 2px !important; border-style: solid !important; }
+        .border-4 { border-width: 4px !important; border-style: solid !important; }
+        .border-t { border-top: 1px solid rgba(20, 184, 166, 0.2) !important; }
+        .border-b { border-bottom: 1px solid rgba(20, 184, 166, 0.2) !important; }
+        .border-r { border-right: 1px solid rgba(20, 184, 166, 0.2) !important; }
+        .border-l { border-left: 1px solid rgba(20, 184, 166, 0.2) !important; }
+
+        .border-teal-400 { border-color: #2dd4bf !important; }
+        .border-teal-500\/10 { border-color: rgba(20, 184, 166, 0.1) !important; }
+        .border-teal-500\/15 { border-color: rgba(20, 184, 166, 0.15) !important; }
+        .border-teal-500\/20 { border-color: rgba(20, 184, 166, 0.2) !important; }
+        .border-teal-500\/25 { border-color: rgba(20, 184, 166, 0.25) !important; }
+        .border-teal-500\/30 { border-color: rgba(20, 184, 166, 0.3) !important; }
+        .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.3) !important; }
+        .border-cyan-500\/30 { border-color: rgba(6, 182, 212, 0.3) !important; }
+        .border-amber-500\/30 { border-color: rgba(245, 158, 11, 0.3) !important; }
+        .border-rose-500\/30 { border-color: rgba(244, 63, 94, 0.3) !important; }
+        .border-slate-600 { border-color: #475569 !important; }
+        .border-slate-700 { border-color: #334155 !important; }
+
+        /* Shadows & Blurs */
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2) !important; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3) !important; }
+        .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4) !important; }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important; }
+        .shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4) !important; }
+        .backdrop-blur-md { backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; }
+        .backdrop-blur-xl { backdrop-filter: blur(24px) !important; -webkit-backdrop-filter: blur(24px) !important; }
+
+        /* Interactive effects & Transitions */
+        .transition { transition: all 0.2s ease-in-out !important; }
+        .cursor-pointer { cursor: pointer !important; }
+        .overflow-hidden { overflow: hidden !important; }
+        .overflow-y-auto { overflow-y: auto !important; }
+        .resize-none { resize: none !important; }
+        .whitespace-pre-wrap { white-space: pre-wrap !important; }
+        .object-cover { object-fit: cover !important; }
+
+        /* Hover states */
+        .hover\:opacity-90:hover { opacity: 0.9 !important; }
+        .hover\:bg-teal-500\/10:hover { background-color: rgba(20, 184, 166, 0.1) !important; }
+        .hover\:bg-teal-500\/20:hover { background-color: rgba(20, 184, 166, 0.2) !important; }
+        .hover\:bg-teal-500\/30:hover { background-color: rgba(20, 184, 166, 0.3) !important; }
+        .hover\:bg-teal-500\/5:hover { background-color: rgba(20, 184, 166, 0.05) !important; }
+        .hover\:bg-slate-800:hover { background-color: #1e293b !important; }
+        .hover\:bg-slate-700:hover { background-color: #334155 !important; }
+        .hover\:text-white:hover { color: #ffffff !important; }
+        .hover\:text-teal-400:hover { color: #2dd4bf !important; }
+        .hover\:text-cyan-400:hover { color: #22d3ee !important; }
+        .hover\:text-rose-400:hover { color: #fb7185 !important; }
+
+        /* Group hover for photo upload */
+        .group:hover .group-hover\:opacity-100 { opacity: 1 !important; }
+        .opacity-0 { opacity: 0 !important; }
+
+        /* Focus rings */
+        input:focus, textarea:focus {
+            outline: none !important;
+            border-color: #2dd4bf !important;
+            box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.3) !important;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important; }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin { animation: spin 1s linear infinite !important; }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.3); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(20, 184, 166, 0.6); }
+
+        /* Responsive Breakpoint Overrides (Placed at very end to override base mobile-first utilities) */
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .md\:block { display: block !important; }
+            .md\:flex { display: flex !important; }
+            .md\:hidden { display: none !important; }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:flex-row { flex-direction: row !important; }
+            .lg\:w-80 {
+                width: 20rem !important;
+                min-width: 20rem !important;
+                max-width: 20rem !important;
+                flex: 0 0 20rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#020617] text-slate-100 antialiased min-h-screen flex flex-col selection:bg-teal-500 selection:text-slate-950">
+
+    <div class="flex flex-1 min-h-screen relative">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-[#070b19] text-slate-300 flex flex-col fixed inset-y-0 left-0 z-50 border-r border-teal-500/20 shadow-2xl">
+            <div class="p-6 flex items-center space-x-3.5 border-b border-teal-500/20 bg-[#070b19]/80">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-400 to-emerald-400 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/30 font-bold">
+                    <i class="fa-solid fa-code text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-white tracking-wider text-[11px]">DATA SCIENCE</h1>
+                    <p class="text-[10px] text-teal-400 font-bold tracking-widest uppercase">DIGITAL PORTAL</p>
+                </div>
+            </div>
+
+            <nav class="flex-1 px-3 py-6 space-y-2">
+                <a href="javascript:void(0)" onclick="switchTab('home')" id="nav-home" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl text-slate-950 bg-gradient-to-r from-teal-400 to-emerald-400 font-bold transition shadow-lg text-xs">
+                    <i class="fa-solid fa-house w-5 text-slate-950"></i>
+                    <span>Home Dashboard</span>
+                </a>
+                <a href="javascript:void(0)" onclick="switchTab('modules')" id="nav-modules" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
+                    <i class="fa-solid fa-book-bookmark w-5 text-teal-400"></i>
+                    <span>Modules (<span id="module-count-badge">5</span>)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="switchTab('experiments')" id="nav-experiments" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
+                    <i class="fa-solid fa-flask-vial w-5 text-emerald-400"></i>
+                    <span>Experiments Hub (<span id="experiment-count-badge">2</span>)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="switchTab('tools')" id="nav-tools" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
+                    <i class="fa-solid fa-toolbox w-5 text-cyan-400"></i>
+                    <span>Tools & Projects</span>
+                </a>
+            </nav>
+
+            <div class="px-3.5 py-3 border-t border-teal-500/20 bg-[#070b19]/90 space-y-2">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center justify-between">
+                    <span>Data Persistence</span>
+                    <span class="text-emerald-400 font-mono text-[9px] flex items-center"><i class="fa-solid fa-circle text-[6px] mr-1 text-emerald-400 animate-pulse"></i>Synced</span>
+                </div>
+                <button onclick="exportPortalBackup()" class="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 hover:text-white border border-teal-500/30 text-[11px] font-semibold transition shadow-sm" title="Download a JSON backup of all experiments, modules, and profile">
+                    <i class="fa-solid fa-download text-xs text-teal-400"></i>
+                    <span>Download Backup</span>
+                </button>
+                <label class="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[11px] font-semibold transition cursor-pointer" title="Restore portal data from a saved JSON file">
+                    <i class="fa-solid fa-upload text-xs text-emerald-400"></i>
+                    <span>Restore from Backup</span>
+                    <input type="file" id="backup-file-input" accept=".json" class="hidden" onchange="importPortalBackup(event)">
+                </label>
+            </div>
+
+            <div class="p-4 border-t border-teal-500/20 bg-[#020617] text-xs text-slate-400">
+                <div class="flex items-center space-x-2 text-teal-400 font-semibold mb-1 text-[11px]">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Mohan Babu University</span>
+                </div>
+                <p class="text-[10px] text-slate-500">CSE-DS 2028 Batch Portal</p>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <div class="flex-1 ml-64 flex flex-col min-w-0">
+            <header class="bg-[#070b19]/90 backdrop-blur-md border-b border-teal-500/20 sticky top-0 z-40 px-8 py-4 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-4 flex-1 max-w-lg">
+                    <div class="relative w-full">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search modules, experiments, tools..." class="w-full pl-10 pr-4 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-400 transition">
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div id="save-status-indicator" class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-semibold transition">
+                        <i class="fa-solid fa-circle-check text-xs"></i>
+                        <span id="save-status-text">Auto-Saved</span>
+                    </div>
+
+                    <button onclick="openAddModal()" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                        <span>Add Item</span>
+                    </button>
+                    <div class="flex items-center space-x-3.5 border-l pl-5 border-teal-500/20">
+                        <div id="header-avatar-container" class="w-9 h-9 rounded-full flex items-center justify-center border-2 border-teal-400 bg-teal-500/20 text-teal-400 font-bold overflow-hidden shadow-md">
+                            <span id="header-initials">KP</span>
+                            <img id="header-avatar" src="" alt="" class="w-full h-full object-cover hidden">
+                        </div>
+                        <div class="hidden md:block text-right">
+                            <p id="header-name" class="text-xs font-bold text-white tracking-wide">KOTAPATI POOJITHA</p>
+                            <p id="header-roll" class="text-[10px] text-teal-400 font-mono">24102A030050</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 p-8 flex flex-col lg:flex-row gap-8">
+                <!-- Content Container -->
+                <div class="flex-1 min-w-0" id="main-content-area"></div>
+
+                <!-- Right ID Card & Profile Sidebar -->
+                <div class="w-full lg:w-80 flex flex-col space-y-6">
+                    <div class="bg-[#070b19] backdrop-blur-xl rounded-3xl shadow-xl border border-teal-500/20 p-6 text-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400"></div>
+                        <div class="absolute top-4 right-4 text-teal-400">
+                            <i class="fa-solid fa-id-card text-lg"></i>
+                        </div>
+                        
+                        <!-- Student Photo (Directly Clickable) -->
+                        <div class="relative w-24 h-24 mx-auto mt-2 mb-4 group cursor-pointer" onclick="document.getElementById('profile-photo-input').click()" title="Click to upload profile photo">
+                            <div id="id-card-photo-placeholder" class="w-full h-full rounded-full border-4 border-teal-500/30 bg-teal-500/10 flex items-center justify-center text-teal-400 font-extrabold text-xl shadow-xl">
+                                KP
+                            </div>
+                            <img id="id-card-photo" src="" alt="Profile Photo" class="w-full h-full rounded-full object-cover shadow-xl border-4 border-teal-500/30 hidden">
+                            <div class="absolute inset-0 bg-slate-950/70 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white text-[10px] font-semibold">
+                                <i class="fa-solid fa-camera mr-1"></i> Upload
+                            </div>
+                        </div>
+                        <input type="file" id="profile-photo-input" accept="image/*" class="hidden" onchange="previewProfilePhoto(event)">
+
+                        <h2 id="id-card-name" class="text-xs font-extrabold text-white tracking-tight">KOTAPATI POOJITHA</h2>
+                        <p class="text-[10px] font-bold text-teal-400 uppercase tracking-widest mt-0.5">CSE - Data Science</p>
+
+                        <!-- Details list -->
+                        <div class="mt-4 text-left space-y-2 bg-[#020617] p-3.5 rounded-2xl border border-teal-500/20 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium text-[11px]">Roll No:</span>
+                                <span id="id-card-roll" class="font-bold font-mono text-slate-200 text-[11px]">24102A030050</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium text-[11px]">Section:</span>
+                                <span id="id-card-section" class="font-bold text-teal-400 text-[11px]">CSE-DS A</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium text-[11px]">Subject:</span>
+                                <span id="id-card-subject" class="font-bold text-slate-200 text-[11px]">Data Science Lab</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium text-[11px]">Professor:</span>
+                                <span id="id-card-prof" class="font-bold text-slate-200 text-[11px]">S.Bosubabu</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium text-[11px]">University:</span>
+                                <span id="id-card-univ" class="font-bold text-slate-200 text-right text-[11px]">Mohan Babu Univ.</span>
+                            </div>
+                        </div>
+
+                        <!-- Professional Social Links -->
+                        <div class="flex gap-2.5 mt-3.5">
+                            <a id="id-card-github" href="https://github.com" target="_blank" class="flex-1 bg-[#020617] hover:bg-teal-500/10 text-slate-200 py-2 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition border border-teal-500/30">
+                                <i class="fa-brands fa-github text-teal-400"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a id="id-card-linkedin" href="https://linkedin.com" target="_blank" class="flex-1 bg-[#020617] hover:bg-teal-500/10 text-slate-200 py-2 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition border border-teal-500/30">
+                                <i class="fa-brands fa-linkedin text-cyan-400"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+
+                        <button onclick="openEditProfileModal()" class="w-full mt-3 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 py-2 rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 transition border border-teal-500/30">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Edit ID Card & Links</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="profile-modal" class="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-teal-500/30">
+            <div class="px-6 py-4 bg-[#020617] text-white flex justify-between items-center border-b border-teal-500/20">
+                <h3 class="font-bold text-sm">Edit ID Card Details & Socials</h3>
+                <button onclick="closeProfileModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+            </div>
+            <form id="profile-form" onsubmit="saveProfile(event)" class="p-6 space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Full Name</label>
+                    <input type="text" id="profile-name-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Roll Number</label>
+                    <input type="text" id="profile-roll-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Section</label>
+                    <input type="text" id="profile-section-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Subject</label>
+                    <input type="text" id="profile-subject-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Assistant Professor</label>
+                    <input type="text" id="profile-prof-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">University</label>
+                    <input type="text" id="profile-univ-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">GitHub Profile URL</label>
+                    <input type="url" id="profile-github-input" placeholder="https://github.com/username" class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">LinkedIn Profile URL</label>
+                    <input type="url" id="profile-linkedin-input" placeholder="https://linkedin.com/in/username" class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div class="flex justify-end space-x-3 pt-3 border-t border-teal-500/20">
+                    <button type="button" onclick="closeProfileModal()" class="px-4 py-2 bg-[#020617] text-slate-300 rounded-xl font-semibold border border-teal-500/30">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold rounded-xl shadow-md">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Universal Add/Edit Item Modal -->
+    <div id="item-modal" class="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-teal-500/30">
+            <div class="px-6 py-4 bg-[#020617] text-white flex justify-between items-center border-b border-teal-500/20">
+                <h3 id="modal-title" class="font-bold text-sm">Add / Edit Item</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+            </div>
+            <form id="item-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4 text-xs">
+                <input type="hidden" id="modal-edit-id">
+                <input type="hidden" id="modal-edit-category">
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Title / Name</label>
+                    <input type="text" id="modal-title-input" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Description / Tag</label>
+                    <textarea id="modal-desc-input" rows="2" required class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">GitHub Repository Link</label>
+                    <input type="url" id="modal-github-input" placeholder="https://github.com/..." class="w-full px-3.5 py-2 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div class="flex justify-end space-x-3 pt-3 border-t border-teal-500/20">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-[#020617] text-slate-300 rounded-xl font-semibold border border-teal-500/30">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold rounded-xl shadow-md">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add / Edit Sub-Experiment Modal -->
+    <div id="subexp-modal" class="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-teal-500/30">
+            <div class="px-6 py-4 bg-[#020617] text-white flex justify-between items-center border-b border-teal-500/20">
+                <div>
+                    <h3 id="subexp-modal-title" class="font-bold text-sm text-white">Add Sub-Experiment</h3>
+                    <p id="subexp-modal-parent" class="text-[10px] text-teal-400 font-mono mt-0.5">Parent Experiment</p>
+                </div>
+                <button type="button" onclick="closeSubExpModal()" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-base"></i></button>
+            </div>
+            <form id="subexp-form" onsubmit="handleSubExpFormSubmit(event)" class="p-6 space-y-4 text-xs">
+                <input type="hidden" id="subexp-parent-id">
+                <input type="hidden" id="subexp-edit-id">
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Sub-Experiment Title / Name</label>
+                    <input type="text" id="subexp-title-input" required placeholder="e.g., a-3: Reading CSV Data & DataFrame Operations" class="w-full px-3.5 py-2.5 bg-[#020617] border border-teal-500/30 rounded-xl text-slate-200 placeholder-slate-500 focus:ring-2 focus:ring-teal-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-400 uppercase mb-1">Python Starter Code</label>
+                    <textarea id="subexp-code-input" rows="7" spellcheck="false" class="w-full px-3.5 py-2.5 bg-[#020617] text-teal-300 font-mono border border-teal-500/30 rounded-xl text-xs focus:ring-2 focus:ring-teal-400 focus:outline-none leading-relaxed resize-none"></textarea>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-teal-500/20">
+                    <button type="button" onclick="closeSubExpModal()" class="px-4 py-2 bg-[#020617] text-slate-300 rounded-xl font-semibold border border-teal-500/30 hover:bg-slate-800 transition">Cancel</button>
+                    <div class="flex items-center space-x-2">
+                        <button type="button" onclick="handleSubExpFormSubmit(event, true)" class="px-4 py-2 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-xl font-bold border border-teal-500/30 transition flex items-center space-x-1.5 shadow">
+                            <i class="fa-solid fa-terminal text-xs"></i><span>Save & Open Compiler</span>
+                        </button>
+                        <button type="submit" class="px-5 py-2 bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold rounded-xl shadow-md hover:opacity-90 active:scale-95 transition">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Live Python Compiler Workspace Modal (Large & Spacious) -->
+    <div id="compiler-modal" class="fixed inset-0 bg-[#020617]/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-6">
+        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-7xl w-full h-[92vh] overflow-hidden border border-teal-500/30 flex flex-col">
+            <div class="px-8 py-4 bg-[#020617] text-white flex justify-between items-center sticky top-0 z-20 border-b border-teal-500/20">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h3 id="compiler-modal-title" class="font-extrabold text-base text-teal-400">Live Python Compiler</h3>
+                        <p id="compiler-modal-subtitle" class="text-xs text-slate-400">Real Pandas & NumPy Execution with In-Memory CSV Dataset Engine</p>
+                    </div>
+                    <div id="compiler-status-badge" class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span id="compiler-status-text">Loading Pyodide & Pandas...</span>
+                    </div>
+                </div>
+                <button onclick="closeCompilerModal()" class="text-slate-400 hover:text-white text-2xl transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="p-6 space-y-4 flex-1 flex flex-col overflow-hidden">
+                <!-- Action Bar & Dataset Helpers -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-[#020617] p-3.5 rounded-2xl border border-teal-500/20">
+                    <div class="flex items-center flex-wrap gap-2 text-xs">
+                        <span class="text-slate-400 font-semibold flex items-center mr-1">
+                            <i class="fa-solid fa-database text-teal-400 mr-1.5"></i> Ready Datasets:
+                        </span>
+                        <button onclick="insertDatasetSnippet('students.csv')" class="px-2.5 py-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 rounded-lg border border-teal-500/30 font-mono text-[11px] transition">
+                            students.csv
+                        </button>
+                        <button onclick="insertDatasetSnippet('iris.csv')" class="px-2.5 py-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 rounded-lg border border-teal-500/30 font-mono text-[11px] transition">
+                            iris.csv
+                        </button>
+                        <button onclick="insertDatasetSnippet('data.csv')" class="px-2.5 py-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 rounded-lg border border-teal-500/30 font-mono text-[11px] transition">
+                            data.csv
+                        </button>
+                        <label class="cursor-pointer px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-600 font-medium text-[11px] flex items-center space-x-1.5 transition ml-1" title="Upload any CSV file to use in Python">
+                            <i class="fa-solid fa-file-arrow-up text-teal-400"></i>
+                            <span>Upload Custom CSV</span>
+                            <input type="file" accept=".csv" class="hidden" onchange="uploadCsvToPyodide(event)">
+                        </label>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <button onclick="resetCompilerCode()" class="text-slate-400 hover:text-slate-200 px-3 py-2 text-xs font-semibold rounded-xl hover:bg-slate-800/80 transition" title="Reset code to experiment default">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset Code
+                        </button>
+                        <button onclick="runCompilerCode()" id="run-code-btn" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 active:scale-95 transition">
+                            <i class="fa-solid fa-play text-xs"></i><span>Run Code & Get Output</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Code Editor & Console Output split view -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1 overflow-hidden">
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-center mb-1.5 px-1">
+                            <label class="text-xs uppercase font-semibold text-slate-400 tracking-wider flex items-center">
+                                <i class="fa-brands fa-python text-teal-400 mr-1.5"></i> Python Script
+                            </label>
+                            <span class="text-[10px] text-slate-500 font-mono">Python 3.11 Environment</span>
+                        </div>
+                        <textarea id="compiler-code-input" rows="22" oninput="onCompilerCodeInput()" spellcheck="false" class="w-full flex-1 bg-[#020617] text-teal-300 font-mono text-xs p-5 rounded-2xl border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none leading-relaxed shadow-inner"></textarea>
+                    </div>
+                    
+                    <div class="flex flex-col h-full">
+                        <div class="flex justify-between items-center mb-1.5 px-1">
+                            <label class="text-xs uppercase font-semibold text-slate-400 tracking-wider flex items-center">
+                                <i class="fa-solid fa-terminal text-emerald-400 mr-1.5"></i> Console Output (Live)
+                            </label>
+                            <button onclick="clearConsoleOutput()" class="text-[10px] text-slate-400 hover:text-white transition">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Clear Console
+                            </button>
+                        </div>
+                        <pre id="compiler-output-pre" class="w-full flex-1 bg-[#020617] text-slate-200 font-mono text-xs p-5 rounded-2xl border border-teal-500/30 overflow-y-auto resize-none leading-relaxed whitespace-pre-wrap shadow-inner">Click 'Run Code & Get Output' to execute the Python script...</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script with Complete Robust Pyodide URL & CSV Environment Engine -->
+    <script>
+        let pyodideReady = false;
+        let pyodideInstance = null;
+
+        const BUILTIN_DATASETS = {
+            'students.csv': `Roll_No,Name,Section,Marks,Grade,Attendance\n24102A030050,Kotapati Poojitha,CSE-DS A,98,A+,96\n24102A030051,Aarav Sharma,CSE-DS A,92,A,91\n24102A030052,Ananya Verma,CSE-DS A,89,A,88\n24102A030053,Rohan Reddy,CSE-DS A,95,A+,94\n24102A030054,Sneha Patel,CSE-DS A,84,B+,85\n24102A030055,Vikram Das,CSE-DS A,78,B,80`,
+            'iris.csv': `sepal_length,sepal_width,petal_length,petal_width,species\n5.1,3.5,1.4,0.2,setosa\n4.9,3.0,1.4,0.2,setosa\n4.7,3.2,1.3,0.2,setosa\n7.0,3.2,4.7,1.4,versicolor\n6.4,3.2,4.5,1.5,versicolor\n6.9,3.1,4.9,1.5,versicolor\n6.3,3.3,6.0,2.5,virginica\n5.8,2.7,5.1,1.9,virginica\n7.1,3.0,5.9,2.1,virginica\n6.3,2.9,5.6,1.8,virginica`,
+            'data.csv': `id,name,department,salary,experience_years\n101,Kotapati Poojitha,Data Science,120000,4\n102,Aarav Sharma,Machine Learning,115000,3\n103,Ananya Verma,Analytics,98000,2\n104,Rohan Reddy,Data Science,125000,5\n105,Sneha Patel,AI Engineering,110000,3`
+        };
+
+        async function initPyodide() {
+            updateCompilerStatus('loading', 'Loading Python 3.11 Runtime...');
+            try {
+                pyodideInstance = await loadPyodide();
+                updateCompilerStatus('loading', 'Loading Pandas & NumPy...');
+                
+                await pyodideInstance.loadPackage("pandas");
+                await pyodideInstance.loadPackage("numpy");
+
+                for (const [filename, content] of Object.entries(BUILTIN_DATASETS)) {
+                    pyodideInstance.FS.writeFile(filename, content);
+                }
+
+                await pyodideInstance.runPythonAsync(`
+import io
+import urllib.request
+import urllib.error
+import pandas as pd
+import pandas.io.common
+from pyodide.http import open_url
+
+class PyodideUrlResponse:
+    def __init__(self, data, url=""):
+        if isinstance(data, str):
+            self.data_bytes = data.encode('utf-8')
+        else:
+            self.data_bytes = data
+        self.bio = io.BytesIO(self.data_bytes)
+        self.headers = {"Content-Encoding": None}
+        self.url = url
+        self.status = 200
+
+    def read(self, *args):
+        return self.bio.read(*args)
+
+    def readline(self, *args):
+        return self.bio.readline(*args)
+
+    def seek(self, *args):
+        return self.bio.seek(*args)
+
+    def tell(self):
+        return self.bio.tell()
+
+    def close(self):
+        self.bio.close()
+
+    def info(self):
+        return self.headers
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+_orig_urlopen = urllib.request.urlopen
+
+def _browser_urlopen(url, *args, **kwargs):
+    req_url = url
+    if hasattr(url, 'full_url'):
+        req_url = url.full_url
+    elif hasattr(url, 'get_full_url'):
+        req_url = url.get_full_url()
+    elif not isinstance(url, str):
+        req_url = str(url)
+
+    if isinstance(req_url, str) and (req_url.startswith('http://') or req_url.startswith('https://')):
+        try:
+            res = open_url(req_url)
+            content = res.read()
+            return PyodideUrlResponse(content, req_url)
+        except Exception as e:
+            raise urllib.error.URLError(f"Failed to fetch {req_url}: {e}") from e
+    return _orig_urlopen(url, *args, **kwargs)
+
+urllib.request.urlopen = _browser_urlopen
+pandas.io.common.urlopen = _browser_urlopen
+
+_orig_read_csv = pd.read_csv
+
+def safe_read_csv(filepath_or_buffer, *args, **kwargs):
+    if isinstance(filepath_or_buffer, str) and (filepath_or_buffer.startswith('http://') or filepath_or_buffer.startswith('https://')):
+        try:
+            content = open_url(filepath_or_buffer).read()
+            return _orig_read_csv(io.StringIO(content), *args, **kwargs)
+        except Exception as e:
+            raise RuntimeError(f"Could not load online CSV from '{filepath_or_buffer}'. In browser Pyodide, the URL host must support CORS. Detail: {e}") from e
+    return _orig_read_csv(filepath_or_buffer, *args, **kwargs)
+
+pd.read_csv = safe_read_csv
+                `);
+
+                pyodideReady = true;
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+            } catch (err) {
+                console.error("Pyodide failed to load:", err);
+                updateCompilerStatus('error', 'Pyodide Load Failed (Check Network)');
+            }
+        }
+        initPyodide();
+
+        function updateCompilerStatus(status, text) {
+            const badge = document.getElementById('compiler-status-badge');
+            const textEl = document.getElementById('compiler-status-text');
+            if (!badge || !textEl) return;
+
+            textEl.innerText = text;
+            if (status === 'ready') {
+                badge.className = "px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1.5";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>${text}</span>`;
+            } else if (status === 'loading') {
+                badge.className = "px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center space-x-1.5";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span><span>${text}</span>`;
+            } else if (status === 'running') {
+                badge.className = "px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center space-x-1.5";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-spin"></span><span>${text}</span>`;
+            } else {
+                badge.className = "px-3 py-1 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center space-x-1.5";
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-400"></span><span>${text}</span>`;
+            }
+        }
+
+        const defaultProfile = {
+            name: 'KOTAPATI POOJITHA',
+            roll: '24102A030050',
+            section: 'CSE-DS A',
+            subject: 'Data Science Lab',
+            prof: 'S.Bosubabu',
+            univ: 'Mohan Babu University',
+            photo: '',
+            github: 'https://github.com',
+            linkedin: 'https://linkedin.com'
+        };
+
+        const defaultModules = [
+            { id: 1, title: 'Module 1: Python Fundamentals for Data Science', desc: 'Variables, data types, control flow, functions, and NumPy basics.', pdfName: 'module1_fundamentals.pdf', pdfData: null, github: 'https://github.com' },
+            { id: 2, title: 'Module 2: Data Preprocessing with Pandas', desc: 'Handling missing values, data transformation, merging datasets, and cleaning.', pdfName: 'module2_preprocessing.pdf', pdfData: null, github: 'https://github.com' },
+            { id: 3, title: 'Module 3: Data Visualization Mastery', desc: 'Creating insightful plots and visual dashboards using Matplotlib and Seaborn.', pdfName: 'module3_visualization.pdf', pdfData: null, github: 'https://github.com' },
+            { id: 4, title: 'Module 4: Machine Learning Algorithms', desc: 'Supervised and unsupervised learning models with Scikit-learn.', pdfName: 'module4_machine_learning.pdf', pdfData: null, github: 'https://github.com' },
+            { id: 5, title: 'Module 5: Advanced Deep Learning & AI', desc: 'Neural networks, computer vision, and NLP model implementation.', pdfName: 'module5_deep_learning.pdf', pdfData: null, github: 'https://github.com' }
+        ];
+
+        const defaultExperiments = [
+            {
+                id: 1,
+                title: 'Experiment 1: Pandas Data Handling & CSV Processing',
+                github: 'https://github.com',
+                subExperiments: [
+                    { 
+                        id: '1a', 
+                        name: 'a-1: Reading CSV Data & DataFrame Operations', 
+                        code: `# Experiment 1 (a-1): Reading CSV Data & DataFrame Operations
+import pandas as pd
+
+# 1. Read pre-loaded CSV dataset from local environment
+print("--- Reading CSV: students.csv ---")
+df = pd.read_csv('students.csv')
+print(df)
+
+# 2. Inspecting First Rows
+print("\\n--- First 3 Rows (head) ---")
+print(df.head(3))
+
+# 3. Inspecting Shape and Columns
+print("\\n--- Dataset Shape (Rows, Columns) ---")
+print(df.shape)
+print("Columns:", list(df.columns))
+
+# 4. Statistical Summary
+print("\\n--- Statistical Summary (describe) ---")
+print(df.describe())
+
+# 5. Filtering DataFrame
+print("\\n--- Filter: Students with Marks >= 90 ---")
+top_students = df[df['Marks'] >= 90]
+print(top_students[['Roll_No', 'Name', 'Marks', 'Grade']])` 
+                    },
+                    { 
+                        id: '1b', 
+                        name: 'a-2: Writing Data to a CSV File', 
+                        code: `# Experiment 1 (a-2): Writing Data to a CSV File
+import pandas as pd
+
+# 1. Create a student performance DataFrame
+data = {
+    'Roll_No': ['24102A030050', '24102A030051', '24102A030052'],
+    'Name': ['Kotapati Poojitha', 'Aarav Sharma', 'Ananya Verma'],
+    'Subject': ['Data Science', 'Data Science', 'Data Science'],
+    'Lab_Score': [98, 92, 89],
+    'Status': ['Distinction', 'Distinction', 'First Class']
+}
+df = pd.DataFrame(data)
+
+# 2. Write DataFrame to CSV in virtual environment
+output_csv = 'lab_results.csv'
+df.to_csv(output_csv, index=False)
+print(f"Success: CSV file '{output_csv}' written successfully!")
+
+# 3. Read it back to verify persistence
+print(f"\\n--- Verifying content read back from '{output_csv}' ---")
+saved_df = pd.read_csv(output_csv)
+print(saved_df)` 
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: 'Experiment 2: Statistical Data Visualization',
+                github: 'https://github.com',
+                subExperiments: [
+                    { 
+                        id: '2a', 
+                        name: '2a-1: NumPy Statistical Summary', 
+                        code: `# Experiment 2 (2a-1): NumPy Statistical Summary
+import numpy as np
+
+# Sample laboratory experiment measurements
+data = np.array([45.2, 47.8, 52.1, 49.3, 51.0, 48.6, 53.4, 50.2])
+
+print("Data Array:", data)
+print("Mean:", np.mean(data))
+print("Median:", np.median(data))
+print("Standard Deviation:", round(np.std(data), 4))
+print("Variance:", round(np.var(data), 4))
+print("Min Value:", np.min(data))
+print("Max Value:", np.max(data))` 
+                    }
+                ]
+            }
+        ];
+
+        const defaultTools = [
+            { id: 1, name: 'Pandas', category: 'Analysis', desc: 'Powerful data structures and analysis tools for Python.', icon: 'fa-table', github: 'https://github.com/pandas-dev/pandas' },
+            { id: 2, name: 'NumPy', category: 'Computing', desc: 'Support for large, multi-dimensional arrays and matrices.', icon: 'fa-calculator', github: 'https://github.com/numpy/numpy' },
+            { id: 3, name: 'Matplotlib', category: 'Visualization', desc: 'Comprehensive library for creating static and interactive plots.', icon: 'fa-chart-line', github: 'https://github.com/matplotlib/matplotlib' },
+            { id: 4, name: 'Seaborn', category: 'Graphics', desc: 'Statistical data visualization based on matplotlib.', icon: 'fa-chart-pie', github: 'https://github.com/mwaskom/seaborn' },
+            { id: 5, name: 'Scikit-Learn', category: 'Machine Learning', desc: 'Simple and efficient tools for predictive data analysis.', icon: 'fa-brain', github: 'https://github.com/scikit-learn/scikit-learn' },
+            { id: 6, name: 'TensorFlow', category: 'Deep Learning', desc: 'End-to-end open source platform for machine learning.', icon: 'fa-network-wired', github: 'https://github.com/tensorflow/tensorflow' },
+            { id: 7, name: 'PyTorch', category: 'Deep Learning', desc: 'Tensors and Dynamic neural networks in Python with GPU acceleration.', icon: 'fa-fire', github: 'https://github.com/pytorch/pytorch' },
+            { id: 8, name: 'SciPy', category: 'Mathematics', desc: 'Fundamental library for scientific computing and technical computing.', icon: 'fa-square-root-variable', github: 'https://github.com/scipy/scipy' },
+            { id: 9, name: 'Jupyter', category: 'Environment', desc: 'Web application for creating and sharing computational documents.', icon: 'fa-book-bookmark', github: 'https://github.com/jupyter/jupyter' },
+            { id: 10, name: 'Statsmodels', category: 'Statistics', desc: 'Python module that allows users to explore data and estimate statistical models.', icon: 'fa-chart-area', github: 'https://github.com/statsmodels/statsmodels' }
+        ];
+
+        const defaultProjects = [
+            { id: 1, name: 'NeoCampus Student Portal', category: 'Web App', desc: 'College management portal built with React and Tailwind CSS.', github: 'https://github.com/kotapatipoojitha/neocampus' },
+            { id: 2, name: 'Civic Grievance Redressal Platform', category: 'Fullstack', desc: 'Centralized portal for citizens to report civic complaints.', github: 'https://github.com/kotapatipoojitha/civic-portal' }
+        ];
+
+        // ==========================================
+        // DETERMINISTIC PERSISTENCE & STORAGE ENGINE
+        // (Clean Single-Master LocalStorage + Emergency Backup + IndexedDB)
+        // ==========================================
+        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_master';
+
+        // Stale legacy keys to aggressively purge so user has full 5MB free quota
+        const LEGACY_STORAGE_KEYS = [
+            'poojitha_master_portal_data_v20',
+            'poojitha_master_portal_data_v19',
+            'poojitha_master_portal_data_v18',
+            'poojitha_master_portal_data_v17',
+            'poojitha_master_portal_data_v16',
+            'poojitha_permanent_backup',
+            'poojitha_master_portal_data',
+            'dsp_auto_backup',
+            'dsp_portal_data',
+            'poojitha_portal_data_backup'
+        ];
+
+        function purgeStaleStorageKeys() {
+            try {
+                LEGACY_STORAGE_KEYS.forEach(k => {
+                    try { localStorage.removeItem(k); } catch(e) {}
+                });
+                for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const k = localStorage.key(i);
+                    if (k && k !== PRIMARY_STORAGE_KEY && (k.startsWith('poojitha_') || k.startsWith('dsp_') || k.includes('portal') || k.includes('backup'))) {
+                        try { localStorage.removeItem(k); } catch(e) {}
+                    }
+                }
+            } catch(e) {}
+        }
+
+        // Run purge immediately on load
+        purgeStaleStorageKeys();
+
+        // 1. IndexedDB Helper (Handles unlimited data, PDFs, and full states without quota limits)
+        const DB_NAME = 'PoojithaDataScienceDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'portalStore';
+
+        function openPortalDB() {
+            return new Promise((resolve) => {
+                if (!window.indexedDB) {
+                    resolve(null);
+                    return;
+                }
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onupgradeneeded = function(e) {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME);
+                    }
+                };
+                request.onsuccess = function(e) { resolve(e.target.result); };
+                request.onerror = function() { resolve(null); };
+            });
+        }
+
+        async function saveToIndexedDB(dataObj) {
+            try {
+                const db = await openPortalDB();
+                if (!db) return;
+                const tx = db.transaction([STORE_NAME], 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                store.put(dataObj, 'masterState');
+            } catch (err) {
+                console.warn("IndexedDB save error:", err);
+            }
+        }
+
+        async function loadFromIndexedDB() {
+            try {
+                const db = await openPortalDB();
+                if (!db) return null;
+                return new Promise((resolve) => {
+                    const tx = db.transaction([STORE_NAME], 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const req = store.get('masterState');
+                    req.onsuccess = function() { resolve(req.result || null); };
+                    req.onerror = function() { resolve(null); };
+                });
+            } catch (err) {
+                return null;
+            }
+        }
+
+        function tryParseJSON(raw) {
+            if (!raw || typeof raw !== 'string') return null;
+            const trimmed = raw.trim();
+            if (!trimmed.startsWith('{')) return null;
+            try {
+                const parsed = JSON.parse(trimmed);
+                if (parsed && typeof parsed === 'object') return parsed;
+            } catch(e) {}
+            return null;
+        }
+
+        // 2. Deterministic State Sanitizer & Loader
+        function sanitizeState(s) {
+            if (!s || typeof s !== 'object') s = {};
+            const exps = Array.isArray(s.experiments) && s.experiments.length > 0 
+                ? s.experiments 
+                : JSON.parse(JSON.stringify(defaultExperiments));
+            
+            exps.forEach(e => {
+                if (!e.subExperiments || !Array.isArray(e.subExperiments)) e.subExperiments = [];
+                if (!e.desc) e.desc = 'Data Science Lab Experiment';
+                if (!e.github) e.github = 'https://github.com';
+            });
+
+            return {
+                activeTab: s.activeTab || 'home',
+                expandedExpId: s.expandedExpId || (exps[0] ? exps[0].id : 1),
+                profile: (s.profile && typeof s.profile === 'object') ? { ...defaultProfile, ...s.profile } : JSON.parse(JSON.stringify(defaultProfile)),
+                modules: (Array.isArray(s.modules) && s.modules.length > 0) ? s.modules : JSON.parse(JSON.stringify(defaultModules)),
+                experiments: exps,
+                tools: (Array.isArray(s.tools) && s.tools.length > 0) ? s.tools : JSON.parse(JSON.stringify(defaultTools)),
+                projects: (Array.isArray(s.projects) && s.projects.length > 0) ? s.projects : JSON.parse(JSON.stringify(defaultProjects))
+            };
+        }
+
+        function loadBestSavedState() {
+            purgeStaleStorageKeys();
+
+            // A. Check Primary Master Storage (Highest Priority - Single Source of Truth)
+            const primaryParsed = tryParseJSON(localStorage.getItem(PRIMARY_STORAGE_KEY));
+            if (primaryParsed && Array.isArray(primaryParsed.experiments) && primaryParsed.experiments.length > 0) {
+                return sanitizeState(primaryParsed);
+            }
+
+            // B. Check window.name (for instant in-tab refresh preservation)
+            const winParsed = tryParseJSON(window.name);
+            if (winParsed && Array.isArray(winParsed.experiments) && winParsed.experiments.length > 0) {
+                return sanitizeState(winParsed);
+            }
+
+            // C. One-time Migration from legacy storage keys (if any exist in the browser)
+            let bestLegacy = null;
+            for (const key of LEGACY_STORAGE_KEYS) {
+                try {
+                    const parsed = tryParseJSON(localStorage.getItem(key));
+                    if (parsed && Array.isArray(parsed.experiments)) {
+                        if (!bestLegacy || parsed.experiments.length > bestLegacy.experiments.length) {
+                            bestLegacy = parsed;
+                        } else if (parsed.experiments.length === bestLegacy.experiments.length) {
+                            const sub1 = parsed.experiments.reduce((a, x) => a + (x.subExperiments ? x.subExperiments.length : 0), 0);
+                            const sub2 = bestLegacy.experiments.reduce((a, x) => a + (x.subExperiments ? x.subExperiments.length : 0), 0);
+                            if (sub1 > sub2) bestLegacy = parsed;
+                        }
+                    }
+                } catch(e) {}
+            }
+
+            if (bestLegacy) {
+                const migrated = sanitizeState(bestLegacy);
+                try {
+                    const cleanCopy = {
+                        ...migrated,
+                        modules: (migrated.modules || []).map(m => {
+                            const { pdfData, ...meta } = m;
+                            return meta;
+                        })
+                    };
+                    localStorage.setItem(PRIMARY_STORAGE_KEY, JSON.stringify(cleanCopy));
+                } catch(e) {}
+                purgeStaleStorageKeys();
+                return migrated;
+            }
+
+            // Clean default initial state
+            return {
+                activeTab: 'home',
+                expandedExpId: 1,
+                profile: JSON.parse(JSON.stringify(defaultProfile)),
+                modules: JSON.parse(JSON.stringify(defaultModules)),
+                experiments: JSON.parse(JSON.stringify(defaultExperiments)),
+                tools: JSON.parse(JSON.stringify(defaultTools)),
+                projects: JSON.parse(JSON.stringify(defaultProjects))
+            };
+        }
+
+        let state = loadBestSavedState();
+        let expandedExpId = state.expandedExpId || (state.experiments && state.experiments[0] ? state.experiments[0].id : 1);
+
+        // 3. Bidirectional Background Sync from IndexedDB (preserves uploaded PDFs and rich datasets safely)
+        (async function syncFromIndexedDB() {
+            try {
+                const idbState = await loadFromIndexedDB();
+                if (idbState) {
+                    let changed = false;
+
+                    // 1. Sync PDFs back into memory for module viewing
+                    if (Array.isArray(idbState.modules) && Array.isArray(state.modules)) {
+                        idbState.modules.forEach(m => {
+                            const cur = state.modules.find(x => x.id == m.id);
+                            if (cur && m.pdfData) {
+                                cur.pdfData = m.pdfData;
+                                cur.pdfName = m.pdfName || cur.pdfName;
+                            }
+                        });
+                    }
+
+                    // 2. Check if IndexedDB has richer experiment/sub-experiment data than localStorage!
+                    if (Array.isArray(idbState.experiments)) {
+                        const localTotalSubs = (state.experiments || []).reduce((a, e) => a + (e.subExperiments ? e.subExperiments.length : 0), 0);
+                        const idbTotalSubs = idbState.experiments.reduce((a, e) => a + (e.subExperiments ? e.subExperiments.length : 0), 0);
+                        const localExpCount = (state.experiments || []).length;
+                        const idbExpCount = idbState.experiments.length;
+
+                        if (idbExpCount > localExpCount || idbTotalSubs > localTotalSubs) {
+                            console.log(`IndexedDB has richer experiment data (${idbExpCount} exps, ${idbTotalSubs} subs vs local ${localExpCount} exps, ${localTotalSubs} subs). Restoring!`);
+                            idbState.experiments.forEach(idbExp => {
+                                const localExp = state.experiments.find(x => x.id == idbExp.id || x.title === idbExp.title);
+                                if (!localExp) {
+                                    state.experiments.push(idbExp);
+                                    changed = true;
+                                } else {
+                                    if (!localExp.subExperiments) localExp.subExperiments = [];
+                                    if (Array.isArray(idbExp.subExperiments)) {
+                                        idbExp.subExperiments.forEach(idbSub => {
+                                            const localSub = localExp.subExperiments.find(s => s.id == idbSub.id || s.name === idbSub.name);
+                                            if (!localSub) {
+                                                localExp.subExperiments.push(idbSub);
+                                                changed = true;
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    if (changed) {
+                        saveState();
+                        renderContent();
+                    }
+                }
+            } catch (e) {
+                console.warn("IDB background sync warning:", e);
+            }
+        })();
+
+        // 4. Save State Engine
+        function updateSaveStatusIndicator(status) {
+            const ind = document.getElementById('save-status-indicator');
+            const txt = document.getElementById('save-status-text');
+            if (!ind || !txt) return;
+
+            if (status === 'saving') {
+                ind.className = 'hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-semibold transition';
+                ind.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Saving...</span>';
+            } else {
+                ind.className = 'hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-semibold transition';
+                ind.innerHTML = '<i class="fa-solid fa-circle-check text-xs"></i><span>Auto-Saved</span>';
+            }
+        }
+
+        let saveDebounceTimer = null;
+        function debouncedSaveState(delay = 600) {
+            clearTimeout(saveDebounceTimer);
+            updateSaveStatusIndicator('saving');
+            saveDebounceTimer = setTimeout(() => {
+                saveState();
+            }, delay);
+        }
+
+        function saveState() {
+            updateSaveStatusIndicator('saving');
+
+            // 1. Synchronize expanded accordion state
+            if (expandedExpId !== undefined) {
+                state.expandedExpId = expandedExpId;
+            }
+
+            // 2. Prepare lightweight JSON for localStorage (Zero heavy base64 PDFs!)
+            // Modules only store metadata (pdfName, id, title, desc, github), so size is tiny (< 30 KB)
+            // This guarantees localStorage will NEVER hit the 5MB browser quota ceiling!
+            let localJson = "";
+            try {
+                const localState = {
+                    activeTab: state.activeTab,
+                    expandedExpId: state.expandedExpId,
+                    profile: state.profile,
+                    modules: (state.modules || []).map(m => {
+                        const { pdfData, ...meta } = m;
+                        return { ...meta, hasPdf: !!pdfData };
+                    }),
+                    experiments: state.experiments,
+                    tools: state.tools,
+                    projects: state.projects
+                };
+                localJson = JSON.stringify(localState);
+                localStorage.setItem(PRIMARY_STORAGE_KEY, localJson);
+            } catch (err) {
+                console.warn("LocalStorage save attempt error, running emergency cleanup:", err);
+                try {
+                    // Aggressive emergency quota cleanup: wipe everything in localStorage except PRIMARY_STORAGE_KEY
+                    for (let i = localStorage.length - 1; i >= 0; i--) {
+                        const k = localStorage.key(i);
+                        if (k && k !== PRIMARY_STORAGE_KEY) {
+                            try { localStorage.removeItem(k); } catch(e) {}
+                        }
+                    }
+                    if (localJson) localStorage.setItem(PRIMARY_STORAGE_KEY, localJson);
+                } catch (err2) {
+                    console.error("Critical LocalStorage failure:", err2);
+                }
+            }
+
+            // 3. Keep in window.name for instant tab refresh
+            try {
+                if (localJson) window.name = localJson;
+            } catch (e) {}
+
+            // 4. Asynchronously persist full state (including all heavy base64 PDFs) to IndexedDB
+            saveToIndexedDB(state);
+
+            setTimeout(() => updateSaveStatusIndicator('saved'), 200);
+        }
+
+        // 5. Auto-Flush on Tab Close or Page Hide
+        window.addEventListener('beforeunload', function() {
+            clearTimeout(saveDebounceTimer);
+            saveState();
+        });
+        window.addEventListener('pagehide', function() {
+            clearTimeout(saveDebounceTimer);
+            saveState();
+        });
+
+        // 6. Real-time Python Compiler Code Auto-Saving
+        function onCompilerCodeInput() {
+            const codeInput = document.getElementById('compiler-code-input');
+            if (codeInput && activeCompileExpId && activeCompileSubId) {
+                const exp = state.experiments.find(e => e.id === activeCompileExpId);
+                const sub = exp ? exp.subExperiments.find(s => s.id === activeCompileSubId) : null;
+                if (sub) {
+                    sub.code = codeInput.value;
+                    debouncedSaveState(800);
+                }
+            }
+        }
+
+        // 7. Download & Restore JSON Backup Files
+        function exportPortalBackup() {
+            try {
+                saveState();
+                const jsonStr = JSON.stringify(state, null, 2);
+                const blob = new Blob([jsonStr], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                const now = new Date();
+                const dateStr = now.toISOString().slice(0, 10);
+                a.href = url;
+                a.download = `Kotapati_Poojitha_Portal_Backup_${dateStr}.json`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+                showToast("Data backup downloaded! Keep this JSON file safe on your computer.");
+            } catch (err) {
+                alert("Backup download error: " + err.message);
+            }
+        }
+
+        function importPortalBackup(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed && (parsed.experiments || parsed.modules || parsed.profile)) {
+                        state = sanitizeState(parsed);
+                        expandedExpId = state.expandedExpId;
+                        saveState();
+                        renderContent();
+                        showToast("All data restored successfully from your backup file!");
+                    } else {
+                        alert("The chosen file is not a valid portal backup JSON file.");
+                    }
+                } catch (err) {
+                    alert("Failed to read backup file: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function showToast(message) {
+            let toast = document.getElementById('portal-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'portal-toast';
+                toast.className = 'fixed bottom-6 right-6 z-50 bg-[#070b19] border border-teal-500/40 text-slate-100 px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs backdrop-blur-md transition-all transform translate-y-2 opacity-0 pointer-events-none';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i><span class="font-medium">${message}</span>`;
+            toast.classList.remove('translate-y-2', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+
+        function switchTab(tabId, shouldSave = true) {
+            state.activeTab = tabId;
+            if (shouldSave) saveState();
+
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('bg-gradient-to-r', 'from-teal-400', 'to-emerald-400', 'text-slate-950', 'font-bold', 'shadow-lg');
+                el.classList.add('hover:bg-teal-500/10', 'hover:text-white', 'text-slate-400', 'font-medium');
+            });
+            const activeEl = document.getElementById(`nav-${tabId}`);
+            if (activeEl) {
+                activeEl.classList.add('bg-gradient-to-r', 'from-teal-400', 'to-emerald-400', 'text-slate-950', 'font-bold', 'shadow-lg');
+                activeEl.classList.remove('hover:bg-teal-500/10', 'text-slate-400', 'font-medium');
+            }
+
+            renderContent();
+        }
+
+        function renderContent() {
+            const container = document.getElementById('main-content-area');
+            if (!container) return;
+
+            if (state.activeTab === 'home') container.innerHTML = renderHomeView();
+            else if (state.activeTab === 'modules') container.innerHTML = renderModulesView();
+            else if (state.activeTab === 'experiments') container.innerHTML = renderVerticalExperimentsView();
+            else if (state.activeTab === 'tools') container.innerHTML = renderToolsView();
+
+            const modBadge = document.getElementById('module-count-badge');
+            if (modBadge) modBadge.innerText = state.modules ? state.modules.length : 0;
+
+            const expBadge = document.getElementById('experiment-count-badge');
+            if (expBadge) expBadge.innerText = state.experiments ? state.experiments.length : 0;
+
+            updateProfileUI();
+        }
+
+        function updateProfileUI() {
+            const nameEl = document.getElementById('header-name');
+            const rollEl = document.getElementById('header-roll');
+            if (nameEl) nameEl.innerText = state.profile.name;
+            if (rollEl) rollEl.innerText = state.profile.roll;
+
+            const idName = document.getElementById('id-card-name');
+            const idRoll = document.getElementById('id-card-roll');
+            const idSec = document.getElementById('id-card-section');
+            const idSub = document.getElementById('id-card-subject');
+            const idProf = document.getElementById('id-card-prof');
+            const idUniv = document.getElementById('id-card-univ');
+
+            if (idName) idName.innerText = state.profile.name;
+            if (idRoll) idRoll.innerText = state.profile.roll;
+            if (idSec) idSec.innerText = state.profile.section;
+            if (idSub) idSub.innerText = state.profile.subject;
+            if (idProf) idProf.innerText = state.profile.prof;
+            if (idUniv) idUniv.innerText = state.profile.univ;
+
+            const gh = document.getElementById('id-card-github');
+            const li = document.getElementById('id-card-linkedin');
+            if (gh) gh.href = state.profile.github || '#';
+            if (li) li.href = state.profile.linkedin || '#';
+
+            const idPhoto = document.getElementById('id-card-photo');
+            const idPlaceholder = document.getElementById('id-card-photo-placeholder');
+            const headerAvatar = document.getElementById('header-avatar');
+            const headerInitials = document.getElementById('header-initials');
+
+            if (state.profile.photo && state.profile.photo.trim() !== '') {
+                if (idPhoto && idPlaceholder) {
+                    idPhoto.src = state.profile.photo;
+                    idPhoto.classList.remove('hidden');
+                    idPlaceholder.classList.add('hidden');
+                }
+                if (headerAvatar && headerInitials) {
+                    headerAvatar.src = state.profile.photo;
+                    headerAvatar.classList.remove('hidden');
+                    headerInitials.classList.add('hidden');
+                }
+            } else {
+                if (idPhoto && idPlaceholder) {
+                    idPhoto.classList.add('hidden');
+                    idPlaceholder.classList.remove('hidden');
+                }
+                if (headerAvatar && headerInitials) {
+                    headerAvatar.classList.add('hidden');
+                    headerInitials.classList.remove('hidden');
+                }
+            }
+        }
+
+        function previewProfilePhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = 160;
+                        canvas.height = 160;
+                        ctx.drawImage(img, 0, 0, 160, 160);
+                        state.profile.photo = canvas.toDataURL('image/jpeg', 0.7);
+                        saveState();
+                        updateProfileUI();
+                        showToast("Profile photo updated & auto-saved!");
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openEditProfileModal() {
+            document.getElementById('profile-name-input').value = state.profile.name;
+            document.getElementById('profile-roll-input').value = state.profile.roll;
+            document.getElementById('profile-section-input').value = state.profile.section;
+            document.getElementById('profile-subject-input').value = state.profile.subject;
+            document.getElementById('profile-prof-input').value = state.profile.prof;
+            document.getElementById('profile-univ-input').value = state.profile.univ;
+            document.getElementById('profile-github-input').value = state.profile.github;
+            document.getElementById('profile-linkedin-input').value = state.profile.linkedin;
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+
+        function closeProfileModal() { document.getElementById('profile-modal').classList.add('hidden'); }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            state.profile.name = document.getElementById('profile-name-input').value;
+            state.profile.roll = document.getElementById('profile-roll-input').value;
+            state.profile.section = document.getElementById('profile-section-input').value;
+            state.profile.subject = document.getElementById('profile-subject-input').value;
+            state.profile.prof = document.getElementById('profile-prof-input').value;
+            state.profile.univ = document.getElementById('profile-univ-input').value;
+            state.profile.github = document.getElementById('profile-github-input').value;
+            state.profile.linkedin = document.getElementById('profile-linkedin-input').value;
+            saveState();
+            updateProfileUI();
+            closeProfileModal();
+            showToast("Profile details updated & auto-saved!");
+        }
+
+        function renderHomeView() {
+            return `
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-r from-teal-950/60 via-[#070b19] to-emerald-950/50 p-8 rounded-3xl border border-teal-500/30 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 text-teal-500/10 font-bold text-9xl pointer-events-none"><i class="fa-solid fa-code"></i></div>
+                        <div class="relative z-10 max-w-2xl">
+                            <span class="px-3 py-1 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-full text-[11px] font-bold tracking-wider uppercase">Mohan Babu University • 2028 Batch</span>
+                            <h1 class="text-2xl font-extrabold text-white mt-3 tracking-tight">Data Science Digital Portal</h1>
+                            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Welcome back, <span class="text-teal-400 font-bold">${state.profile.name}</span> (${state.profile.roll}). Access your course modules, run experiments with live Python compilers, and manage projects.</p>
+                            <div class="flex flex-wrap gap-3 mt-6">
+                                <button onclick="switchTab('experiments')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
+                                    <i class="fa-solid fa-flask-vial"></i>
+                                    <span>Open Experiments Hub</span>
+                                </button>
+                                <button onclick="switchTab('modules')" class="bg-[#020617] text-teal-300 font-bold px-5 py-2.5 rounded-xl text-xs flex items-center space-x-2 border border-teal-500/30 transition">
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                    <span>Browse Modules</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portal Summary Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div onclick="switchTab('modules')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-teal-400/40 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Modules</span>
+                                <div class="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center"><i class="fa-solid fa-book-bookmark"></i></div>
+                            </div>
+                            <p class="text-2xl font-extrabold text-white mt-3">${state.modules ? state.modules.length : 5}</p>
+                            <p class="text-[10px] text-teal-400 mt-1">Course syllabus & PDFs</p>
+                        </div>
+                        <div onclick="switchTab('experiments')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-teal-400/40 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Experiments</span>
+                                <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-flask-vial"></i></div>
+                            </div>
+                            <p class="text-2xl font-extrabold text-white mt-3">${state.experiments ? state.experiments.length : 2}</p>
+                            <p class="text-[10px] text-emerald-400 mt-1">Interactive lab codes & compiler</p>
+                        </div>
+                        <div onclick="switchTab('tools')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-teal-400/40 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Tools & Projects</span>
+                                <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><i class="fa-solid fa-toolbox"></i></div>
+                            </div>
+                            <p class="text-2xl font-extrabold text-white mt-3">${(state.tools ? state.tools.length : 10) + (state.projects ? state.projects.length : 2)}</p>
+                            <p class="text-[10px] text-cyan-400 mt-1">Python ecosystem & repositories</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderModulesView() {
+            let html = `
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
+                        <div>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-book-bookmark text-teal-400 mr-2"></i> Course Modules & PDFs</h2>
+                            <p class="text-xs text-slate-400 mt-1">Upload and view syllabus modules & PDF documents.</p>
+                        </div>
+                        <button onclick="openAddModalFor('module')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg">
+                            <i class="fa-solid fa-plus"></i><span>Add Module</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            `;
+            state.modules.forEach(mod => {
+                html += `
+                    <div class="bg-[#070b19] p-6 rounded-3xl border border-teal-500/20 shadow-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="px-3 py-1 bg-teal-500/10 text-teal-400 font-mono text-[10px] rounded-full border border-teal-500/30">Module</span>
+                                <div class="flex items-center space-x-2">
+                                    ${mod.github ? `<a href="${mod.github}" target="_blank" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="GitHub"><i class="fa-brands fa-github text-sm"></i></a>` : ''}
+                                    <button onclick="openEditModal('module', ${mod.id})" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="deleteModule(${mod.id})" class="text-slate-500 hover:text-rose-400 text-xs p-1" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <h3 class="text-sm font-extrabold text-white mt-3">${mod.title}</h3>
+                            <p class="text-xs text-slate-400 mt-1.5">${mod.desc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-teal-500/10 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-400 font-mono truncate max-w-[140px]"><i class="fa-solid fa-file-pdf text-rose-400 mr-1"></i> ${mod.pdfName}</span>
+                            <div class="flex items-center space-x-2">
+                                <label class="cursor-pointer bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 px-3 py-1.5 rounded-xl text-xs font-semibold border border-teal-500/30 flex items-center space-x-1">
+                                    <i class="fa-solid fa-upload text-[10px]"></i><span>Upload PDF</span>
+                                    <input type="file" accept=".pdf" class="hidden" onchange="uploadModulePDF(event, ${mod.id})">
+                                </label>
+                                ${mod.pdfData ? `<button onclick="viewModulePDF(${mod.id})" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs shadow-md"><i class="fa-solid fa-eye mr-1"></i> View PDF</button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div></div>`;
+            return html;
+        }
+
+        function renderVerticalExperimentsView() {
+            let html = `
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
+                        <div>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-flask-vial text-teal-400 mr-2"></i> Experiments & Sub-Experiments Hub (${state.experiments ? state.experiments.length : 0} Experiments)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Vertical layout: Click any experiment to expand/collapse. Open live Python compiler for any sub-experiment.</p>
+                        </div>
+                        <button onclick="openAddModalFor('experiment')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
+                            <i class="fa-solid fa-plus"></i><span>Add Main Experiment</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+            `;
+
+            if (!state.experiments || state.experiments.length === 0) {
+                html += `
+                    <div class="bg-[#070b19] p-12 rounded-3xl border border-teal-500/20 text-center">
+                        <i class="fa-solid fa-flask-vial text-4xl text-teal-400/40 mb-3 block"></i>
+                        <h3 class="text-sm font-bold text-slate-300">No experiments found</h3>
+                        <p class="text-xs text-slate-500 mt-1 mb-4">Click "Add Main Experiment" above to create your first experiment.</p>
+                        <button onclick="openAddModalFor('experiment')" class="bg-teal-500/20 text-teal-300 px-4 py-2 rounded-xl text-xs font-semibold hover:bg-teal-500/30 transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Main Experiment
+                        </button>
+                    </div>
+                `;
+            } else {
+                state.experiments.forEach(exp => {
+                    let isExpanded = exp.id === expandedExpId;
+                    html += `
+                        <div class="bg-[#070b19] rounded-3xl border border-teal-500/25 shadow-xl overflow-hidden transition">
+                            <div onclick="toggleExperimentAccordion(${exp.id})" class="p-6 flex justify-between items-center cursor-pointer hover:bg-teal-500/5 transition">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold">
+                                        <i class="fa-solid ${isExpanded ? 'fa-folder-open' : 'fa-folder'} text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-extrabold text-white">${exp.title}</h3>
+                                        <p class="text-[10px] text-teal-400 font-mono mt-0.5">${exp.subExperiments ? exp.subExperiments.length : 0} Sub-experiments</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="event.stopPropagation(); openAddSubExpModal(${exp.id})" class="bg-teal-500/20 text-teal-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold hover:bg-teal-500/30 transition">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Sub-exp
+                                    </button>
+                                    <button onclick="event.stopPropagation(); openEditModal('experiment', ${exp.id})" class="text-slate-400 hover:text-teal-400 p-2" title="Edit"><i class="fa-solid fa-pen-to-square text-xs"></i></button>
+                                    <button onclick="event.stopPropagation(); deleteExperiment(${exp.id})" class="text-slate-500 hover:text-rose-400 p-2" title="Delete"><i class="fa-solid fa-trash text-xs"></i></button>
+                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-400 text-xs ml-2"></i>
+                                </div>
+                            </div>
+
+                            ${isExpanded ? `
+                                <div class="p-6 pt-0 space-y-3 border-t border-teal-500/15 bg-[#020617]/50">
+                                    <div class="space-y-2 mt-4">
+                            ` : ''}
+                    `;
+
+                    if (isExpanded) {
+                        if (exp.subExperiments && exp.subExperiments.length > 0) {
+                            exp.subExperiments.forEach(sub => {
+                                html += `
+                                    <div class="bg-[#070b19] p-4 rounded-2xl border border-teal-500/20 flex items-center justify-between shadow-inner">
+                                        <div class="flex items-center space-x-3 truncate">
+                                            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xs font-mono">
+                                                <i class="fa-solid fa-file-code"></i>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-200 truncate">${sub.name}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button onclick="openCompilerModal(${exp.id}, '${sub.id}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl text-[11px] flex items-center space-x-1.5 shadow-md hover:opacity-90 transition">
+                                                <i class="fa-solid fa-terminal text-[10px]"></i><span>Open Compiler</span>
+                                            </button>
+                                            <button onclick="openEditSubExpModal(${exp.id}, '${sub.id}')" class="text-slate-400 hover:text-teal-400 p-2 text-xs transition" title="Edit Sub-experiment">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button onclick="deleteSubExperiment(${exp.id}, '${sub.id}')" class="text-slate-500 hover:text-rose-400 p-2 text-xs transition" title="Delete Sub-experiment">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            html += `<p class="text-xs text-slate-400 py-4 text-center">No sub-experiments added yet. Click 'Add Sub-exp' above.</p>`;
+                        }
+                        html += `</div></div>`;
+                    }
+
+                    html += `</div>`;
+                });
+            }
+
+            html += `</div></div>`;
+            return html;
+        }
+
+        function toggleExperimentAccordion(expId) {
+            expandedExpId = (expandedExpId === expId) ? null : expId;
+            state.expandedExpId = expandedExpId;
+            saveState();
+            renderContent();
+        }
+
+        let activeCompileExpId = null;
+        let activeCompileSubId = null;
+
+        function openCompilerModal(expId, subId) {
+            activeCompileExpId = expId;
+            activeCompileSubId = subId;
+            const exp = state.experiments.find(e => e.id === expId);
+            const sub = exp ? exp.subExperiments.find(s => s.id === subId) : null;
+            if (sub) {
+                document.getElementById('compiler-modal-title').innerText = `${exp.title} — ${sub.name}`;
+                document.getElementById('compiler-code-input').value = sub.code;
+                document.getElementById('compiler-output-pre').innerText = "Click 'Run Code & Get Output' to execute script...";
+                document.getElementById('compiler-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeCompilerModal() {
+            const codeInput = document.getElementById('compiler-code-input');
+            if (codeInput && activeCompileExpId && activeCompileSubId) {
+                const exp = state.experiments.find(e => e.id === activeCompileExpId);
+                const sub = exp ? exp.subExperiments.find(s => s.id === activeCompileSubId) : null;
+                if (sub) {
+                    sub.code = codeInput.value;
+                    saveState();
+                }
+            }
+            document.getElementById('compiler-modal').classList.add('hidden');
+        }
+
+        function clearConsoleOutput() {
+            document.getElementById('compiler-output-pre').innerText = "Console cleared. Click 'Run Code' to execute.";
+        }
+
+        function resetCompilerCode() {
+            const exp = defaultExperiments.find(e => e.id === activeCompileExpId);
+            const sub = exp ? exp.subExperiments.find(s => s.id === activeCompileSubId) : null;
+            if (sub) {
+                document.getElementById('compiler-code-input').value = sub.code;
+                const stateExp = state.experiments.find(e => e.id === activeCompileExpId);
+                const stateSub = stateExp ? stateExp.subExperiments.find(s => s.id === activeCompileSubId) : null;
+                if (stateSub) {
+                    stateSub.code = sub.code;
+                    saveState();
+                }
+            }
+        }
+
+        function insertDatasetSnippet(filename) {
+            const textarea = document.getElementById('compiler-code-input');
+            const snippet = `\n# Read dataset '${filename}'\ndf = pd.read_csv('${filename}')\nprint(df.head())\n`;
+            textarea.value += snippet;
+            textarea.scrollTop = textarea.scrollHeight;
+        }
+
+        function uploadCsvToPyodide(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                if (pyodideInstance && pyodideInstance.FS) {
+                    pyodideInstance.FS.writeFile(file.name, content);
+                    alert(`✅ File '${file.name}' successfully loaded into Python environment!\nYou can now use: pd.read_csv('${file.name}')`);
+                    const textarea = document.getElementById('compiler-code-input');
+                    textarea.value = `import pandas as pd\n\n# Reading uploaded dataset: ${file.name}\ndf = pd.read_csv('${file.name}')\nprint("Dataset Info:")\nprint(df.info())\nprint("\\nFirst Rows:")\nprint(df.head())\n`;
+                } else {
+                    alert("Python engine is still initializing. Please wait a moment.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        async function runCompilerCode() {
+            const code = document.getElementById('compiler-code-input').value;
+            const outputPre = document.getElementById('compiler-output-pre');
+
+            if (!pyodideReady || !pyodideInstance) {
+                outputPre.innerText = "⏳ Please wait: Pyodide environment and Pandas are still loading from CDN...\nOnce the badge turns green ('Ready'), click 'Run Code & Get Output' again.";
+                return;
+            }
+
+            outputPre.innerText = "Executing Python code...\n";
+
+            const exp = state.experiments.find(e => e.id === activeCompileExpId);
+            const sub = exp ? exp.subExperiments.find(s => s.id === activeCompileSubId) : null;
+            if (sub) {
+                sub.code = code;
+                saveState();
+            }
+
+            updateCompilerStatus('running', 'Running Script...');
+
+            try {
+                pyodideInstance.runPython(`
+import sys, io
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+                `);
+
+                await pyodideInstance.runPythonAsync(code);
+
+                const stdout = pyodideInstance.runPython("sys.stdout.getvalue()");
+                const stderr = pyodideInstance.runPython("sys.stderr.getvalue()");
+
+                let outputText = "";
+                if (stdout && stdout.trim() !== "") outputText += stdout;
+                if (stderr && stderr.trim() !== "") outputText += (outputText ? "\n" : "") + "Warnings / Notice:\n" + stderr;
+
+                if (!outputText || outputText.trim() === "") {
+                    outputText = "Script executed successfully with no printed output.";
+                }
+
+                outputPre.innerText = outputText;
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+            } catch (err) {
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+                let errString = String(err);
+                let helpfulAdvice = "";
+                if (errString.includes("URLError") || errString.includes("unknown url type") || errString.includes("NetworkError") || errString.includes("CORS")) {
+                    helpfulAdvice = "\n\n💡 Tip: When reading CSVs in the browser, either use the built-in local datasets ('students.csv', 'iris.csv', 'data.csv') or click 'Upload Custom CSV' above to add your own lab data!";
+                }
+                outputPre.innerText = "Execution Error:\n" + errString + helpfulAdvice;
+            }
+        }
+
+        function openAddSubExpModal(expId) {
+            const exp = state.experiments.find(e => e.id === expId);
+            if (!exp) return;
+            document.getElementById('subexp-parent-id').value = expId;
+            document.getElementById('subexp-edit-id').value = '';
+            document.getElementById('subexp-modal-title').innerText = 'Add Sub-Experiment';
+            document.getElementById('subexp-modal-parent').innerText = `Parent: ${exp.title}`;
+            document.getElementById('subexp-title-input').value = '';
+            document.getElementById('subexp-code-input').value = `# Sub-experiment code\nimport pandas as pd\n\n# Read local dataset\ndf = pd.read_csv('students.csv')\nprint("First 5 rows:")\nprint(df.head())\n`;
+            document.getElementById('subexp-modal').classList.remove('hidden');
+            setTimeout(() => { document.getElementById('subexp-title-input').focus(); }, 60);
+        }
+
+        function openAddSubExpTo(expId) { openAddSubExpModal(expId); }
+
+        function openEditSubExpModal(expId, subId) {
+            const exp = state.experiments.find(e => e.id == expId);
+            if (!exp) return;
+            const sub = (exp.subExperiments || []).find(s => s.id == subId);
+            if (!sub) return;
+
+            document.getElementById('subexp-parent-id').value = exp.id;
+            document.getElementById('subexp-edit-id').value = sub.id;
+            document.getElementById('subexp-modal-title').innerText = 'Edit Sub-Experiment';
+            document.getElementById('subexp-modal-parent').innerText = `Parent: ${exp.title}`;
+            document.getElementById('subexp-title-input').value = sub.name;
+            document.getElementById('subexp-code-input').value = sub.code || '';
+            document.getElementById('subexp-modal').classList.remove('hidden');
+            setTimeout(() => { document.getElementById('subexp-title-input').focus(); }, 60);
+        }
+
+        function closeSubExpModal() {
+            document.getElementById('subexp-modal').classList.add('hidden');
+        }
+
+        function handleSubExpFormSubmit(event, openCompilerAfterSave = false) {
+            if (event) event.preventDefault();
+            const expId = document.getElementById('subexp-parent-id').value;
+            const subId = document.getElementById('subexp-edit-id').value;
+            const title = document.getElementById('subexp-title-input').value.trim();
+            const code = document.getElementById('subexp-code-input').value;
+
+            if (!title) {
+                alert('Please enter a sub-experiment title');
+                return;
+            }
+
+            const exp = state.experiments.find(e => e.id == expId);
+            if (!exp) {
+                alert('Parent experiment not found!');
+                return;
+            }
+            if (!exp.subExperiments) exp.subExperiments = [];
+
+            let targetSubId = subId;
+            if (subId) {
+                const sub = exp.subExperiments.find(s => s.id == subId);
+                if (sub) {
+                    sub.name = title;
+                    sub.code = code;
+                }
+            } else {
+                targetSubId = 'sub-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
+                exp.subExperiments.push({
+                    id: targetSubId,
+                    name: title,
+                    code: code || `# Sub-experiment: ${title}\nimport pandas as pd\ndf = pd.read_csv('students.csv')\nprint(df.head())\n`
+                });
+            }
+
+            expandedExpId = exp.id;
+            state.expandedExpId = exp.id;
+            saveState();
+            closeSubExpModal();
+            renderContent();
+            showToast(`Sub-experiment "${title}" saved! (Total: ${exp.subExperiments.length})`);
+
+            if (openCompilerAfterSave) {
+                openCompilerModal(exp.id, targetSubId);
+            }
+        }
+
+        function deleteSubExperiment(expId, subId) {
+            const exp = state.experiments.find(e => e.id == expId);
+            if (exp && exp.subExperiments) {
+                exp.subExperiments = exp.subExperiments.filter(s => s.id != subId);
+                expandedExpId = exp.id;
+                state.expandedExpId = exp.id;
+                saveState();
+                renderContent();
+                showToast(`Sub-experiment deleted. (Remaining: ${exp.subExperiments.length})`);
+            }
+        }
+
+        function renderToolsView() {
+            let html = `
+                <div class="space-y-8">
+                    <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
+                        <div>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-toolbox text-cyan-400 mr-2"></i> Python Ecosystem Tools (10 Essential Libraries)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Data science libraries and student project repositories.</p>
+                        </div>
+                        <button onclick="openAddModalFor('tool')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg">
+                            <i class="fa-solid fa-plus"></i><span>Add Tool/Project</span>
+                        </button>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Python Ecosystem Tools</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            `;
+            state.tools.forEach(tool => {
+                html += `
+                    <div class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                    <i class="fa-solid ${tool.icon || 'fa-code'}"></i>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    ${tool.github ? `<a href="${tool.github}" target="_blank" class="text-slate-400 hover:text-cyan-400 text-xs"><i class="fa-brands fa-github"></i></a>` : ''}
+                                    <button onclick="openEditModal('tool', ${tool.id})" class="text-slate-400 hover:text-teal-400 text-xs" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="deleteTool(${tool.id})" class="text-slate-500 hover:text-rose-400 text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-white mt-3">${tool.name}</h4>
+                            <p class="text-[10px] text-slate-400 mt-1">${tool.desc}</p>
+                        </div>
+                        <span class="text-[10px] text-cyan-400 font-mono bg-cyan-500/10 px-2 py-0.5 rounded-full self-start">${tool.category}</span>
+                    </div>
+                `;
+            });
+            html += `</div></div><div class="pt-4">
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Student Projects</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+            state.projects.forEach(proj => {
+                html += `
+                    <div class="bg-[#070b19] p-6 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] rounded-full border border-emerald-500/30 font-mono">${proj.category}</span>
+                                <div class="flex items-center space-x-2">
+                                    ${proj.github ? `<a href="${proj.github}" target="_blank" class="text-slate-300 hover:text-teal-400 text-xs font-semibold flex items-center space-x-1 bg-slate-800 px-2 py-1 rounded-lg border border-slate-700"><i class="fa-brands fa-github"></i><span>Repo</span></a>` : ''}
+                                    <button onclick="openEditModal('project', ${proj.id})" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="deleteProject(${proj.id})" class="text-slate-500 hover:text-rose-400 text-xs p-1" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <h4 class="text-sm font-extrabold text-white mt-3">${proj.name}</h4>
+                            <p class="text-xs text-slate-400 mt-1">${proj.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div></div></div>`;
+            return html;
+        }
+
+        function openAddModalFor(category) {
+            document.getElementById('modal-edit-id').value = '';
+            document.getElementById('modal-edit-category').value = category;
+            document.getElementById('modal-title').innerText = `Add New ${category.toUpperCase()}`;
+            document.getElementById('modal-title-input').value = '';
+            document.getElementById('modal-desc-input').value = (category === 'experiment') ? 'Data Science Lab Experiment' : '';
+            document.getElementById('modal-github-input').value = '';
+            document.getElementById('item-modal').classList.remove('hidden');
+        }
+
+        function openAddModal() { openAddModalFor('experiment'); }
+
+        function openEditModal(category, id) {
+            document.getElementById('modal-edit-id').value = id;
+            document.getElementById('modal-edit-category').value = category;
+            document.getElementById('modal-title').innerText = `Edit ${category.toUpperCase()}`;
+
+            let item = null;
+            if (category === 'module') item = state.modules.find(m => m.id === id);
+            else if (category === 'experiment') item = state.experiments.find(e => e.id === id);
+            else if (category === 'tool') item = state.tools.find(t => t.id === id);
+            else if (category === 'project') item = state.projects.find(p => p.id === id);
+
+            if (item) {
+                document.getElementById('modal-title-input').value = item.title || item.name || '';
+                document.getElementById('modal-desc-input').value = item.desc || item.category || 'Data Science Lab Experiment';
+                document.getElementById('modal-github-input').value = item.github || '';
+            }
+            document.getElementById('item-modal').classList.remove('hidden');
+        }
+
+        function closeModal() { document.getElementById('item-modal').classList.add('hidden'); }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const editId = document.getElementById('modal-edit-id').value;
+            const category = document.getElementById('modal-edit-category').value;
+            const title = document.getElementById('modal-title-input').value;
+            const desc = document.getElementById('modal-desc-input').value;
+            const github = document.getElementById('modal-github-input').value;
+
+            if (editId) {
+                let list = (category === 'module') ? state.modules :
+                           (category === 'experiment') ? state.experiments :
+                           (category === 'tool') ? state.tools : state.projects;
+                let item = list.find(x => x.id == editId);
+                if (item) {
+                    if (category === 'tool') { item.name = title; item.category = desc; }
+                    else { item.title = title; item.desc = desc; }
+                    item.github = github;
+                }
+            } else {
+                if (category === 'module') {
+                    state.modules.push({ id: Date.now(), title, desc, pdfName: 'module.pdf', pdfData: null, github });
+                } else if (category === 'experiment') {
+                    const newId = Date.now() + Math.floor(Math.random() * 1000);
+                    state.experiments.push({
+                        id: newId,
+                        title,
+                        desc: desc || 'Data Science Lab Experiment',
+                        github: github || 'https://github.com',
+                        subExperiments: [{ 
+                            id: 'sub-' + Date.now() + '-1', 
+                            name: 'a-1: Setup & Data Inspection', 
+                            code: `import pandas as pd\ndf = pd.read_csv('students.csv')\nprint(df.head())\n` 
+                        }]
+                    });
+                    expandedExpId = newId;
+                    state.expandedExpId = newId;
+                } else if (category === 'tool') {
+                    state.tools.push({ id: Date.now(), name: title, category: desc, desc: 'Custom tool', icon: 'fa-code', github });
+                } else if (category === 'project') {
+                    state.projects.push({ id: Date.now(), name: title, category: 'Web App', desc, github });
+                }
+            }
+
+            saveState();
+            closeModal();
+            renderContent();
+            showToast(category === 'experiment' 
+                ? `Experiment "${title}" created & saved! (Total: ${state.experiments.length})` 
+                : "Item saved and persisted successfully!");
+        }
+
+        function uploadModulePDF(event, moduleId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const mItem = state.modules.find(m => m.id == moduleId);
+                    if (mItem) {
+                        mItem.pdfName = file.name;
+                        mItem.pdfData = e.target.result;
+                        saveState();
+                        renderContent();
+                        showToast(`PDF '${file.name}' attached and saved to database!`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function viewModulePDF(moduleId) {
+            const mod = state.modules.find(m => m.id === moduleId);
+            if (mod && mod.pdfData) {
+                const pdfWindow = window.open("");
+                pdfWindow.document.write(`<iframe src="${mod.pdfData}" frameborder="0" style="width:100%; height:100%;"></iframe>`);
+            }
+        }
+
+        function handleSearch(query) {
+            if (!query || query.trim() === '') {
+                renderContent();
+                return;
+            }
+            query = query.toLowerCase();
+            const container = document.getElementById('main-content-area');
+            if (!container) return;
+
+            let html = `<div class="space-y-6"><h2 class="text-sm font-bold text-teal-400 uppercase tracking-wider">Search Results for: "${query}"</h2>`;
+            
+            const matchedExps = state.experiments.filter(e => e.title.toLowerCase().includes(query) || (e.subExperiments && e.subExperiments.some(s => s.name.toLowerCase().includes(query))));
+            if (matchedExps.length > 0) {
+                html += `<div><h3 class="text-xs font-bold text-white mb-2">Experiments</h3><div class="space-y-2">`;
+                matchedExps.forEach(e => {
+                    html += `<div class="bg-[#070b19] p-3 rounded-xl border border-teal-500/20 flex justify-between items-center"><span class="text-xs text-slate-200 font-semibold">${e.title}</span><button onclick="switchTab('experiments')" class="text-xs text-teal-400 hover:underline">View in Hub</button></div>`;
+                });
+                html += `</div></div>`;
+            }
+
+            const matchedMods = state.modules.filter(m => m.title.toLowerCase().includes(query) || m.desc.toLowerCase().includes(query));
+            if (matchedMods.length > 0) {
+                html += `<div><h3 class="text-xs font-bold text-white mb-2">Modules</h3><div class="space-y-2">`;
+                matchedMods.forEach(m => {
+                    html += `<div class="bg-[#070b19] p-3 rounded-xl border border-teal-500/20 flex justify-between items-center"><span class="text-xs text-slate-200 font-semibold">${m.title}</span><button onclick="switchTab('modules')" class="text-xs text-teal-400 hover:underline">View</button></div>`;
+                });
+                html += `</div></div>`;
+            }
+
+            const matchedTools = state.tools.filter(t => t.name.toLowerCase().includes(query) || t.desc.toLowerCase().includes(query));
+            if (matchedTools.length > 0) {
+                html += `<div><h3 class="text-xs font-bold text-white mb-2">Tools</h3><div class="space-y-2">`;
+                matchedTools.forEach(t => {
+                    html += `<div class="bg-[#070b19] p-3 rounded-xl border border-teal-500/20 flex justify-between items-center"><span class="text-xs text-slate-200 font-semibold">${t.name} (${t.category})</span><button onclick="switchTab('tools')" class="text-xs text-teal-400 hover:underline">View</button></div>`;
+                });
+                html += `</div></div>`;
+            }
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function deleteModule(id) { state.modules = state.modules.filter(m => m.id !== id); saveState(); renderContent(); showToast("Module deleted."); }
+        function deleteExperiment(id) { 
+            state.experiments = state.experiments.filter(e => e.id != id); 
+            if (expandedExpId == id || state.expandedExpId == id) {
+                expandedExpId = state.experiments.length > 0 ? state.experiments[0].id : null;
+                state.expandedExpId = expandedExpId;
+            }
+            saveState(); 
+            renderContent(); 
+            showToast(`Experiment deleted. (Remaining: ${state.experiments.length})`); 
+        }
+        function deleteTool(id) { state.tools = state.tools.filter(t => t.id !== id); saveState(); renderContent(); showToast("Tool deleted."); }
+        function deleteProject(id) { state.projects = state.projects.filter(p => p.id !== id); saveState(); renderContent(); showToast("Project deleted."); }
+
+        window.onload = function() {
+            switchTab(state.activeTab || 'home', false);
+        };
+    </script>
+</body>
+</html>
