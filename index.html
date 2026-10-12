@@ -907,140 +907,342 @@ pd.read_csv = safe_read_csv
         }
 
         const defaultProfile = {
-            name: 'KOTAPATI POOJITHA',
-            roll: '24102A030050',
-            section: 'CSE-DS A',
-            subject: 'Data Science Lab',
-            prof: 'S.Bosubabu',
-            univ: 'Mohan Babu University',
-            photo: '',
-            github: 'https://github.com',
-            linkedin: 'https://linkedin.com'
-        };
+    "name": "KOTAPATI POOJITHA",
+    "roll": "24102A030050",
+    "section": "CSE-DS 1",
+    "subject": "Data Science",
+    "prof": "S.Bosubabu",
+    "univ": "Mohan Babu University",
+    "photo": "data:image/jpeg;base64,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",
+    "github": "https://github.com/poojithachowdarykotapati-beep",
+    "linkedin": "https://www.linkedin.com/in/poojitha-kotapati-b25880322/"
+};
 
         const defaultModules = [
-            { id: 1, title: 'Module 1: Python Fundamentals for Data Science', desc: 'Variables, data types, control flow, functions, and NumPy basics.', pdfName: 'module1_fundamentals.pdf', pdfData: null, github: 'https://github.com' },
-            { id: 2, title: 'Module 2: Data Preprocessing with Pandas', desc: 'Handling missing values, data transformation, merging datasets, and cleaning.', pdfName: 'module2_preprocessing.pdf', pdfData: null, github: 'https://github.com' },
-            { id: 3, title: 'Module 3: Data Visualization Mastery', desc: 'Creating insightful plots and visual dashboards using Matplotlib and Seaborn.', pdfName: 'module3_visualization.pdf', pdfData: null, github: 'https://github.com' },
-            { id: 4, title: 'Module 4: Machine Learning Algorithms', desc: 'Supervised and unsupervised learning models with Scikit-learn.', pdfName: 'module4_machine_learning.pdf', pdfData: null, github: 'https://github.com' },
-            { id: 5, title: 'Module 5: Advanced Deep Learning & AI', desc: 'Neural networks, computer vision, and NLP model implementation.', pdfName: 'module5_deep_learning.pdf', pdfData: null, github: 'https://github.com' }
-        ];
+    {
+        "id": 1,
+        "title": "Module 1: Python Fundamentals for Data Science",
+        "desc": "Variables, data types, control flow, functions, and NumPy basics.",
+        "pdfName": "Module1.pdf",
+        "pdfData": null,
+        "github": "https://github.com"
+    },
+    {
+        "id": 2,
+        "title": "Module 2: Data Preprocessing with Pandas",
+        "desc": "Handling missing values, data transformation, merging datasets, and cleaning.",
+        "pdfName": "Module2.pdf",
+        "pdfData": null,
+        "github": "https://github.com"
+    },
+    {
+        "id": 3,
+        "title": "Module 3: Data Visualization Mastery",
+        "desc": "Creating insightful plots and visual dashboards using Matplotlib and Seaborn.",
+        "pdfName": "Module3.pdf",
+        "pdfData": null,
+        "github": "https://github.com"
+    },
+    {
+        "id": 4,
+        "title": "Module 4: Machine Learning Algorithms",
+        "desc": "Supervised and unsupervised learning models with Scikit-learn.",
+        "pdfName": "Module4.pdf",
+        "pdfData": null,
+        "github": "https://github.com"
+    },
+    {
+        "id": 5,
+        "title": "Module 5: Advanced Deep Learning & AI",
+        "desc": "Neural networks, computer vision, and NLP model implementation.",
+        "pdfName": "Module5.pdf",
+        "pdfData": null,
+        "github": "https://github.com"
+    }
+];
 
         const defaultExperiments = [
+    {
+        "id": 1,
+        "title": "Experiment 1: Pandas Data Handling & CSV Processing",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
             {
-                id: 1,
-                title: 'Experiment 1: Pandas Data Handling & CSV Processing',
-                github: 'https://github.com',
-                subExperiments: [
-                    { 
-                        id: '1a', 
-                        name: 'a-1: Reading CSV Data & DataFrame Operations', 
-                        code: `# Experiment 1 (a-1): Reading CSV Data & DataFrame Operations
-import pandas as pd
-
-# 1. Read pre-loaded CSV dataset from local environment
-print("--- Reading CSV: students.csv ---")
-df = pd.read_csv('students.csv')
-print(df)
-
-# 2. Inspecting First Rows
-print("\\n--- First 3 Rows (head) ---")
-print(df.head(3))
-
-# 3. Inspecting Shape and Columns
-print("\\n--- Dataset Shape (Rows, Columns) ---")
-print(df.shape)
-print("Columns:", list(df.columns))
-
-# 4. Statistical Summary
-print("\\n--- Statistical Summary (describe) ---")
-print(df.describe())
-
-# 5. Filtering DataFrame
-print("\\n--- Filter: Students with Marks >= 90 ---")
-top_students = df[df['Marks'] >= 90]
-print(top_students[['Roll_No', 'Name', 'Marks', 'Grade']])` 
-                    },
-                    { 
-                        id: '1b', 
-                        name: 'a-2: Writing Data to a CSV File', 
-                        code: `# Experiment 1 (a-2): Writing Data to a CSV File
-import pandas as pd
-
-# 1. Create a student performance DataFrame
-data = {
-    'Roll_No': ['24102A030050', '24102A030051', '24102A030052'],
-    'Name': ['Kotapati Poojitha', 'Aarav Sharma', 'Ananya Verma'],
-    'Subject': ['Data Science', 'Data Science', 'Data Science'],
-    'Lab_Score': [98, 92, 89],
-    'Status': ['Distinction', 'Distinction', 'First Class']
-}
-df = pd.DataFrame(data)
-
-# 2. Write DataFrame to CSV in virtual environment
-output_csv = 'lab_results.csv'
-df.to_csv(output_csv, index=False)
-print(f"Success: CSV file '{output_csv}' written successfully!")
-
-# 3. Read it back to verify persistence
-print(f"\\n--- Verifying content read back from '{output_csv}' ---")
-saved_df = pd.read_csv(output_csv)
-print(saved_df)` 
-                    }
-                ]
+                "id": "1a",
+                "name": "1a-1: Reading CSV Data from an online Source",
+                "code": "import pandas as pd\n# Online CSV dataset\nurl = \"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv\"\n# CSV file reading\ndf = pd.read_csv(url)\n# Displaying the first five rows\nprint(\"First five rows of the dataset:\")\nprint(df.head())\n# Displaying dataset information\nprint(\"\\nDataset Information:\")\nprint(df.info())\n# Displaying the shape of the dataset\nprint(\"\\nNumber of rows and columns:\")\nprint(df.shape)"
             },
             {
-                id: 2,
-                title: 'Experiment 2: Statistical Data Visualization',
-                github: 'https://github.com',
-                subExperiments: [
-                    { 
-                        id: '2a', 
-                        name: '2a-1: NumPy Statistical Summary', 
-                        code: `# Experiment 2 (2a-1): NumPy Statistical Summary
-import numpy as np
-
-# Sample laboratory experiment measurements
-data = np.array([45.2, 47.8, 52.1, 49.3, 51.0, 48.6, 53.4, 50.2])
-
-print("Data Array:", data)
-print("Mean:", np.mean(data))
-print("Median:", np.median(data))
-print("Standard Deviation:", round(np.std(data), 4))
-print("Variance:", round(np.var(data), 4))
-print("Min Value:", np.min(data))
-print("Max Value:", np.max(data))` 
-                    }
-                ]
+                "id": "1b",
+                "name": "1a-2: Writing Data to a CSV File",
+                "code": "import pandas as pd\nurl = \"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv\"\ndf = pd.read_csv(url)\ndf.to_csv(\"iris_output.csv\", index=False)\nprint(\"The dataset has been successfully written to iris_output.csv\")"
+            },
+            {
+                "id": "sub-1791559818662",
+                "name": "1a-3:Reading Tab-Delimited Data",
+                "code": "import pandas as pd\ndata = {\n    \"RollNo\": [101, 102, 103],\n    \"Name\": [\"Rahul\", \"Priya\", \"Akhil\"],\n    \"Marks\": [85, 92, 78]\n}\ndf = pd.DataFrame(data)\nprint(df)"
+            },
+            {
+                "id": "sub-1791733847799",
+                "name": "1a-4:Writing Tab-Delimited Data",
+                "code": "import pandas as pd\n\n# Creating a dictionary of student data\nstudent_data = {\n    \"Roll_No\": [101, 102, 103, 104],\n    \"Name\": [\"Anusha\", \"Babitha\", \"Charitha\", \"Deepika\"],\n    \"Dept\": [\"IT\", \"IT\", \"CSE\", \"ECE\"],\n    \"Percentage\": [89, 92, 88, 85]\n}\n# Creating a DataFrame\ndf = pd.DataFrame(student_data)\n# Displaying the DataFrame\nprint(\"Student Data:\")\nprint(df)\n# Writing data into a tab-delimited text file\ndf.to_csv(\"student_output.txt\", sep=\"\\t\", index=False)\nprint(\"Data successfully written to student_output.txt\")\n"
+            },
+            {
+                "id": "sub-1791733881347",
+                "name": "1b-1:Generating JSON Files",
+                "code": "import pandas as pd\nstudent_data = {\n    \"Roll_No\": [101, 102, 103, 104],\n    \"Name\": [\"Anusha\", \"Babitha\", \"Charitha\", \"Deepika\"],\n    \"Department\": [\"IT\", \"IT\", \"CSE\", \"ECE\"],\n    \"Marks\": [89, 92, 88, 95]\n}\ndf = pd.DataFrame(student_data)\ndf.to_json(\n    \"students.json\",\n    orient=\"records\",\n    indent=4\n)\nprint(\"JSON file created successfully.\")\n"
+            },
+            {
+                "id": "sub-1791733903864",
+                "name": "1b-2:Reading JSON DataReading JSON Data",
+                "code": "import pandas as pd\ndf = pd.read_json(\"students.json\")\nprint(\"Student Data\")\nprint(df)\n"
+            },
+            {
+                "id": "sub-1791733983248",
+                "name": "1b-3:Parsing JSON Data",
+                "code": "import pandas as pd\nfrom io import StringIO\njson_data = \"\"\"\n[\n    {\n        \"Roll_No\": 101,\n        \"Name\": \"Anusha\",\n        \"Marks\": 89\n    },\n    {\n        \"Roll_No\": 102,\n        \"Name\": \"Babitha\",\n        \"Marks\": 92\n    },\n    {\n        \"Roll_No\": 103,\n        \"Name\": \"Charitha\",\n        \"Marks\": 88\n    }\n]\n\"\"\"\ndf = pd.read_json(StringIO(json_data))\nprint(\"Parsed JSON Data\")\nprint(df)\n"
+            },
+            {
+                "id": "sub-1791734018547",
+                "name": "1b-4:Reading JSON Data from a URL",
+                "code": "import pandas as pd\nurl = \"https://jsonplaceholder.typicode.com/users\"\ndf = pd.read_json(url)\nprint(df.head())\n"
+            },
+            {
+                "id": "sub-1791736047581-g55v",
+                "name": "1c-1:Writing Data to an Excel File",
+                "code": "import pandas as pd\nstudent_data={\"Roll No\":[101,102,103,104],\"Name\":[\"Anusha\",\"Babitha\",\"Charitha\",\"Deepika\"],\"Department\":[\"IT\",\"IT\",\"CSE\",\"ECE\"],\"Percentage\":[89,92,88,85]}\ndf=pd.DataFrame(student_data)\nprint(\"Student Details:\")\nprint(df)\ncsv_data=df.to_csv(index=False)\nprint(\"\\nData successfully written!\")\nprint(\"File name: Students.csv\")\nprint(\"\\nCSV File Content:\")\nprint(csv_data)\n"
+            },
+            {
+                "id": "sub-1791736101262-jycv",
+                "name": "1c-2:Reading Excel Data",
+                "code": "import pandas as pd\ndf = pd.read_excel(\n    \"Students.xlsx\",\n    sheet_name=\"Student Details\"\n)\nprint(\"Data read from Excel file:\")\nprint(df)\n"
+            },
+            {
+                "id": "sub-1791736149287-b2mv",
+                "name": "1c-3:Working with Multiple DataFrames",
+                "code": "import pandas as pd\nstudent_data={\"Roll No\":[101,102,103],\"Name\":[\"Anusha\",\"Babitha\",\"Charitha\"],\"Department\":[\"IT\",\"IT\",\"CSE\"],\"Percentage\":[89,92,88]}\ncourse_data={\"Course ID\":[\"C101\",\"C102\",\"C103\"],\"Course Name\":[\"Python\",\"Data Science\",\"Machine Learning\"],\"Credits\":[4,3,4]}\nstudents_df=pd.DataFrame(student_data)\ncourses_df=pd.DataFrame(course_data)\nprint(\"Students DataFrame:\")\nprint(students_df)\nprint(\"\\nCourses DataFrame:\")\nprint(courses_df)\ncombined_df=pd.concat([students_df,courses_df],axis=1)\nprint(\"\\nCombined DataFrame:\")\nprint(combined_df)\nprint(\"\\nMultiple DataFrames processed successfully!\")\n"
+            },
+            {
+                "id": "sub-1791736185350-jm4o",
+                "name": "1c-4:Reading All Excel Sheets",
+                "code": "import pandas as pd\nstudents_data={\"Roll No\":[101,102,103],\"Name\":[\"Anusha\",\"Babitha\",\"Charitha\"],\"Department\":[\"IT\",\"IT\",\"CSE\"],\"Percentage\":[89,92,88]}\ncourses_data={\"Course ID\":[\"C101\",\"C102\",\"C103\"],\"Course Name\":[\"Python\",\"Data Science\",\"Machine Learning\"],\"Credits\":[4,3,4]}\nexcel_data={\"Students\":pd.DataFrame(students_data),\"Courses\":pd.DataFrame(courses_data)}\nprint(\"Available Excel Sheets:\")\nprint(list(excel_data.keys()))\nprint(\"\\nIn Student Sheet:\")\nprint(excel_data[\"Students\"])\nprint(\"\\nIn Course Sheet:\")\nprint(excel_data[\"Courses\"])\nprint(\"\\nAll sheets read successfully!\")\n"
             }
-        ];
+        ],
+        "desc": "Data Science Lab Experiment"
+    },
+    {
+        "id": 2,
+        "title": "Experiment 2: Web APIs And Data Base Connectivity",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "2a",
+                "name": "2a-1: Working with GitHub REST APIs",
+                "code": "import pandas as pd\nissues=[\n{\"id\":1001,\"title\":\"Improve DataFrame performance\",\"state\":\"open\",\"created_at\":\"2026-10-01\"},\n{\"id\":1002,\"title\":\"Fix CSV reading issue\",\"state\":\"closed\",\"created_at\":\"2026-10-02\"},\n{\"id\":1003,\"title\":\"Add new plotting feature\",\"state\":\"open\",\"created_at\":\"2026-10-03\"},\n{\"id\":1004,\"title\":\"Update documentation\",\"state\":\"open\",\"created_at\":\"2026-10-04\"},\n{\"id\":1005,\"title\":\"Fix Excel import error\",\"state\":\"closed\",\"created_at\":\"2026-10-05\"}\n]\ndf_issues=pd.DataFrame(issues)\nprint(\"GitHub REST API - Pandas Repository Issues\")\nprint(df_issues[[\"id\",\"title\",\"state\",\"created_at\"]].head(30).to_string(index=False))\nprint(\"\\nTotal Issues:\",len(df_issues))\nprint(\"Open Issues:\",len(df_issues[df_issues[\"state\"]==\"open\"]))\nprint(\"Closed Issues:\",len(df_issues[df_issues[\"state\"]==\"closed\"]))\n"
+            },
+            {
+                "id": "sub-1791736306828-cebr",
+                "name": "2b-1:Connecting Python with SQL Databases",
+                "code": "import pandas as pd\nstudents=pd.DataFrame({\"id\":[1,2,3],\"name\":[\"John\",\"Alice\",\"Bob\"]})\nprint(\"Student Records:\")\nprint(students)\nstudents.loc[students[\"id\"]==1,\"name\"]=\"David\"\nprint(\"\\nAfter Update:\")\nprint(students)\nstudents=students[students[\"id\"]!=2]\nprint(\"\\nAfter Delete:\")\nprint(students)\nprint(\"\\nDatabase operations completed successfully!\")\n"
+            }
+        ],
+        "desc": "Data Science Lab Experiment"
+    },
+    {
+        "id": 1791558547890,
+        "title": "Experiment 3:Data Cleaning And Transformation",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-1791736635277-6ylm",
+                "name": "3a-1:Cleaning and Preprocessing Data",
+                "code": "import numpy as np\nimport pandas as pd\ndata = {'A': [1, 2, np.nan],\n        'B': [4, np.nan, np.nan]}\ndf = pd.DataFrame(data)\nprint(df.isna())\ndf_clean = df.dropna()\ndf_filled = df.fillna(0)\nprint(df_clean)\nprint(df_filled)\ndf = df.drop_duplicates()\n"
+            },
+            {
+                "id": "sub-1791736711537-upt4",
+                "name": "3b-1:Transforming Data for Analysis",
+                "code": "import pandas as pd\ndf = pd.DataFrame({\n    'gender': ['male', 'female', 'male']\n})\ndf['gender_num'] = df['gender'].map({\n    'male': 0,\n    'female': 1\n})\ndf_renamed = df.rename(columns={'gender': 'Gender'})\nprint(df_renamed)\n"
+            },
+            {
+                "id": "sub-1791736753105-cq77",
+                "name": "3c-1:Data Normalization",
+                "code": "import numpy as np\nimport pandas as pd\ndata = pd.DataFrame(np.random.randn(100, 3))\noutliers = (data > 3) | (data < -3)\nprint(outliers.sum())\n"
+            },
+            {
+                "id": "sub-1791736797220-hjqc",
+                "name": "3d-1:Pattern Matching with Regular Expressions",
+                "code": "import re\ntext = \"This is 1 test\"\nsplit_text = re.split(r'\\s+', text)\nprint(split_text)\n"
+            }
+        ],
+        "desc": "Data Science Lab Experiment"
+    },
+    {
+        "id": 1791736841977,
+        "title": "Experiment 4:Data Wrangling",
+        "desc": "Data Science Lab Experiment",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-1791736841095-1",
+                "name": "4a-1: Creating and Manipulating Pandas Series",
+                "code": "import pandas as pd\nimport numpy as np\ndata = pd.Series(\n    np.random.randn(6),\n    index=[\n        ['a', 'a', 'b', 'b', 'c', 'c'],\n        [1, 2, 1, 2, 1, 2]\n    ]\n)\nprint(data)\nprint(data['b'])\nprint(data[:, 1])"
+            },
+            {
+                "id": "sub-1791737146681-508d",
+                "name": "4b-1:Stacking Data with Pandas",
+                "code": "import pandas as pd\nimport numpy as np\ndata = pd.Series(\n    np.random.randn(6),\n    index=[\n        ['a', 'a', 'b', 'b', 'c', 'c'],\n        [1, 2, 1, 2, 1, 2]\n    ]\n)\ndf = data.unstack()\nprint(df)\nprint(df.stack())"
+            },
+            {
+                "id": "sub-1791737237061-mywp",
+                "name": "4c-1:Merging DataFrames with Pandas",
+                "code": "import pandas as pd\nimport numpy as np\ndf1 = pd.DataFrame({\n    'a': [1, np.nan, 3],\n    'b': [4, 5, 6]\n})\ndf2 = pd.DataFrame({\n    'a': [7, 8, 9],\n    'b': [np.nan, 11, 12]\n})\nmerged = df1.combine_first(df2)\nprint(merged)"
+            }
+        ]
+    },
+    {
+        "id": 1791737432752,
+        "title": "Experiment 5:Data Visualization",
+        "desc": "Data Science Lab Experiment",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-1791737432056-1",
+                "name": "5a-1: Visualizing Trends with Line Plots",
+                "code": "months=[\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\"]\nsales=[120,140,160,220,180,250]\nexpenses=[70,90,110,100,130,150]\nprint(\"Monthly Sales and Expenses\")\nprint(\"Month  Sales  Expenses\")\nfor m,s,e in zip(months,sales,expenses):\n    print(f\"{m:5}  {s:5}  {e:8}\")\nprint(\"\\nHighest Sales:\",max(sales))\nprint(\"Highest Expenses:\",max(expenses))\nprint(\"Line plot data displayed successfully!\")\n"
+            },
+            {
+                "id": "sub-1791738213976-cu6z",
+                "name": "5b-1:Comparing Categories with Bar Plots",
+                "code": "import pandas as pd\ndata={'Python':[80,78,95,85],'Java':[73,80,85,82],'C++':[70,75,85,90]}\ndf=pd.DataFrame(data,index=['Student1','Student2','Student3','Student4'])\nprint(\"DataFrame:\")\nprint(df)\nprint(\"\\nStudent Marks Comparison\")\nfor student,row in df.iterrows():\n    print(student,\":\",\", \".join(f\"{subject}={marks}\" for subject,marks in row.items()))\nprint(\"\\nHighest Marks:\")\nprint(df.max())\nprint(\"\\nAverage Marks:\")\nprint(df.mean().round(2))"
+            },
+            {
+                "id": "sub-1791738267946-n1p8",
+                "name": "5c-1:Analyzing Data Distribution with Histograms",
+                "code": "import pandas as pd\ndata={'Python':[85,90,78,88],'Java':[75,82,80,85],'C++':[80,76,85,90]}\ndf=pd.DataFrame(data,index=['Student1','Student2','Student3','Student4'])\nprint(\"DataFrame:\")\nprint(df)\nprint(\"\\nStacked Bar Plot Data:\")\nfor student,row in df.iterrows():\n    print(student,\":\",\"Python =\",row['Python'],\"Java =\",row['Java'],\"C++ =\",row['C++'],\"Total =\",row.sum())\nprint(\"\\nTotal Marks:\")\nprint(df.sum(axis=1))\n"
+            },
+            {
+                "id": "sub-1791738341442-8xcx",
+                "name": "5d-1:Exploring Relationships with Scatter Plots",
+                "code": "import pandas as pd\ndata=[40,45,50,55,58,60,62,65,68,70,73,75,77,80,83,86,88,90,95,97]\ndf=pd.DataFrame({'Marks':data})\nprint(\"Observed Data:\")\nprint(df)\nprint(\"\\nHistogram Frequency:\")\nprint(pd.cut(df['Marks'],bins=6).value_counts().sort_index())\nprint(\"\\nDensity Values:\")\nprint(df['Marks'].value_counts(normalize=True).sort_index())\nprint(\"\\nMean:\",df['Marks'].mean())\nprint(\"Median:\",df['Marks'].median())\n\n"
+            },
+            {
+                "id": "sub-1791738415841-rmas",
+                "name": "5e-1:Analyzing Distributions with Box Plots",
+                "code": "import pandas as pd\nstudy_hours=[1,2,3,4,5,6,7,8,9,10]\nmarks=[42,55,58,60,65,72,75,80,90,95]\ndf=pd.DataFrame({'Study_Hours':study_hours,'Marks':marks})\nprint(\"Data:\")\nprint(df)\nprint(\"\\nRelationship Between Study Hours and Marks\")\nfor h,m in zip(study_hours,marks):\n    print(f\"Study Hours: {h}, Marks: {m}\")\ncorrelation=df['Study_Hours'].corr(df['Marks'])\nprint(\"\\nCorrelation Coefficient:\",round(correlation,2))\nprint(\"There is a strong positive correlation.\")\n\n"
+            }
+        ]
+    }
+];
 
         const defaultTools = [
-            { id: 1, name: 'Pandas', category: 'Analysis', desc: 'Powerful data structures and analysis tools for Python.', icon: 'fa-table', github: 'https://github.com/pandas-dev/pandas' },
-            { id: 2, name: 'NumPy', category: 'Computing', desc: 'Support for large, multi-dimensional arrays and matrices.', icon: 'fa-calculator', github: 'https://github.com/numpy/numpy' },
-            { id: 3, name: 'Matplotlib', category: 'Visualization', desc: 'Comprehensive library for creating static and interactive plots.', icon: 'fa-chart-line', github: 'https://github.com/matplotlib/matplotlib' },
-            { id: 4, name: 'Seaborn', category: 'Graphics', desc: 'Statistical data visualization based on matplotlib.', icon: 'fa-chart-pie', github: 'https://github.com/mwaskom/seaborn' },
-            { id: 5, name: 'Scikit-Learn', category: 'Machine Learning', desc: 'Simple and efficient tools for predictive data analysis.', icon: 'fa-brain', github: 'https://github.com/scikit-learn/scikit-learn' },
-            { id: 6, name: 'TensorFlow', category: 'Deep Learning', desc: 'End-to-end open source platform for machine learning.', icon: 'fa-network-wired', github: 'https://github.com/tensorflow/tensorflow' },
-            { id: 7, name: 'PyTorch', category: 'Deep Learning', desc: 'Tensors and Dynamic neural networks in Python with GPU acceleration.', icon: 'fa-fire', github: 'https://github.com/pytorch/pytorch' },
-            { id: 8, name: 'SciPy', category: 'Mathematics', desc: 'Fundamental library for scientific computing and technical computing.', icon: 'fa-square-root-variable', github: 'https://github.com/scipy/scipy' },
-            { id: 9, name: 'Jupyter', category: 'Environment', desc: 'Web application for creating and sharing computational documents.', icon: 'fa-book-bookmark', github: 'https://github.com/jupyter/jupyter' },
-            { id: 10, name: 'Statsmodels', category: 'Statistics', desc: 'Python module that allows users to explore data and estimate statistical models.', icon: 'fa-chart-area', github: 'https://github.com/statsmodels/statsmodels' }
-        ];
+    {
+        "id": 1,
+        "name": "Pandas",
+        "category": "Analysis",
+        "desc": "Powerful data structures and analysis tools for Python.",
+        "icon": "fa-table",
+        "github": "https://github.com"
+    },
+    {
+        "id": 2,
+        "name": "NumPy",
+        "category": "Computing",
+        "desc": "Support for large, multi-dimensional arrays and matrices.",
+        "icon": "fa-calculator",
+        "github": "https://github.com/numpy/numpy"
+    },
+    {
+        "id": 3,
+        "name": "Matplotlib",
+        "category": "Visualization",
+        "desc": "Comprehensive library for creating static and interactive plots.",
+        "icon": "fa-chart-line",
+        "github": "https://github.com/matplotlib/matplotlib"
+    },
+    {
+        "id": 4,
+        "name": "Seaborn",
+        "category": "Graphics",
+        "desc": "Statistical data visualization based on matplotlib.",
+        "icon": "fa-chart-pie",
+        "github": "https://github.com/mwaskom/seaborn"
+    },
+    {
+        "id": 5,
+        "name": "Scikit-Learn",
+        "category": "Machine Learning",
+        "desc": "Simple and efficient tools for predictive data analysis.",
+        "icon": "fa-brain",
+        "github": "https://github.com/scikit-learn/scikit-learn"
+    },
+    {
+        "id": 6,
+        "name": "TensorFlow",
+        "category": "Deep Learning",
+        "desc": "End-to-end open source platform for machine learning.",
+        "icon": "fa-network-wired",
+        "github": "https://github.com/tensorflow/tensorflow"
+    },
+    {
+        "id": 7,
+        "name": "PyTorch",
+        "category": "Deep Learning",
+        "desc": "Tensors and Dynamic neural networks in Python with GPU acceleration.",
+        "icon": "fa-fire",
+        "github": "https://github.com/pytorch/pytorch"
+    },
+    {
+        "id": 8,
+        "name": "SciPy",
+        "category": "Mathematics",
+        "desc": "Fundamental library for scientific computing and technical computing.",
+        "icon": "fa-square-root-variable",
+        "github": "https://github.com/scipy/scipy"
+    },
+    {
+        "id": 9,
+        "name": "Jupyter",
+        "category": "Environment",
+        "desc": "Web application for creating and sharing computational documents.",
+        "icon": "fa-book-bookmark",
+        "github": "https://github.com/jupyter/jupyter"
+    },
+    {
+        "id": 10,
+        "name": "Statsmodels",
+        "category": "Statistics",
+        "desc": "Python module that allows users to explore data and estimate statistical models.",
+        "icon": "fa-chart-area",
+        "github": "https://github.com/statsmodels/statsmodels"
+    }
+];
 
         const defaultProjects = [
-            { id: 1, name: 'NeoCampus Student Portal', category: 'Web App', desc: 'College management portal built with React and Tailwind CSS.', github: 'https://github.com/kotapatipoojitha/neocampus' },
-            { id: 2, name: 'Civic Grievance Redressal Platform', category: 'Fullstack', desc: 'Centralized portal for citizens to report civic complaints.', github: 'https://github.com/kotapatipoojitha/civic-portal' }
-        ];
+    {
+        "id": 1,
+        "name": "NeoCampus Student Portal",
+        "category": "Web App",
+        "desc": "College management portal built with React and Tailwind CSS.",
+        "github": "https://github.com"
+    },
+    {
+        "id": 2,
+        "name": "Civic Grievance Redressal Platform",
+        "category": "Fullstack",
+        "desc": "Centralized portal for citizens to report civic complaints.",
+        "github": "https://github.com/kotapatipoojitha/civic-portal"
+    }
+];
 
         // ==========================================
         // DETERMINISTIC PERSISTENCE & STORAGE ENGINE
         // (Clean Single-Master LocalStorage + Emergency Backup + IndexedDB)
         // ==========================================
-        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_master';
+        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_v2026';
 
         // Stale legacy keys to aggressively purge so user has full 5MB free quota
         const LEGACY_STORAGE_KEYS = [
+            'poojitha_portal_data_master',
             'poojitha_master_portal_data_v20',
             'poojitha_master_portal_data_v19',
             'poojitha_master_portal_data_v18',
@@ -1161,13 +1363,13 @@ print("Max Value:", np.max(data))`
 
             // A. Check Primary Master Storage (Highest Priority - Single Source of Truth)
             const primaryParsed = tryParseJSON(localStorage.getItem(PRIMARY_STORAGE_KEY));
-            if (primaryParsed && Array.isArray(primaryParsed.experiments) && primaryParsed.experiments.length > 0) {
+            if (primaryParsed && Array.isArray(primaryParsed.experiments) && primaryParsed.experiments.length >= defaultExperiments.length) {
                 return sanitizeState(primaryParsed);
             }
 
             // B. Check window.name (for instant in-tab refresh preservation)
             const winParsed = tryParseJSON(window.name);
-            if (winParsed && Array.isArray(winParsed.experiments) && winParsed.experiments.length > 0) {
+            if (winParsed && Array.isArray(winParsed.experiments) && winParsed.experiments.length >= defaultExperiments.length) {
                 return sanitizeState(winParsed);
             }
 
@@ -1670,7 +1872,7 @@ print("Max Value:", np.max(data))`
                                     <i class="fa-solid fa-upload text-[10px]"></i><span>Upload PDF</span>
                                     <input type="file" accept=".pdf" class="hidden" onchange="uploadModulePDF(event, ${mod.id})">
                                 </label>
-                                ${mod.pdfData ? `<button onclick="viewModulePDF(${mod.id})" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs shadow-md"><i class="fa-solid fa-eye mr-1"></i> View PDF</button>` : ''}
+                                ${(mod.pdfData || mod.pdfName) ? `<button onclick="viewModulePDF(${mod.id})" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs shadow-md hover:opacity-90 transition"><i class="fa-solid fa-eye mr-1"></i> View PDF</button>` : ''}
                             </div>
                         </div>
                     </div>
