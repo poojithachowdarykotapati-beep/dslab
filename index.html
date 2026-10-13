@@ -441,7 +441,7 @@
                 </a>
                 <a href="javascript:void(0)" onclick="switchTab('experiments')" id="nav-experiments" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
                     <i class="fa-solid fa-flask-vial w-5 text-emerald-400"></i>
-                    <span>Experiments Hub (<span id="experiment-count-badge">2</span>)</span>
+                    <span>Experiments Hub (<span id="experiment-count-badge">7</span>)</span>
                 </a>
                 <a href="javascript:void(0)" onclick="switchTab('tools')" id="nav-tools" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
                     <i class="fa-solid fa-toolbox w-5 text-cyan-400"></i>
@@ -925,7 +925,7 @@ pd.read_csv = safe_read_csv
         "desc": "Variables, data types, control flow, functions, and NumPy basics.",
         "pdfName": "Module1.pdf",
         "pdfData": null,
-        "github": "https://github.com"
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience"
     },
     {
         "id": 2,
@@ -933,7 +933,7 @@ pd.read_csv = safe_read_csv
         "desc": "Handling missing values, data transformation, merging datasets, and cleaning.",
         "pdfName": "Module2.pdf",
         "pdfData": null,
-        "github": "https://github.com"
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience"
     },
     {
         "id": 3,
@@ -941,7 +941,7 @@ pd.read_csv = safe_read_csv
         "desc": "Creating insightful plots and visual dashboards using Matplotlib and Seaborn.",
         "pdfName": "Module3.pdf",
         "pdfData": null,
-        "github": "https://github.com"
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience"
     },
     {
         "id": 4,
@@ -949,7 +949,7 @@ pd.read_csv = safe_read_csv
         "desc": "Supervised and unsupervised learning models with Scikit-learn.",
         "pdfName": "Module4.pdf",
         "pdfData": null,
-        "github": "https://github.com"
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience"
     },
     {
         "id": 5,
@@ -957,7 +957,7 @@ pd.read_csv = safe_read_csv
         "desc": "Neural networks, computer vision, and NLP model implementation.",
         "pdfName": "Module5.pdf",
         "pdfData": null,
-        "github": "https://github.com"
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience"
     }
 ];
 
@@ -1131,6 +1131,72 @@ pd.read_csv = safe_read_csv
                 "code": "import pandas as pd\nstudy_hours=[1,2,3,4,5,6,7,8,9,10]\nmarks=[42,55,58,60,65,72,75,80,90,95]\ndf=pd.DataFrame({'Study_Hours':study_hours,'Marks':marks})\nprint(\"Data:\")\nprint(df)\nprint(\"\\nRelationship Between Study Hours and Marks\")\nfor h,m in zip(study_hours,marks):\n    print(f\"Study Hours: {h}, Marks: {m}\")\ncorrelation=df['Study_Hours'].corr(df['Marks'])\nprint(\"\\nCorrelation Coefficient:\",round(correlation,2))\nprint(\"There is a strong positive correlation.\")\n\n"
             }
         ]
+    },
+    {
+        "id": 1791873065649,
+        "title": "Experiment 6:Time series Analysis",
+        "desc": "Data Science Lab Experiment",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-1791873064995-1",
+                "name": "6a-1: Timestamps using pandas",
+                "code": "import pandas as pd\ndates=pd.to_datetime([\n    '2026-02-10',\n    '2026-02-11',\n    '2026-02-12',\n    '2026-02-13',\n    '2026-02-14',\n])\ntemparature=[25,27,26,29,30]\ntime_series=pd.Series(\n    temparature,\n    index=dates\n)\nprint(\"Time Series\")\nprint(time_series)\n"
+            },
+            {
+                "id": "sub-1791873246251-9v73",
+                "name": "6b-1:DateTime Index",
+                "code": "import pandas as pd\ndate_index=pd.date_range(\n    start='2026-01-01',\n    periods=7,\n    freq='D'\n)\nprint(\"generated DatatimeIndex: \")\nprint(date_index)\n"
+            },
+            {
+                "id": "sub-1791873354427-u3qx",
+                "name": "6c-1:generating time zones",
+                "code": "import pandas as pd\n#generate date range by setting a time zone\nindia_dates=pd.date_range(\n    start='2026-01-01 09:00',\n    periods=3,\n    tz='Asia/Kolkata'\n)\nprint(\"1. Date Range with Asia/Kolkata Time Zone: \")\nprint(india_dates)\n\n\n#2.create a timezone-naive DatetimeIndex\ndates=pd.date_range(\n    start='2026-01-01 09:00',\n    periods=3,\n    freq='h'\n)\nprint(\"\\n2. TimeZone-naive Date Range: \")\nprint(dates)\n\n#3.localize the timezone\nlocalized_dates=dates.tz_localize('Asia/Kolkata')\nprint(\"\\n3. After Localizing to Asia/Kolkata: \")\nprint(localized_dates)\n\n#4.convert to another timezone using tz_convert()\nnew_york_dates=localized_dates.tz_convert(\n    'America/New_York'\n    )\nprint(\"\\n4. Converting to America/New_York: \")\nprint(new_york_dates)\n\n#5.create another time series in a different timezone\nindia_series=pd.Series(\n    [100,200,300],\n    index=localized_dates\n)\nnew_york_series=pd.Series(\n    [400,500,600],\n    index=new_york_dates\n)\nprint(\"\\n5. India Time Series: \")\nprint(india_series)\nprint(\"\\nNew York Time Series: \")\nprint(new_york_series)\n\n#6.combine twodifferent timezone series\ncombined_series=pd.concat([\n    india_series,\n    new_york_series\n])\nprint(\"\\n6. Combined Time Series: \")\nprint(combined_series)\n"
+            },
+            {
+                "id": "sub-1791873486162-qlp3",
+                "name": "6d-1:performing period arithmatic",
+                "code": "import pandas as pd\np=pd.Period('2026-01',freq='M')\nprint(\"Original Period\")\nprint(p)\nprint(\"\\nAfter adding 2:\")\nprint(p+2)\nprint(\"\\nAfter adding 5:\")\nprint(p+5)\nprint(\"\\nAfter subtracting 1:\")\nprint(p-1)\nprint(\"\\nAfter subtracting 3:\")\nprint(p-3)\nperiods=pd.period_range(\n    start='2026-01',\n    periods=6,\n    freq='M'\n)\nprint(\"\\nRange of periods:\")\nprint(periods)\n"
+            },
+            {
+                "id": "sub-1791873584513-i3jh",
+                "name": "6e-1:asfreq Method",
+                "code": "import pandas as pd\np=pd.Period('2026-01',freq='M')\nprint(\"Original Period:\")\nprint(p)\ndaily_start=p.asfreq('D',how='start')\nprint(\"\\nMonthly Period converted to Daily(Start):\")\nprint(daily_start)\ndaily_end=p.asfreq('D',how='end')\nprint(\"\\nMonthly Period converted to Daily (End):\")\nprint(daily_end)\nperiod_index=pd.period_range(start='2026-1',periods=3,freq='M')\nprint(\"\\n Original Period Index:\")\nprint(period_index)\ndaily_period_index=period_index.asfreq('D',how='start')\nprint(\"\\nperiodIndex converted to Daily Frequency:\")\nprint(daily_period_index)\ndaily_period_index_end=period_index.asfreq('D',how='end')\nprint(\"\\nPeriodIndex converted to Daily Frequency (End):\")\nprint(daily_period_index_end)\n"
+            },
+            {
+                "id": "sub-1791873726036-a5dp",
+                "name": "6f-1:to-period method",
+                "code": "import pandas as pd\ndates=pd.to_datetime([\n    '2026-01-10',\n    '2026-02-15',\n    '2026-03-20',\n    '2026-04-25',\n])\nsales=pd.Series(\n    [1000,1500,1800,2200],\n    index=dates\n)\nprint(\"Original Series:\")\nprint(sales)\nperiod_series=sales.to_period('M')\nprint(\"\\nSeries converted to Monthly Periods:\")\nprint(period_series)\ndf=pd.DataFrame(\n    {\n        'Sales':[1000,1500,1800,2200],\n        'Profit':[200,300,400,500]\n    },\n    index=dates\n)\nprint(\"\\nOriginal DataFrame:\")\nprint(df)\nperiod_df=df.to_period('M')\nprint(\"\\nDataFrame converted to Monthly Periods:\")\nprint(period_df)"
+            },
+            {
+                "id": "sub-1791873823096-yy9h",
+                "name": "6g-1:resampling,downsampling,unsampling,methods",
+                "code": "import pandas as pd\ndates=pd.date_range(\n    start='2026-01-01 00:00',\n    periods=12,\n    freq='h'\n)\nvalues=[10,12,15,14,18,20,22,21,25,28,30,32]\ntime_series=pd.Series(\n    values,\n    index=dates\n)\nprint(\"Original Hourly Time Series: \")\nprint(time_series)\nresampled=time_series.resample('3h').mean()\nprint(\"\\nResampled Time Series (3 Hourly Mean):\")\nprint(resampled)\ndownsampled=time_series.resample('4h').sum()\nprint(\"\\nDownsampled Time Series - 4 Hour Sum: \")\nprint(downsampled)\nupsampled=time_series.resample('30min').asfreq()\nprint(\"\\nUpsampled Time Series - 30 Minute:\")\nprint(upsampled)\nupsampled_ffill=time_series.resample('30min').ffill()\nprint(\"\\nUpsampled Time Series using Forward Fill:\")\nprint(upsampled_ffill)\n"
+            }
+        ]
+    },
+    {
+        "id": 1791874151890,
+        "title": "Experiment 7:Data Aggregation",
+        "desc": "Data Science Lab Experiment",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-1791874151610-1",
+                "name": "7a-1:Tabular DataSet",
+                "code": "import pandas as pd\ndata={\n    'Name':['priya','kiran','Lakshmi','Ravi'],\n    'Department':['CSE','DS','DS','CSE'],\n    'Year':[4,3,4,3],\n    'Marks':[98,89,95,94]\n}\ndf=pd.DataFrame(data)\nprint(\"Original DataFrame:\")\nprint(df)\nprint(\"\\n1.Group by Department:\")\ngroup1=df.groupby('Department')\nfor name,group in group1:\n    print(\"\\nDepartment:\",name)\n    print(group)\nprint(\"\\nAverage Marks by Department:\")\nprint(df.groupby('Department')['Marks'].mean())\nprint(\"\\n2.Group by Department and year:\")\ngroup2=df.groupby(['Department','Year'])\nfor name,group in group2:\n    print(\"\\nGroup:\",name)\n    print(group)\nprint(\"\\nAverage Marks by Department and Year:\")\nprint(df.groupby(['Department','Year'])['Marks'].mean())"
+            },
+            {
+                "id": "sub-1791874352683-pd69",
+                "name": "7b-1:use aggregate method",
+                "code": "\nimport pandas as pd\ndata={\n    'Department':['DS','DS','CS','IT','IT','CS'],\n    'Marks':[80,85,90,95,89,98],\n    'Attendance':[90,85,80,75,95,88]\n}\ndf=pd.DataFrame(data)\nprint(\"Original DataFrame:\")\nprint(df)\nresult=df.groupby('Department').aggregate({\n    'Marks':['sum','mean','std'],\n    'Attendance':['sum','mean','std']\n})\nprint(\"\\nSummary Statistics:\")\nprint(result)"
+            },
+            {
+                "id": "sub-1791874413070-1sr5",
+                "name": "7c-1:using group() by method",
+                "code": "import pandas as pd\nurl=\"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv\"\ndf=pd.read_csv(url)\nprint(\"First 5 Records:\")\nprint(df.head())\nprint(\"\\nDataset Information:\")\nprint(df.info())\nprint(\"\\nStatistical Summary:\")\nprint(df.describe())\nprint(\"\\n.GroupBy using a Single Column:\")\ngroup_single=df.groupby('species')['sepal_length'].agg(['count','sum','mean','std','min','max'])\nprint(group_single)\nprint(\"\\n2.GroupBy using Multiple Columns:\")\ngroup_multiple=df.groupby(['species','sepal_width'])['sepal_length'].mean()\nprint(group_multiple.head(15))\nprint(\"\\n3.Summary Statistics:\")\nsummary=df.groupby('species').agg({\n    'sepal_length':['mean','std','min','max'],\n    'sepal_width':['mean','std','min','max'],\n    'petal_length':['mean','std','min','max'],\n    'petal_width':['mean','std','min','max'],\n})\nprint(summary)\nprint(\"\\n4\")"
+            }
+        ]
     }
 ];
 
@@ -1238,10 +1304,11 @@ pd.read_csv = safe_read_csv
         // DETERMINISTIC PERSISTENCE & STORAGE ENGINE
         // (Clean Single-Master LocalStorage + Emergency Backup + IndexedDB)
         // ==========================================
-        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_v2026';
+        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_v2026_exp7';
 
         // Stale legacy keys to aggressively purge so user has full 5MB free quota
         const LEGACY_STORAGE_KEYS = [
+            'poojitha_portal_data_v2026',
             'poojitha_portal_data_master',
             'poojitha_master_portal_data_v20',
             'poojitha_master_portal_data_v19',
@@ -1337,24 +1404,65 @@ pd.read_csv = safe_read_csv
         // 2. Deterministic State Sanitizer & Loader
         function sanitizeState(s) {
             if (!s || typeof s !== 'object') s = {};
-            const exps = Array.isArray(s.experiments) && s.experiments.length > 0 
-                ? s.experiments 
-                : JSON.parse(JSON.stringify(defaultExperiments));
-            
-            exps.forEach(e => {
-                if (!e.subExperiments || !Array.isArray(e.subExperiments)) e.subExperiments = [];
-                if (!e.desc) e.desc = 'Data Science Lab Experiment';
-                if (!e.github) e.github = 'https://github.com';
+
+            // Smart Merge: Start with all defaultExperiments to guarantee complete curriculum
+            const baseDefaults = JSON.parse(JSON.stringify(defaultExperiments));
+            const userExps = Array.isArray(s.experiments) ? s.experiments : [];
+
+            // Merge user changes or custom sub-experiments into baseDefaults
+            baseDefaults.forEach(defExp => {
+                const userExp = userExps.find(x => x.id == defExp.id || (x.title && x.title.toLowerCase().trim() === defExp.title.toLowerCase().trim()));
+                if (userExp) {
+                    if (userExp.github) defExp.github = userExp.github;
+                    if (userExp.desc) defExp.desc = userExp.desc;
+                    // Merge any additional sub-experiments the user might have added locally
+                    if (Array.isArray(userExp.subExperiments)) {
+                        userExp.subExperiments.forEach(userSub => {
+                            const exists = defExp.subExperiments.some(ds => ds.id == userSub.id || ds.name.trim() === userSub.name.trim());
+                            if (!exists) {
+                                defExp.subExperiments.push(userSub);
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Also keep any brand new experiments the user created beyond defaultExperiments
+            userExps.forEach(userExp => {
+                const existsInDefaults = baseDefaults.some(ds => ds.id == userExp.id || (ds.title && ds.title.toLowerCase().trim() === (userExp.title || '').toLowerCase().trim()));
+                if (!existsInDefaults) {
+                    if (!userExp.subExperiments || !Array.isArray(userExp.subExperiments)) userExp.subExperiments = [];
+                    if (!userExp.desc) userExp.desc = 'Data Science Lab Experiment';
+                    if (!userExp.github) userExp.github = 'https://github.com';
+                    baseDefaults.push(userExp);
+                }
+            });
+
+            // Merge modules: ensure default 5 modules are always present
+            const baseModules = JSON.parse(JSON.stringify(defaultModules));
+            const userModules = Array.isArray(s.modules) ? s.modules : [];
+            baseModules.forEach(defMod => {
+                const userMod = userModules.find(m => m.id == defMod.id || m.title === defMod.title);
+                if (userMod) {
+                    if (userMod.pdfData) defMod.pdfData = userMod.pdfData;
+                    if (userMod.pdfName) defMod.pdfName = userMod.pdfName;
+                    if (userMod.github) defMod.github = userMod.github;
+                }
+            });
+            userModules.forEach(userMod => {
+                if (!baseModules.some(m => m.id == userMod.id)) {
+                    baseModules.push(userMod);
+                }
             });
 
             return {
                 activeTab: s.activeTab || 'home',
-                expandedExpId: s.expandedExpId || (exps[0] ? exps[0].id : 1),
+                expandedExpId: s.expandedExpId || (baseDefaults[0] ? baseDefaults[0].id : 1),
                 profile: (s.profile && typeof s.profile === 'object') ? { ...defaultProfile, ...s.profile } : JSON.parse(JSON.stringify(defaultProfile)),
-                modules: (Array.isArray(s.modules) && s.modules.length > 0) ? s.modules : JSON.parse(JSON.stringify(defaultModules)),
-                experiments: exps,
-                tools: (Array.isArray(s.tools) && s.tools.length > 0) ? s.tools : JSON.parse(JSON.stringify(defaultTools)),
-                projects: (Array.isArray(s.projects) && s.projects.length > 0) ? s.projects : JSON.parse(JSON.stringify(defaultProjects))
+                modules: baseModules,
+                experiments: baseDefaults,
+                tools: (Array.isArray(s.tools) && s.tools.length >= defaultTools.length) ? s.tools : JSON.parse(JSON.stringify(defaultTools)),
+                projects: (Array.isArray(s.projects) && s.projects.length >= defaultProjects.length) ? s.projects : JSON.parse(JSON.stringify(defaultProjects))
             };
         }
 
@@ -2371,10 +2479,49 @@ sys.stderr = io.StringIO()
         }
 
         function viewModulePDF(moduleId) {
-            const mod = state.modules.find(m => m.id === moduleId);
-            if (mod && mod.pdfData) {
-                const pdfWindow = window.open("");
-                pdfWindow.document.write(`<iframe src="${mod.pdfData}" frameborder="0" style="width:100%; height:100%;"></iframe>`);
+            const mod = (state.modules || []).find(m => m.id === moduleId);
+            if (!mod) return;
+
+            // 1. If base64 data was custom uploaded by user, convert to Blob URL to bypass browser top-level data: URL blocks
+            if (mod.pdfData && typeof mod.pdfData === 'string' && mod.pdfData.startsWith('data:')) {
+                try {
+                    const parts = mod.pdfData.split(';base64,');
+                    const contentType = parts[0].replace('data:', '') || 'application/pdf';
+                    const raw = window.atob(parts[1]);
+                    const uInt8Array = new Uint8Array(raw.length);
+                    for (let i = 0; i < raw.length; ++i) {
+                        uInt8Array[i] = raw.charCodeAt(i);
+                    }
+                    const blob = new Blob([uInt8Array], { type: contentType });
+                    const blobUrl = URL.createObjectURL(blob);
+                    const win = window.open(blobUrl, '_blank');
+                    if (!win || win.closed || typeof win.closed === 'undefined') {
+                        const a = document.createElement('a');
+                        a.href = blobUrl;
+                        a.target = '_blank';
+                        a.rel = 'noopener noreferrer';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                    }
+                    return;
+                } catch(e) {
+                    console.warn("Base64 to blob conversion failed:", e);
+                }
+            }
+
+            // 2. Open repository PDF file (Module1.pdf ... Module5.pdf) directly in a new tab!
+            // Works 100% on all laptops, phones, Chrome, Edge, Safari, Firefox.
+            const pdfFile = mod.pdfName || ('Module' + mod.id + '.pdf');
+            const win = window.open(pdfFile, '_blank');
+            if (!win || win.closed || typeof win.closed === 'undefined') {
+                const a = document.createElement('a');
+                a.href = pdfFile;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
             }
         }
 
