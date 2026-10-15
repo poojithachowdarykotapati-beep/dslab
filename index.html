@@ -129,6 +129,13 @@
         .h-10 { height: 2.5rem !important; }
         .w-24 { width: 6rem !important; }
         .h-24 { height: 6rem !important; }
+        .w-12 { width: 3rem !important; }
+        .h-12 { height: 3rem !important; }
+        .w-20 { width: 5rem !important; }
+        .ml-20 { margin-left: 5rem !important; }
+        .left-full { left: 100% !important; }
+        .my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+        .whitespace-nowrap { white-space: nowrap !important; }
         .w-64 { width: 16rem !important; }
         .ml-64 { margin-left: 16rem !important; }
         .max-w-md { max-width: 28rem !important; }
@@ -399,6 +406,7 @@
         @media (min-width: 768px) {
             .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
             .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
             .md\:block { display: block !important; }
             .md\:flex { display: flex !important; }
             .md\:hidden { display: none !important; }
@@ -418,64 +426,74 @@
 <body class="bg-[#020617] text-slate-100 antialiased min-h-screen flex flex-col selection:bg-teal-500 selection:text-slate-950">
 
     <div class="flex flex-1 min-h-screen relative">
-        <!-- Sidebar Navigation -->
-        <aside class="w-64 bg-[#070b19] text-slate-300 flex flex-col fixed inset-y-0 left-0 z-50 border-r border-teal-500/20 shadow-2xl">
-            <div class="p-6 flex items-center space-x-3.5 border-b border-teal-500/20 bg-[#070b19]/80">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-400 to-emerald-400 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/30 font-bold">
-                    <i class="fa-solid fa-code text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="font-extrabold text-white tracking-wider text-[11px]">DATA SCIENCE</h1>
-                    <p class="text-[10px] text-teal-400 font-bold tracking-widest uppercase">DIGITAL LIBRARY</p>
+        <!-- Icon-Only Sidebar Navigation -->
+        <aside class="w-20 bg-[#070b19] text-slate-300 flex flex-col items-center py-6 fixed inset-y-0 left-0 z-50 border-r border-teal-500/20 shadow-2xl justify-between">
+            <!-- Brand Logo Icon -->
+            <div class="flex flex-col items-center">
+                <div onclick="switchTab('home')" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-400 to-emerald-400 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/30 font-bold group relative cursor-pointer active:scale-95 transition" title="Data Science Digital Library">
+                    <i class="fa-solid fa-code text-xl"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-[11px] font-bold rounded-xl shadow-2xl whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition z-50">
+                        Data Science Digital Library
+                    </span>
                 </div>
             </div>
 
-            <nav class="flex-1 px-3 py-6 space-y-2">
-                <a href="javascript:void(0)" onclick="switchTab('home')" id="nav-home" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl text-slate-950 bg-gradient-to-r from-teal-400 to-emerald-400 font-bold transition shadow-lg text-xs">
-                    <i class="fa-solid fa-house w-5 text-slate-950"></i>
-                    <span>Home Dashboard</span>
+            <!-- Central Navigation Icons -->
+            <nav class="flex flex-col items-center space-y-4 my-auto">
+                <!-- Home Icon -->
+                <a href="javascript:void(0)" onclick="switchTab('home')" id="nav-home" class="nav-link w-12 h-12 rounded-2xl flex items-center justify-center text-slate-950 bg-gradient-to-r from-teal-400 to-emerald-400 font-bold transition shadow-lg relative group">
+                    <i class="fa-solid fa-house text-lg"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-xs font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Home Dashboard
+                    </span>
                 </a>
-                <a href="javascript:void(0)" onclick="switchTab('modules')" id="nav-modules" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
-                    <i class="fa-solid fa-book-bookmark w-5 text-teal-400"></i>
-                    <span>Modules (<span id="module-count-badge">5</span>)</span>
+
+                <!-- Modules Icon -->
+                <a href="javascript:void(0)" onclick="switchTab('modules')" id="nav-modules" class="nav-link w-12 h-12 rounded-2xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-teal-500/10 font-medium transition relative group">
+                    <i class="fa-solid fa-book-bookmark text-lg"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-xs font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Modules (<span id="module-count-badge">5</span>)
+                    </span>
                 </a>
-                <a href="javascript:void(0)" onclick="switchTab('experiments')" id="nav-experiments" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
-                    <i class="fa-solid fa-flask-vial w-5 text-emerald-400"></i>
-                    <span>Experiments Hub (<span id="experiment-count-badge">7</span>)</span>
+
+                <!-- Experiments Icon -->
+                <a href="javascript:void(0)" onclick="switchTab('experiments')" id="nav-experiments" class="nav-link w-12 h-12 rounded-2xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-teal-500/10 font-medium transition relative group">
+                    <i class="fa-solid fa-flask-vial text-lg"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-xs font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Experiments Hub (<span id="experiment-count-badge">7</span>)
+                    </span>
                 </a>
-                <a href="javascript:void(0)" onclick="switchTab('tools')" id="nav-tools" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-2xl hover:bg-teal-500/10 hover:text-white transition text-slate-400 font-medium text-xs">
-                    <i class="fa-solid fa-toolbox w-5 text-cyan-400"></i>
-                    <span>Tools & Projects</span>
+
+                <!-- Tools Icon -->
+                <a href="javascript:void(0)" onclick="switchTab('tools')" id="nav-tools" class="nav-link w-12 h-12 rounded-2xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-teal-500/10 font-medium transition relative group">
+                    <i class="fa-solid fa-toolbox text-lg"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-xs font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Tools (<span id="tools-count-badge">10</span>)
+                    </span>
+                </a>
+
+                <!-- Projects Icon -->
+                <a href="javascript:void(0)" onclick="switchTab('projects')" id="nav-projects" class="nav-link w-12 h-12 rounded-2xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-teal-500/10 font-medium transition relative group">
+                    <i class="fa-solid fa-diagram-project text-lg"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-xs font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Projects (<span id="projects-count-badge">2</span>)
+                    </span>
                 </a>
             </nav>
 
-            <div class="px-3.5 py-3 border-t border-teal-500/20 bg-[#070b19]/90 space-y-2">
-                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center justify-between">
-                    <span>Data Persistence</span>
-                    <span class="text-emerald-400 font-mono text-[9px] flex items-center"><i class="fa-solid fa-circle text-[6px] mr-1 text-emerald-400 animate-pulse"></i>Synced</span>
+            <!-- Bottom University Icon -->
+            <div class="flex flex-col items-center">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 relative group cursor-default">
+                    <i class="fa-solid fa-shield-halved text-base"></i>
+                    <span class="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 border border-teal-500/30 text-white text-[11px] font-semibold rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition whitespace-nowrap z-50">
+                        Mohan Babu University • CSE-DS
+                    </span>
                 </div>
-                <button onclick="exportPortalBackup()" class="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 hover:text-white border border-teal-500/30 text-[11px] font-semibold transition shadow-sm" title="Download a JSON backup of all experiments, modules, and profile">
-                    <i class="fa-solid fa-download text-xs text-teal-400"></i>
-                    <span>Download Backup</span>
-                </button>
-                <label class="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[11px] font-semibold transition cursor-pointer" title="Restore portal data from a saved JSON file">
-                    <i class="fa-solid fa-upload text-xs text-emerald-400"></i>
-                    <span>Restore from Backup</span>
-                    <input type="file" id="backup-file-input" accept=".json" class="hidden" onchange="importPortalBackup(event)">
-                </label>
-            </div>
-
-            <div class="p-4 border-t border-teal-500/20 bg-[#020617] text-xs text-slate-400">
-                <div class="flex items-center space-x-2 text-teal-400 font-semibold mb-1 text-[11px]">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>Mohan Babu University</span>
-                </div>
-                <p class="text-[10px] text-slate-500">CSE-DS 2028 Batch Digital Library</p>
             </div>
         </aside>
 
         <!-- Main Workspace Area -->
-        <div class="flex-1 ml-64 flex flex-col min-w-0">
+        <div class="flex-1 ml-20 flex flex-col min-w-0">
             <header class="bg-[#070b19]/90 backdrop-blur-md border-b border-teal-500/20 sticky top-0 z-40 px-8 py-4 flex items-center justify-between shadow-sm">
                 <div class="flex items-center space-x-4 flex-1 max-w-lg">
                     <div class="relative w-full">
@@ -487,15 +505,11 @@
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <div id="save-status-indicator" class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-semibold transition">
-                        <i class="fa-solid fa-circle-check text-xs"></i>
-                        <span id="save-status-text">Auto-Saved</span>
+                    <div class="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Verified Digital Library</span>
                     </div>
 
-                    <button onclick="openAddModal()" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
-                        <i class="fa-solid fa-plus text-xs"></i>
-                        <span>Add Item</span>
-                    </button>
                     <div class="flex items-center space-x-3.5 border-l pl-5 border-teal-500/20">
                         <div id="header-avatar-container" class="w-9 h-9 rounded-full flex items-center justify-center border-2 border-teal-400 bg-teal-500/20 text-teal-400 font-bold overflow-hidden shadow-md">
                             <span id="header-initials">KP</span>
@@ -522,16 +536,12 @@
                         </div>
                         
                         <!-- Student Photo (Directly Clickable) -->
-                        <div class="relative w-24 h-24 mx-auto mt-2 mb-4 group cursor-pointer" onclick="document.getElementById('profile-photo-input').click()" title="Click to upload profile photo">
+                        <div class="relative w-24 h-24 mx-auto mt-2 mb-4">
                             <div id="id-card-photo-placeholder" class="w-full h-full rounded-full border-4 border-teal-500/30 bg-teal-500/10 flex items-center justify-center text-teal-400 font-extrabold text-xl shadow-xl">
                                 KP
                             </div>
                             <img id="id-card-photo" src="" alt="Profile Photo" class="w-full h-full rounded-full object-cover shadow-xl border-4 border-teal-500/30 hidden">
-                            <div class="absolute inset-0 bg-slate-950/70 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white text-[10px] font-semibold">
-                                <i class="fa-solid fa-camera mr-1"></i> Upload
-                            </div>
                         </div>
-                        <input type="file" id="profile-photo-input" accept="image/*" class="hidden" onchange="previewProfilePhoto(event)">
 
                         <h2 id="id-card-name" class="text-xs font-extrabold text-white tracking-tight">KOTAPATI POOJITHA</h2>
                         <p class="text-[10px] font-bold text-teal-400 uppercase tracking-widest mt-0.5">CSE - Data Science</p>
@@ -572,11 +582,7 @@
                             </a>
                         </div>
 
-                        <button onclick="openEditProfileModal()" class="w-full mt-3 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 py-2 rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 transition border border-teal-500/30">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            <span>Edit ID Card & Links</span>
-                        </button>
-                    </div>
+                        </div>
                 </div>
             </main>
         </div>
@@ -1804,6 +1810,7 @@ pd.read_csv = safe_read_csv
             else if (state.activeTab === 'modules') container.innerHTML = renderModulesView();
             else if (state.activeTab === 'experiments') container.innerHTML = renderVerticalExperimentsView();
             else if (state.activeTab === 'tools') container.innerHTML = renderToolsView();
+            else if (state.activeTab === 'projects') container.innerHTML = renderProjectsView();
 
             const modBadge = document.getElementById('module-count-badge');
             if (modBadge) modBadge.innerText = state.modules ? state.modules.length : 0;
@@ -1947,7 +1954,7 @@ pd.read_csv = safe_read_csv
                     </div>
 
                     <!-- Portal Summary Stats Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div onclick="switchTab('modules')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-teal-400/40 transition">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-bold text-slate-400 uppercase">Modules</span>
@@ -1961,16 +1968,24 @@ pd.read_csv = safe_read_csv
                                 <span class="text-xs font-bold text-slate-400 uppercase">Experiments</span>
                                 <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-flask-vial"></i></div>
                             </div>
-                            <p class="text-2xl font-extrabold text-white mt-3">${state.experiments ? state.experiments.length : 2}</p>
+                            <p class="text-2xl font-extrabold text-white mt-3">${state.experiments ? state.experiments.length : 7}</p>
                             <p class="text-[10px] text-emerald-400 mt-1">Interactive lab codes & compiler</p>
                         </div>
-                        <div onclick="switchTab('tools')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-teal-400/40 transition">
+                        <div onclick="switchTab('tools')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-cyan-400/40 transition">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-slate-400 uppercase">Tools & Projects</span>
+                                <span class="text-xs font-bold text-slate-400 uppercase">Tools</span>
                                 <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><i class="fa-solid fa-toolbox"></i></div>
                             </div>
-                            <p class="text-2xl font-extrabold text-white mt-3">${(state.tools ? state.tools.length : 10) + (state.projects ? state.projects.length : 2)}</p>
-                            <p class="text-[10px] text-cyan-400 mt-1">Python ecosystem & repositories</p>
+                            <p class="text-2xl font-extrabold text-white mt-3">${state.tools ? state.tools.length : 10}</p>
+                            <p class="text-[10px] text-cyan-400 mt-1">Python ecosystem</p>
+                        </div>
+                        <div onclick="switchTab('projects')" class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg cursor-pointer hover:border-amber-400/40 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400 uppercase">Projects</span>
+                                <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center"><i class="fa-solid fa-diagram-project"></i></div>
+                            </div>
+                            <p class="text-2xl font-extrabold text-white mt-3">${state.projects ? state.projects.length : 2}</p>
+                            <p class="text-[10px] text-amber-400 mt-1">Student repositories</p>
                         </div>
                     </div>
                 </div>
