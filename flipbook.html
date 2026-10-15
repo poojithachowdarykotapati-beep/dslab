@@ -9,48 +9,257 @@
     <title>3D Module Flipbook - Data Science Digital Library</title>
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Tailwind Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <!-- PageFlip 3D Book Library -->
+    <!-- PageFlip 3D Book Engine -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
 
     <style>
-        body {
-            background: radial-gradient(ellipse at 50% 40%, #08142b 0%, #020617 80%);
-            color: #f1f5f9;
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-            min-height: 100vh;
+        /* CSS Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 3D Realistic Book Styling */
+        body {
+            background: #020617;
+            background-color: #020617;
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Fixed Top Navigation Bar */
+        .top-navbar {
+            height: 64px;
+            min-height: 64px;
+            width: 100%;
+            background: rgba(7, 11, 25, 0.96);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 12px;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            color: #2dd4bf;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-back:hover {
+            background: rgba(45, 212, 191, 0.2);
+            color: #ffffff;
+            border-color: #2dd4bf;
+            transform: translateX(-2px);
+        }
+
+        .title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .badge-flipbook {
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: rgba(45, 212, 191, 0.12);
+            color: #2dd4bf;
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .book-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 440px;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .cache-status {
+            font-size: 11px;
+            color: #5eead4;
+            opacity: 0.85;
+            font-family: 'Fira Code', monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 440px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 12px;
+            background: #020617;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            color: #94a3b8;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+        }
+
+        .page-pill .curr {
+            color: #2dd4bf;
+            font-weight: 700;
+        }
+
+        .page-pill .tot {
+            color: #f1f5f9;
+        }
+
+        .btn-ctrl {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            border-radius: 12px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-ctrl:hover {
+            background: #334155;
+            color: #ffffff;
+            border-color: rgba(45, 212, 191, 0.4);
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%);
+            color: #020617;
+            font-size: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(45, 212, 191, 0.35);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(45, 212, 191, 0.5);
+        }
+
+        /* Main Workspace Stage */
+        .main-stage {
+            flex: 1;
+            width: 100%;
+            height: calc(100vh - 64px);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* Premium digital desk ambient gradient */
+            background: radial-gradient(circle at 50% 48%, #0d1b38 0%, #060e22 55%, #020617 100%);
+        }
+
+        /* Subtle ambient backdrop grid or glow behind book */
+        .stage-backdrop-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, rgba(13, 27, 56, 0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Flipbook Container */
         #book-container {
+            position: relative;
+            z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: calc(100vh - 72px);
-            position: relative;
-            padding: 16px;
+            height: 100%;
+            padding: 18px;
         }
 
         .flip-book {
-            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(45, 212, 191, 0.2);
+            box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.95), 0 0 45px rgba(45, 212, 191, 0.12);
+            border-radius: 6px;
             background: #0f172a;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
         }
 
+        /* Page styling: Pure White Crisp Document Sheets */
         .page {
-            background-color: #ffffff;
+            background-color: #ffffff !important;
             overflow: hidden;
-            box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .page-content {
@@ -69,6 +278,7 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            background: #ffffff;
         }
 
         .page-footer {
@@ -79,16 +289,13 @@
             text-align: center;
             font-size: 10px;
             font-family: 'Fira Code', monospace;
+            font-weight: 600;
             color: #64748b;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);
             padding: 2px 0;
-        }
-
-        /* Hard cover styles */
-        .page.--hard {
-            background-color: #0b1329 !important;
-            border: 2px solid #14b8a6;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
         }
 
         /* Floating Nav Buttons */
@@ -96,120 +303,205 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: rgba(7, 11, 25, 0.85);
-            border: 1px solid rgba(45, 212, 191, 0.4);
+            background: rgba(7, 11, 25, 0.9);
+            border: 1.5px solid rgba(45, 212, 191, 0.45);
             color: #2dd4bf;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            z-index: 30;
-            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+            z-index: 50;
+            backdrop-filter: blur(10px);
         }
 
         .nav-floating-btn:hover {
             background: #2dd4bf;
             color: #020617;
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 0 30px rgba(45, 212, 191, 0.6);
+            transform: translateY(-50%) scale(1.12);
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.7);
         }
 
-        .nav-prev-btn { left: 20px; }
-        .nav-next-btn { right: 20px; }
+        .nav-prev-btn { left: 24px; }
+        .nav-next-btn { right: 24px; }
 
-        @media (max-width: 768px) {
-            .nav-prev-btn { left: 6px; width: 40px; height: 40px; font-size: 14px; }
-            .nav-next-btn { right: 6px; width: 40px; height: 40px; font-size: 14px; }
+        /* Fullscreen Overlay for Loading */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: #020617;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.4); border-radius: 9999px; }
+        .loading-icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #020617;
+            font-size: 26px;
+            box-shadow: 0 0 35px rgba(45, 212, 191, 0.45);
+            animation: pulse-glow 1.5s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { transform: scale(0.96); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
+            to { transform: scale(1.05); box-shadow: 0 0 45px rgba(45, 212, 191, 0.7); }
+        }
+
+        .loading-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .loading-desc {
+            font-size: 12px;
+            color: #2dd4bf;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .loading-bar-track {
+            width: 240px;
+            height: 6px;
+            border-radius: 9999px;
+            background: #1e293b;
+            overflow: hidden;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            width: 20%;
+            background: linear-gradient(90deg, #2dd4bf, #34d399);
+            transition: width 0.15s ease;
+        }
+
+        /* Fallback Standard PDF View Container */
+        #standard-pdf-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: #020617;
+            z-index: 40;
+            display: none;
+        }
+
+        #standard-pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Bottom watermark pill */
+        .bottom-watermark {
+            position: absolute;
+            bottom: 12px;
+            font-size: 10px;
+            font-family: 'Fira Code', monospace;
+            color: rgba(148, 163, 184, 0.5);
+            pointer-events: none;
+            z-index: 5;
+            letter-spacing: 0.05em;
+        }
+
+        /* Utility classes */
+        .hidden { display: none !important; }
+
+        @media (max-width: 900px) {
+            .book-title { max-width: 200px; }
+            .cache-status { display: none; }
+            .nav-prev-btn { left: 8px; width: 42px; height: 42px; font-size: 15px; }
+            .nav-next-btn { right: 8px; width: 42px; height: 42px; font-size: 15px; }
+            .btn-ctrl span { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .top-navbar { padding: 0 12px; }
+            .btn-back span { display: none; }
+            .book-title { max-width: 140px; font-size: 12px; }
+        }
     </style>
 </head>
-<body class="bg-[#020617] min-h-screen flex flex-col">
+<body>
 
-    <!-- Top Navigation Toolbar -->
-    <header class="h-[72px] bg-[#070b19]/90 backdrop-blur-md border-b border-teal-500/20 px-4 md:px-8 flex items-center justify-between sticky top-0 z-50 shadow-md">
-        <!-- Back to Library & Title -->
-        <div class="flex items-center space-x-4 min-w-0">
-            <a href="index.html" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs font-semibold transition" title="Return to Data Science Digital Library">
+    <!-- Fixed Top Navigation Toolbar -->
+    <header class="top-navbar">
+        <!-- Left: Back to Library & Book Title -->
+        <div class="nav-left">
+            <a href="index.html" class="btn-back" title="Return to Data Science Digital Library">
                 <i class="fa-solid fa-arrow-left"></i>
-                <span class="hidden sm:inline">Digital Library</span>
+                <span>Digital Library</span>
             </a>
-            <div class="truncate">
-                <div class="flex items-center space-x-2">
-                    <span class="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 font-mono text-[10px] border border-teal-500/30 uppercase font-bold tracking-wider">3D Flipbook</span>
-                    <h1 id="book-title" class="text-xs md:text-sm font-extrabold text-white truncate max-w-xs md:max-w-md">Data Science Module Syllabus</h1>
+            <div class="title-block">
+                <div class="title-row">
+                    <span class="badge-flipbook">3D FLIPBOOK</span>
+                    <h1 id="book-title" class="book-title">Data Science Module Syllabus</h1>
                 </div>
-                <p id="background-cache-status" class="text-[10px] text-teal-400/80 hidden sm:block font-mono">Single page mode • Click corners or use arrows ← →</p>
+                <p id="background-cache-status" class="cache-status">Single page mode • Click corners or use arrows ← →</p>
             </div>
         </div>
 
-        <!-- Page Indicator & Controls -->
-        <div class="flex items-center space-x-2 md:space-x-3">
-            <!-- Page Indicator -->
-            <div class="flex items-center space-x-1.5 bg-[#020617] px-3 py-1.5 rounded-xl border border-teal-500/30 text-xs font-mono shadow-sm">
-                <span class="text-slate-400">Page</span>
-                <span id="current-page" class="font-bold text-teal-400">1</span>
-                <span class="text-slate-500">/</span>
-                <span id="total-pages" class="text-slate-300">--</span>
+        <!-- Right: Page Pill & Action Controls -->
+        <div class="nav-right">
+            <!-- Page Number Indicator -->
+            <div class="page-pill">
+                <span>Page</span>
+                <span id="current-page" class="curr">1</span>
+                <span>/</span>
+                <span id="total-pages" class="tot">--</span>
             </div>
 
-            <!-- Single Page / 2-Page Spread Mode Toggle -->
-            <button onclick="togglePageSpread()" id="btn-spread" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 text-xs font-semibold flex items-center space-x-1.5 transition hidden sm:flex" title="Toggle Single Page / Double Page Mode">
+            <!-- Single Page / Two Pages Mode Switcher -->
+            <button onclick="togglePageSpread()" id="btn-spread" class="btn-ctrl" title="Toggle Single Page / Double Page Mode">
                 <i class="fa-solid fa-file" id="spread-icon"></i>
                 <span id="spread-label">Single Page</span>
             </button>
 
-            <!-- Page flip sound toggle -->
-            <button onclick="toggleSound()" id="btn-sound" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-400 border border-slate-700 text-xs transition" title="Toggle Page Turn Sound">
-                <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+            <!-- Audio Sound Toggle -->
+            <button onclick="toggleSound()" id="btn-sound" class="btn-ctrl" title="Toggle Page Flip Sound">
+                <i class="fa-solid fa-volume-high" id="sound-icon" style="color: #2dd4bf;"></i>
             </button>
 
-            <!-- Fullscreen Toggle -->
-            <button onclick="toggleFullscreen()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs transition hidden sm:inline-block" title="Toggle Fullscreen View">
+            <!-- Fullscreen View Toggle -->
+            <button onclick="toggleFullscreen()" class="btn-ctrl" title="Toggle Fullscreen Mode">
                 <i class="fa-solid fa-expand"></i>
             </button>
 
-            <!-- Download PDF Button -->
-            <a id="btn-download" href="#" download class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold text-xs flex items-center space-x-1.5 shadow-md hover:opacity-90 transition">
-                <i class="fa-solid fa-download text-xs"></i>
-                <span class="hidden md:inline">Download</span>
+            <!-- Download Official PDF -->
+            <a id="btn-download" href="#" download class="btn-download" title="Download official PDF document">
+                <i class="fa-solid fa-download"></i>
+                <span>Download</span>
             </a>
 
-            <!-- Standard PDF View Toggle -->
-            <button onclick="toggleStandardView()" id="btn-toggle-view" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs transition" title="Switch to Standard PDF Viewer">
-                <i class="fa-solid fa-file-pdf text-rose-400"></i>
+            <!-- Standard PDF Reader Fallback -->
+            <button onclick="toggleStandardView()" id="btn-toggle-view" class="btn-ctrl" title="Switch to Standard PDF Viewer">
+                <i class="fa-solid fa-file-pdf" style="color: #fb7185;"></i>
             </button>
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="flex-1 relative flex flex-col justify-center items-center overflow-hidden">
-        
-        <!-- Ultra-fast Initial Loading Spinner (Dismisses in < 0.5s!) -->
-        <div id="loading-overlay" class="absolute inset-0 bg-[#020617] z-40 flex flex-col items-center justify-center p-6 space-y-4">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-teal-400 to-emerald-400 flex items-center justify-center text-slate-950 font-bold text-2xl shadow-xl shadow-teal-500/30 animate-pulse">
-                <i class="fa-solid fa-book-open"></i>
-            </div>
-            <div class="text-center space-y-1">
-                <h3 class="text-base font-extrabold text-white">Opening 3D Flipbook...</h3>
-                <p id="loading-status-text" class="text-xs text-teal-400 font-mono">Loading first page...</p>
-            </div>
-            <div class="w-56 bg-slate-800 h-1.5 rounded-full overflow-hidden border border-teal-500/30">
-                <div id="loading-progress-bar" class="h-full bg-gradient-to-r from-teal-400 to-emerald-400 transition-all duration-150" style="width: 25%;"></div>
-            </div>
-        </div>
+    <!-- Main Workspace Stage -->
+    <main class="main-stage">
+        <!-- Ambient stage background glow -->
+        <div class="stage-backdrop-glow"></div>
 
-        <!-- Floating Flip Buttons -->
+        <!-- Floating Navigation Prev / Next Buttons -->
         <button onclick="prevPage()" id="btn-prev-float" class="nav-floating-btn nav-prev-btn" title="Previous Page (←)">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
@@ -217,18 +509,35 @@
             <i class="fa-solid fa-chevron-right"></i>
         </button>
 
-        <!-- Flipbook Container -->
+        <!-- 3D Flipbook Mount -->
         <div id="book-container">
             <div id="flipbook" class="flip-book">
                 <!-- Pages injected dynamically by JavaScript -->
             </div>
         </div>
 
-        <!-- Fallback Standard PDF View Container (Hidden by default) -->
-        <div id="standard-pdf-container" class="w-full h-full absolute inset-0 bg-[#020617] hidden z-30">
-            <iframe id="standard-pdf-iframe" src="" class="w-full h-full border-0"></iframe>
+        <!-- Watermark -->
+        <div class="bottom-watermark">Mohan Babu University • CSE Data Science Digital Library</div>
+
+        <!-- Standard PDF View Container (Fallback) -->
+        <div id="standard-pdf-container">
+            <iframe id="standard-pdf-iframe" src=""></iframe>
         </div>
     </main>
+
+    <!-- Instant Loading Screen Overlay (Dismisses in <250ms) -->
+    <div id="loading-overlay">
+        <div class="loading-icon-box">
+            <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div style="text-align: center;">
+            <h3 class="loading-title">Opening 3D Flipbook...</h3>
+            <p id="loading-status-text" class="loading-desc">Rendering page 1...</p>
+        </div>
+        <div class="loading-bar-track">
+            <div id="loading-progress-bar" class="loading-bar-fill"></div>
+        </div>
+    </div>
 
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -252,7 +561,7 @@
         let soundEnabled = true;
         let totalPdfPages = 0;
         let isStandardView = false;
-        let isSinglePageMode = true; // Default: Single page view ("one page after another")!
+        let isSinglePageMode = true; // Default: Single Page / Portrait View ("one page after another")
         let pdfDocGlobal = null;
         let renderedPages = new Set();
 
@@ -265,20 +574,20 @@
                 const ctx = new AudioContext();
                 if (ctx.state === 'suspended') ctx.resume();
 
-                const bufferSize = Math.floor(ctx.sampleRate * 0.1);
+                const bufferSize = Math.floor(ctx.sampleRate * 0.08);
                 const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for (let i = 0; i < bufferSize; i++) {
-                    const decay = Math.exp(-i / (ctx.sampleRate * 0.025));
-                    data[i] = (Math.random() * 2 - 1) * decay * 0.25;
+                    const decay = Math.exp(-i / (ctx.sampleRate * 0.02));
+                    data[i] = (Math.random() * 2 - 1) * decay * 0.22;
                 }
 
                 const noise = ctx.createBufferSource();
                 noise.buffer = buffer;
                 const filter = ctx.createBiquadFilter();
                 filter.type = 'bandpass';
-                filter.frequency.value = 1350;
-                filter.Q.value = 1.4;
+                filter.frequency.value = 1400;
+                filter.Q.value = 1.5;
 
                 noise.connect(filter);
                 filter.connect(ctx.destination);
@@ -290,9 +599,11 @@
             soundEnabled = !soundEnabled;
             const icon = document.getElementById('sound-icon');
             if (soundEnabled) {
-                icon.className = 'fa-solid fa-volume-high text-teal-400';
+                icon.className = 'fa-solid fa-volume-high';
+                icon.style.color = '#2dd4bf';
             } else {
-                icon.className = 'fa-solid fa-volume-xmark text-slate-500';
+                icon.className = 'fa-solid fa-volume-xmark';
+                icon.style.color = '#64748b';
             }
         }
 
@@ -314,18 +625,18 @@
             isStandardView = !isStandardView;
             if (isStandardView) {
                 document.getElementById('standard-pdf-iframe').src = pdfFile;
-                stdContainer.classList.remove('hidden');
-                flipContainer.classList.add('hidden');
+                stdContainer.style.display = 'block';
+                flipContainer.style.display = 'none';
                 floatPrev.classList.add('hidden');
                 floatNext.classList.add('hidden');
-                btn.innerHTML = `<i class="fa-solid fa-book-open text-teal-400"></i>`;
+                btn.innerHTML = `<i class="fa-solid fa-book-open" style="color: #2dd4bf;"></i>`;
                 btn.title = "Switch to 3D Flipbook Reader";
             } else {
-                stdContainer.classList.add('hidden');
-                flipContainer.classList.remove('hidden');
+                stdContainer.style.display = 'none';
+                flipContainer.style.display = 'flex';
                 floatPrev.classList.remove('hidden');
                 floatNext.classList.remove('hidden');
-                btn.innerHTML = `<i class="fa-solid fa-file-pdf text-rose-400"></i>`;
+                btn.innerHTML = `<i class="fa-solid fa-file-pdf" style="color: #fb7185;"></i>`;
                 btn.title = "Switch to Standard PDF Viewer";
             }
         }
@@ -343,7 +654,7 @@
                 icon.className = 'fa-solid fa-book-open';
             }
 
-            // Reload flipbook with new orientation
+            // Re-mount flipbook with new orientation
             initPageFlip();
         }
 
@@ -378,8 +689,8 @@
 
             try {
                 const page = await pdfDocGlobal.getPage(pageNum);
-                // Balanced scale for crystal clarity and instant rendering
-                const viewport = page.getViewport({ scale: 1.4 });
+                // Balanced scale for crisp text readability
+                const viewport = page.getViewport({ scale: 1.5 });
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
                 const ctx = canvas.getContext('2d');
@@ -398,41 +709,62 @@
             }
 
             const containerWidth = window.innerWidth;
-            const containerHeight = window.innerHeight - 72;
-            
-            // Standard A4 aspect ratio 1 : 1.414
-            let basePageWidth = 520;
-            let basePageHeight = 735;
+            const containerHeight = window.innerHeight - 64; // 64px header
 
-            if (isSinglePageMode || containerWidth < 900) {
-                // Generous, large single page reading size
-                basePageHeight = Math.min(containerHeight * 0.90, 860);
-                basePageWidth = basePageHeight / 1.414;
-                if (basePageWidth > containerWidth * 0.92) {
-                    basePageWidth = containerWidth * 0.92;
-                    basePageHeight = basePageWidth * 1.414;
-                }
-            } else {
-                basePageHeight = Math.min(containerHeight * 0.88, 760);
-                basePageWidth = basePageHeight / 1.414;
+            // Standard A4 aspect ratio 1 : 1.414 (w/h = 0.707)
+            const availableHeight = containerHeight - 36;
+            const availableWidth = containerWidth - 60;
+
+            let targetHeight = Math.min(availableHeight, 840);
+            let targetWidth = Math.round(targetHeight * 0.707);
+
+            if (targetWidth > availableWidth * 0.90) {
+                targetWidth = Math.round(availableWidth * 0.90);
+                targetHeight = Math.round(targetWidth / 0.707);
             }
 
-            pageFlipInstance = new St.PageFlip(flipbookEl, {
-                width: Math.round(basePageWidth),
-                height: Math.round(basePageHeight),
-                size: 'stretch',
-                minWidth: 280,
-                maxWidth: 1000,
-                minHeight: 400,
-                maxHeight: 1400,
-                maxShadowOpacity: 0.5,
-                showCover: !isSinglePageMode,
-                mobileScrollSupport: false,
-                useMouseEvents: true,
-                clickEventForward: true,
-                usePortrait: isSinglePageMode, // "one page after another" single page view!
-                swipeDistance: 25
-            });
+            if (isSinglePageMode) {
+                // SINGLE PAGE PORTRAIT MODE ("One page after another")
+                // Setting minWidth: 9999 ensures St.PageFlip internal orientation calculation evaluates:
+                // (containerWidth < 2 * minWidth) -> ALWAYS TRUE -> orientation: 'portrait'!
+                pageFlipInstance = new St.PageFlip(flipbookEl, {
+                    width: targetWidth,
+                    height: targetHeight,
+                    size: 'stretch',
+                    minWidth: 9999,
+                    maxWidth: targetWidth,
+                    minHeight: 300,
+                    maxHeight: targetHeight,
+                    maxShadowOpacity: 0.5,
+                    showCover: false, // Single page mode flips page by page cleanly
+                    mobileScrollSupport: false,
+                    useMouseEvents: true,
+                    clickEventForward: true,
+                    usePortrait: true,
+                    swipeDistance: 25
+                });
+            } else {
+                // TWO PAGES LANDSCAPE SPREAD MODE
+                let spreadWidth = Math.min(Math.round((availableWidth * 0.92) / 2), Math.round(targetHeight * 0.707));
+                let spreadHeight = Math.round(spreadWidth / 0.707);
+
+                pageFlipInstance = new St.PageFlip(flipbookEl, {
+                    width: spreadWidth,
+                    height: spreadHeight,
+                    size: 'stretch',
+                    minWidth: 200,
+                    maxWidth: spreadWidth,
+                    minHeight: 300,
+                    maxHeight: spreadHeight,
+                    maxShadowOpacity: 0.5,
+                    showCover: true,
+                    mobileScrollSupport: false,
+                    useMouseEvents: true,
+                    clickEventForward: true,
+                    usePortrait: false,
+                    swipeDistance: 25
+                });
+            }
 
             pageFlipInstance.loadFromHTML(document.querySelectorAll('.page'));
 
@@ -463,7 +795,7 @@
 
             try {
                 statusText.innerText = `Fetching ${pdfFile}...`;
-                progressBar.style.width = '40%';
+                progressBar.style.width = '35%';
                 
                 const loadingTask = pdfjsLib.getDocument(pdfFile);
                 pdfDocGlobal = await loadingTask.promise;
