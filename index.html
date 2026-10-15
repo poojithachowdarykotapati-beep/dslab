@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Science Digital Portal - Kotapati Poojitha</title>
+    <title>Data Science Digital Library - Kotapati Poojitha</title>
     <!-- Fallback FontAwesome Icons + Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -426,7 +426,7 @@
                 </div>
                 <div>
                     <h1 class="font-extrabold text-white tracking-wider text-[11px]">DATA SCIENCE</h1>
-                    <p class="text-[10px] text-teal-400 font-bold tracking-widest uppercase">DIGITAL PORTAL</p>
+                    <p class="text-[10px] text-teal-400 font-bold tracking-widest uppercase">DIGITAL LIBRARY</p>
                 </div>
             </div>
 
@@ -470,7 +470,7 @@
                     <i class="fa-solid fa-shield-halved"></i>
                     <span>Mohan Babu University</span>
                 </div>
-                <p class="text-[10px] text-slate-500">CSE-DS 2028 Batch Portal</p>
+                <p class="text-[10px] text-slate-500">CSE-DS 2028 Batch Digital Library</p>
             </div>
         </aside>
 
@@ -694,29 +694,32 @@
         </div>
     </div>
 
-    <!-- Live Python Compiler Workspace Modal (Large & Spacious) -->
-    <div id="compiler-modal" class="fixed inset-0 bg-[#020617]/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-6">
-        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-7xl w-full h-[92vh] overflow-hidden border border-teal-500/30 flex flex-col">
-            <div class="px-8 py-4 bg-[#020617] text-white flex justify-between items-center sticky top-0 z-20 border-b border-teal-500/20">
-                <div class="flex items-center space-x-4">
-                    <div>
-                        <h3 id="compiler-modal-title" class="font-extrabold text-base text-teal-400">Live Python Compiler</h3>
-                        <p id="compiler-modal-subtitle" class="text-xs text-slate-400">Real Pandas & NumPy Execution with In-Memory CSV Dataset Engine</p>
+    <!-- Live Python Compiler & Visual Graphs Workspace Modal -->
+    <div id="compiler-modal" class="fixed inset-0 bg-[#020617]/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 md:p-6">
+        <div class="bg-[#070b19] rounded-3xl shadow-2xl max-w-7xl w-full h-[94vh] overflow-hidden border border-teal-500/30 flex flex-col">
+            <div class="px-6 md:px-8 py-3.5 bg-[#020617] text-white flex justify-between items-center sticky top-0 z-20 border-b border-teal-500/20">
+                <div class="flex items-center space-x-4 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold">
+                        <i class="fa-brands fa-python text-lg"></i>
                     </div>
-                    <div id="compiler-status-badge" class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center space-x-1.5">
+                    <div class="truncate">
+                        <h3 id="compiler-modal-title" class="font-extrabold text-sm md:text-base text-teal-400 truncate">Live Python Compiler & Visualizer</h3>
+                        <p id="compiler-modal-subtitle" class="text-[11px] text-slate-400 truncate">Python 3.11 • Pandas, NumPy & Matplotlib Plotting Engine</p>
+                    </div>
+                    <div id="compiler-status-badge" class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center space-x-1.5 shrink-0">
                         <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                        <span id="compiler-status-text">Loading Pyodide & Pandas...</span>
+                        <span id="compiler-status-text">Loading Runtime...</span>
                     </div>
                 </div>
-                <button onclick="closeCompilerModal()" class="text-slate-400 hover:text-white text-2xl transition"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="closeCompilerModal()" class="text-slate-400 hover:text-white text-2xl transition p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <div class="p-6 space-y-4 flex-1 flex flex-col overflow-hidden">
+            <div class="p-4 md:p-6 space-y-3 flex-1 flex flex-col overflow-hidden">
                 <!-- Action Bar & Dataset Helpers -->
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-[#020617] p-3.5 rounded-2xl border border-teal-500/20">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-[#020617] p-3 rounded-2xl border border-teal-500/20">
                     <div class="flex items-center flex-wrap gap-2 text-xs">
-                        <span class="text-slate-400 font-semibold flex items-center mr-1">
-                            <i class="fa-solid fa-database text-teal-400 mr-1.5"></i> Ready Datasets:
+                        <span class="text-slate-400 font-semibold flex items-center mr-1 text-[11px]">
+                            <i class="fa-solid fa-database text-teal-400 mr-1.5"></i> Datasets:
                         </span>
                         <button onclick="insertDatasetSnippet('students.csv')" class="px-2.5 py-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 rounded-lg border border-teal-500/30 font-mono text-[11px] transition">
                             students.csv
@@ -727,45 +730,70 @@
                         <button onclick="insertDatasetSnippet('data.csv')" class="px-2.5 py-1 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 rounded-lg border border-teal-500/30 font-mono text-[11px] transition">
                             data.csv
                         </button>
-                        <label class="cursor-pointer px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-600 font-medium text-[11px] flex items-center space-x-1.5 transition ml-1" title="Upload any CSV file to use in Python">
-                            <i class="fa-solid fa-file-arrow-up text-teal-400"></i>
-                            <span>Upload Custom CSV</span>
-                            <input type="file" accept=".csv" class="hidden" onchange="uploadCsvToPyodide(event)">
-                        </label>
+                        <button onclick="insertPlotTemplate()" class="px-2.5 py-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 rounded-lg border border-cyan-500/30 font-mono text-[11px] transition flex items-center space-x-1" title="Insert Matplotlib plot sample code">
+                            <i class="fa-solid fa-chart-line text-[10px]"></i>
+                            <span>+ Plot Template</span>
+                        </button>
                     </div>
 
                     <div class="flex items-center space-x-3">
-                        <button onclick="resetCompilerCode()" class="text-slate-400 hover:text-slate-200 px-3 py-2 text-xs font-semibold rounded-xl hover:bg-slate-800/80 transition" title="Reset code to experiment default">
-                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset Code
+                        <button onclick="resetCompilerCode()" class="text-slate-400 hover:text-slate-200 px-3 py-1.5 text-xs font-semibold rounded-xl hover:bg-slate-800 transition" title="Reset code to experiment default">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset
                         </button>
-                        <button onclick="runCompilerCode()" id="run-code-btn" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 active:scale-95 transition">
-                            <i class="fa-solid fa-play text-xs"></i><span>Run Code & Get Output</span>
+                        <button onclick="runCompilerCode()" id="run-code-btn" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-5 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 active:scale-95 transition">
+                            <i class="fa-solid fa-play text-xs"></i><span>Run Code & Plot</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Code Editor & Console Output split view -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1 overflow-hidden">
+                <!-- Code Editor & Output (Console + Visual Graphs Tabs) split view -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 overflow-hidden">
+                    <!-- Left: Python Editor -->
                     <div class="flex flex-col h-full">
                         <div class="flex justify-between items-center mb-1.5 px-1">
-                            <label class="text-xs uppercase font-semibold text-slate-400 tracking-wider flex items-center">
-                                <i class="fa-brands fa-python text-teal-400 mr-1.5"></i> Python Script
+                            <label class="text-xs uppercase font-bold text-slate-400 tracking-wider flex items-center">
+                                <i class="fa-brands fa-python text-teal-400 mr-1.5"></i> Python Code
                             </label>
                             <span class="text-[10px] text-slate-500 font-mono">Python 3.11 Environment</span>
                         </div>
-                        <textarea id="compiler-code-input" rows="22" oninput="onCompilerCodeInput()" spellcheck="false" class="w-full flex-1 bg-[#020617] text-teal-300 font-mono text-xs p-5 rounded-2xl border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none leading-relaxed shadow-inner"></textarea>
+                        <textarea id="compiler-code-input" rows="22" oninput="onCompilerCodeInput()" spellcheck="false" class="w-full flex-1 bg-[#020617] text-teal-300 font-mono text-xs p-4 rounded-2xl border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none leading-relaxed shadow-inner"></textarea>
                     </div>
                     
-                    <div class="flex flex-col h-full">
+                    <!-- Right: Output Tabs (Console Output vs Visual Graphs) -->
+                    <div class="flex flex-col h-full overflow-hidden">
                         <div class="flex justify-between items-center mb-1.5 px-1">
-                            <label class="text-xs uppercase font-semibold text-slate-400 tracking-wider flex items-center">
-                                <i class="fa-solid fa-terminal text-emerald-400 mr-1.5"></i> Console Output (Live)
-                            </label>
-                            <button onclick="clearConsoleOutput()" class="text-[10px] text-slate-400 hover:text-white transition">
-                                <i class="fa-solid fa-trash-can mr-1"></i> Clear Console
+                            <div class="flex items-center space-x-2">
+                                <button onclick="switchCompilerTab('console')" id="comp-tab-console" class="px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                    <i class="fa-solid fa-terminal text-[11px]"></i>
+                                    <span>Console Output</span>
+                                </button>
+                                <button onclick="switchCompilerTab('plots')" id="comp-tab-plots" class="px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-slate-800 text-slate-400 hover:text-white border border-slate-700">
+                                    <i class="fa-solid fa-chart-pie text-cyan-400 text-[11px]"></i>
+                                    <span>Visual Graphs</span>
+                                    <span id="comp-plots-badge" class="px-1.5 py-0.2 rounded-full bg-cyan-400 text-slate-950 font-extrabold text-[9px] hidden">0</span>
+                                </button>
+                            </div>
+                            <button onclick="clearConsoleOutput()" class="text-[10px] text-slate-400 hover:text-white transition flex items-center space-x-1">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>Clear</span>
                             </button>
                         </div>
-                        <pre id="compiler-output-pre" class="w-full flex-1 bg-[#020617] text-slate-200 font-mono text-xs p-5 rounded-2xl border border-teal-500/30 overflow-y-auto resize-none leading-relaxed whitespace-pre-wrap shadow-inner">Click 'Run Code & Get Output' to execute the Python script...</pre>
+
+                        <!-- Console Output Panel -->
+                        <div id="compiler-console-panel" class="flex-1 overflow-hidden flex flex-col">
+                            <pre id="compiler-output-pre" class="w-full flex-1 bg-[#020617] text-slate-200 font-mono text-xs p-4 rounded-2xl border border-teal-500/30 overflow-y-auto resize-none leading-relaxed whitespace-pre-wrap shadow-inner">Click 'Run Code & Plot' to execute the script and render output...</pre>
+                        </div>
+
+                        <!-- Visual Graphs Panel (Initially hidden) -->
+                        <div id="compiler-plots-panel" class="flex-1 overflow-y-auto bg-[#020617] rounded-2xl border border-teal-500/30 p-4 shadow-inner hidden flex flex-col items-center justify-start space-y-4">
+                            <div id="compiler-plots-gallery" class="w-full space-y-4">
+                                <div class="text-center py-12 text-slate-500 space-y-2">
+                                    <i class="fa-solid fa-chart-line text-4xl text-slate-700"></i>
+                                    <p class="text-xs font-semibold text-slate-400">No Visual Graphs Generated Yet</p>
+                                    <p class="text-[11px] text-slate-500 max-w-xs mx-auto">Use <code class="text-cyan-400">import matplotlib.pyplot as plt</code> or run Experiment 5 to see plots rendered here!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -877,7 +905,7 @@ pd.read_csv = safe_read_csv
                 `);
 
                 pyodideReady = true;
-                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy + Matplotlib Ready');
             } catch (err) {
                 console.error("Pyodide failed to load:", err);
                 updateCompilerStatus('error', 'Pyodide Load Failed (Check Network)');
@@ -1304,10 +1332,11 @@ pd.read_csv = safe_read_csv
         // DETERMINISTIC PERSISTENCE & STORAGE ENGINE
         // (Clean Single-Master LocalStorage + Emergency Backup + IndexedDB)
         // ==========================================
-        const PRIMARY_STORAGE_KEY = 'poojitha_portal_data_v2026_exp7';
+        const PRIMARY_STORAGE_KEY = 'poojitha_library_data_v2026_final';
 
         // Stale legacy keys to aggressively purge so user has full 5MB free quota
         const LEGACY_STORAGE_KEYS = [
+            'poojitha_portal_data_v2026_exp7',
             'poojitha_portal_data_v2026',
             'poojitha_portal_data_master',
             'poojitha_master_portal_data_v20',
@@ -1781,6 +1810,10 @@ pd.read_csv = safe_read_csv
 
             const expBadge = document.getElementById('experiment-count-badge');
             if (expBadge) expBadge.innerText = state.experiments ? state.experiments.length : 0;
+            const toolsBadge = document.getElementById('tools-count-badge');
+            if (toolsBadge) toolsBadge.innerText = state.tools ? state.tools.length : 10;
+            const projectsBadge = document.getElementById('projects-count-badge');
+            if (projectsBadge) projectsBadge.innerText = state.projects ? state.projects.length : 2;
 
             updateProfileUI();
         }
@@ -1898,8 +1931,8 @@ pd.read_csv = safe_read_csv
                         <div class="absolute -right-10 -bottom-10 text-teal-500/10 font-bold text-9xl pointer-events-none"><i class="fa-solid fa-code"></i></div>
                         <div class="relative z-10 max-w-2xl">
                             <span class="px-3 py-1 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-full text-[11px] font-bold tracking-wider uppercase">Mohan Babu University • 2028 Batch</span>
-                            <h1 class="text-2xl font-extrabold text-white mt-3 tracking-tight">Data Science Digital Portal</h1>
-                            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Welcome back, <span class="text-teal-400 font-bold">${state.profile.name}</span> (${state.profile.roll}). Access your course modules, run experiments with live Python compilers, and manage projects.</p>
+                            <h1 class="text-2xl font-extrabold text-white mt-3 tracking-tight">Data Science Digital Library</h1>
+                            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Welcome to the Data Science Digital Library, <span class="text-teal-400 font-bold">${state.profile.name}</span> (${state.profile.roll}). Access syllabus modules in 3D flipbooks, run interactive Python lab experiments with live visual charts, and explore data science tools.</p>
                             <div class="flex flex-wrap gap-3 mt-6">
                                 <button onclick="switchTab('experiments')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
                                     <i class="fa-solid fa-flask-vial"></i>
@@ -1949,38 +1982,35 @@ pd.read_csv = safe_read_csv
                 <div class="space-y-6">
                     <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
                         <div>
-                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-book-bookmark text-teal-400 mr-2"></i> Course Modules & PDFs</h2>
-                            <p class="text-xs text-slate-400 mt-1">Upload and view syllabus modules & PDF documents.</p>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-book-bookmark text-teal-400 mr-2"></i> Course Syllabus Modules (${state.modules ? state.modules.length : 5} Modules)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Read syllabus modules with the interactive 3D Flipbook or download official PDFs directly.</p>
                         </div>
-                        <button onclick="openAddModalFor('module')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg">
-                            <i class="fa-solid fa-plus"></i><span>Add Module</span>
-                        </button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             `;
-            state.modules.forEach(mod => {
+            (state.modules || []).forEach(mod => {
+                const pdfFile = mod.pdfName || ('Module' + mod.id + '.pdf');
                 html += `
-                    <div class="bg-[#070b19] p-6 rounded-3xl border border-teal-500/20 shadow-xl flex flex-col justify-between space-y-4">
+                    <div class="bg-[#070b19] p-6 rounded-3xl border border-teal-500/20 shadow-xl flex flex-col justify-between space-y-5 hover:border-teal-500/40 transition">
                         <div>
                             <div class="flex justify-between items-start">
-                                <span class="px-3 py-1 bg-teal-500/10 text-teal-400 font-mono text-[10px] rounded-full border border-teal-500/30">Module</span>
-                                <div class="flex items-center space-x-2">
-                                    ${mod.github ? `<a href="${mod.github}" target="_blank" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="GitHub"><i class="fa-brands fa-github text-sm"></i></a>` : ''}
-                                    <button onclick="openEditModal('module', ${mod.id})" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="deleteModule(${mod.id})" class="text-slate-500 hover:text-rose-400 text-xs p-1" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                                </div>
+                                <span class="px-3 py-1 bg-teal-500/10 text-teal-400 font-mono text-[10px] rounded-full border border-teal-500/30 font-bold uppercase tracking-wider">Module ${mod.id}</span>
+                                ${mod.github ? `<a href="${mod.github}" target="_blank" class="text-slate-400 hover:text-teal-400 text-xs px-2.5 py-1 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center space-x-1.5 transition" title="GitHub Repository"><i class="fa-brands fa-github text-sm"></i><span class="text-[11px] font-mono">Repo</span></a>` : ''}
                             </div>
-                            <h3 class="text-sm font-extrabold text-white mt-3">${mod.title}</h3>
-                            <p class="text-xs text-slate-400 mt-1.5">${mod.desc}</p>
+                            <h3 class="text-sm font-extrabold text-white mt-3.5 leading-snug">${mod.title}</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${mod.desc}</p>
                         </div>
-                        <div class="pt-4 border-t border-teal-500/10 flex items-center justify-between">
-                            <span class="text-[11px] text-slate-400 font-mono truncate max-w-[140px]"><i class="fa-solid fa-file-pdf text-rose-400 mr-1"></i> ${mod.pdfName}</span>
+                        <div class="pt-4 border-t border-teal-500/15 flex flex-wrap gap-2 items-center justify-between">
+                            <span class="text-[11px] text-slate-400 font-mono truncate max-w-[140px] flex items-center"><i class="fa-solid fa-file-pdf text-rose-400 mr-1.5"></i>${pdfFile}</span>
                             <div class="flex items-center space-x-2">
-                                <label class="cursor-pointer bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 px-3 py-1.5 rounded-xl text-xs font-semibold border border-teal-500/30 flex items-center space-x-1">
-                                    <i class="fa-solid fa-upload text-[10px]"></i><span>Upload PDF</span>
-                                    <input type="file" accept=".pdf" class="hidden" onchange="uploadModulePDF(event, ${mod.id})">
-                                </label>
-                                ${(mod.pdfData || mod.pdfName) ? `<button onclick="viewModulePDF(${mod.id})" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs shadow-md hover:opacity-90 transition"><i class="fa-solid fa-eye mr-1"></i> View PDF</button>` : ''}
+                                <button onclick="openFlipbook('${pdfFile}', '${mod.title.replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3.5 py-2 rounded-xl text-xs shadow-md hover:opacity-90 active:scale-95 transition flex items-center space-x-1.5" title="Read as interactive 3D Flipbook">
+                                    <i class="fa-solid fa-book-open text-xs"></i>
+                                    <span>Read Flipbook</span>
+                                </button>
+                                <a href="${pdfFile}" download="${pdfFile}" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 font-semibold px-3 py-2 rounded-xl text-xs border border-teal-500/30 transition flex items-center space-x-1.5" title="Download PDF document">
+                                    <i class="fa-solid fa-download text-xs"></i>
+                                    <span>Download</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1995,12 +2025,9 @@ pd.read_csv = safe_read_csv
                 <div class="space-y-6">
                     <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
                         <div>
-                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-flask-vial text-teal-400 mr-2"></i> Experiments & Sub-Experiments Hub (${state.experiments ? state.experiments.length : 0} Experiments)</h2>
-                            <p class="text-xs text-slate-400 mt-1">Vertical layout: Click any experiment to expand/collapse. Open live Python compiler for any sub-experiment.</p>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-flask-vial text-emerald-400 mr-2"></i> Data Science Lab Experiments & Live Compiler (${state.experiments ? state.experiments.length : 7} Experiments)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Curriculum experiments: Click any experiment to view sub-experiments. Open the Live Python Compiler to execute scripts and visualize plots.</p>
                         </div>
-                        <button onclick="openAddModalFor('experiment')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg hover:opacity-90 transition">
-                            <i class="fa-solid fa-plus"></i><span>Add Main Experiment</span>
-                        </button>
                     </div>
 
                     <div class="space-y-4">
@@ -2011,10 +2038,6 @@ pd.read_csv = safe_read_csv
                     <div class="bg-[#070b19] p-12 rounded-3xl border border-teal-500/20 text-center">
                         <i class="fa-solid fa-flask-vial text-4xl text-teal-400/40 mb-3 block"></i>
                         <h3 class="text-sm font-bold text-slate-300">No experiments found</h3>
-                        <p class="text-xs text-slate-500 mt-1 mb-4">Click "Add Main Experiment" above to create your first experiment.</p>
-                        <button onclick="openAddModalFor('experiment')" class="bg-teal-500/20 text-teal-300 px-4 py-2 rounded-xl text-xs font-semibold hover:bg-teal-500/30 transition">
-                            <i class="fa-solid fa-plus mr-1"></i> Add Main Experiment
-                        </button>
                     </div>
                 `;
             } else {
@@ -2024,7 +2047,7 @@ pd.read_csv = safe_read_csv
                         <div class="bg-[#070b19] rounded-3xl border border-teal-500/25 shadow-xl overflow-hidden transition">
                             <div onclick="toggleExperimentAccordion(${exp.id})" class="p-6 flex justify-between items-center cursor-pointer hover:bg-teal-500/5 transition">
                                 <div class="flex items-center space-x-3.5">
-                                    <div class="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold">
+                                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
                                         <i class="fa-solid ${isExpanded ? 'fa-folder-open' : 'fa-folder'} text-base"></i>
                                     </div>
                                     <div>
@@ -2032,13 +2055,9 @@ pd.read_csv = safe_read_csv
                                         <p class="text-[10px] text-teal-400 font-mono mt-0.5">${exp.subExperiments ? exp.subExperiments.length : 0} Sub-experiments</p>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-2">
-                                    <button onclick="event.stopPropagation(); openAddSubExpModal(${exp.id})" class="bg-teal-500/20 text-teal-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold hover:bg-teal-500/30 transition">
-                                        <i class="fa-solid fa-plus mr-1"></i> Add Sub-exp
-                                    </button>
-                                    <button onclick="event.stopPropagation(); openEditModal('experiment', ${exp.id})" class="text-slate-400 hover:text-teal-400 p-2" title="Edit"><i class="fa-solid fa-pen-to-square text-xs"></i></button>
-                                    <button onclick="event.stopPropagation(); deleteExperiment(${exp.id})" class="text-slate-500 hover:text-rose-400 p-2" title="Delete"><i class="fa-solid fa-trash text-xs"></i></button>
-                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-400 text-xs ml-2"></i>
+                                <div class="flex items-center space-x-3">
+                                    ${exp.github ? `<a href="${exp.github}" target="_blank" onclick="event.stopPropagation();" class="text-slate-400 hover:text-teal-400 text-xs px-2.5 py-1 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center space-x-1" title="Experiment GitHub Repo"><i class="fa-brands fa-github"></i><span class="text-[10px] font-mono">Repo</span></a>` : ''}
+                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-400 text-xs"></i>
                                 </div>
                             </div>
 
@@ -2052,29 +2071,24 @@ pd.read_csv = safe_read_csv
                         if (exp.subExperiments && exp.subExperiments.length > 0) {
                             exp.subExperiments.forEach(sub => {
                                 html += `
-                                    <div class="bg-[#070b19] p-4 rounded-2xl border border-teal-500/20 flex items-center justify-between shadow-inner">
+                                    <div class="bg-[#070b19] p-4 rounded-2xl border border-teal-500/20 flex items-center justify-between shadow-inner hover:border-teal-500/40 transition">
                                         <div class="flex items-center space-x-3 truncate">
-                                            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xs font-mono">
+                                            <div class="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xs font-mono">
                                                 <i class="fa-solid fa-file-code"></i>
                                             </div>
                                             <span class="text-xs font-bold text-slate-200 truncate">${sub.name}</span>
                                         </div>
-                                        <div class="flex items-center space-x-2">
-                                            <button onclick="openCompilerModal(${exp.id}, '${sub.id}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-3.5 py-1.5 rounded-xl text-[11px] flex items-center space-x-1.5 shadow-md hover:opacity-90 transition">
-                                                <i class="fa-solid fa-terminal text-[10px]"></i><span>Open Compiler</span>
-                                            </button>
-                                            <button onclick="openEditSubExpModal(${exp.id}, '${sub.id}')" class="text-slate-400 hover:text-teal-400 p-2 text-xs transition" title="Edit Sub-experiment">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                            <button onclick="deleteSubExperiment(${exp.id}, '${sub.id}')" class="text-slate-500 hover:text-rose-400 p-2 text-xs transition" title="Delete Sub-experiment">
-                                                <i class="fa-solid fa-trash"></i>
+                                        <div>
+                                            <button onclick="openCompilerModal(${exp.id}, '${sub.id}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold px-4 py-1.5 rounded-xl text-xs flex items-center space-x-1.5 shadow-md hover:opacity-90 active:scale-95 transition" title="Open in Live Python Compiler">
+                                                <i class="fa-solid fa-terminal text-[11px]"></i>
+                                                <span>Open Compiler</span>
                                             </button>
                                         </div>
                                     </div>
                                 `;
                             });
                         } else {
-                            html += `<p class="text-xs text-slate-400 py-4 text-center">No sub-experiments added yet. Click 'Add Sub-exp' above.</p>`;
+                            html += `<p class="text-xs text-slate-400 py-4 text-center">No sub-experiments in this lab module.</p>`;
                         }
                         html += `</div></div>`;
                     }
@@ -2096,6 +2110,111 @@ pd.read_csv = safe_read_csv
 
         let activeCompileExpId = null;
         let activeCompileSubId = null;
+
+        
+        let activeCompilerTab = 'console';
+        let currentPlots = [];
+
+        function switchCompilerTab(tab) {
+            activeCompilerTab = tab;
+            const consolePanel = document.getElementById('compiler-console-panel');
+            const plotsPanel = document.getElementById('compiler-plots-panel');
+            const tabConsole = document.getElementById('comp-tab-console');
+            const tabPlots = document.getElementById('comp-tab-plots');
+
+            if (tab === 'console') {
+                if (consolePanel) consolePanel.classList.remove('hidden');
+                if (plotsPanel) plotsPanel.classList.add('hidden');
+                if (tabConsole) {
+                    tabConsole.className = 'px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                }
+                if (tabPlots) {
+                    tabPlots.className = 'px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-slate-800 text-slate-400 hover:text-white border border-slate-700';
+                }
+            } else {
+                if (consolePanel) consolePanel.classList.add('hidden');
+                if (plotsPanel) plotsPanel.classList.remove('hidden');
+                if (tabPlots) {
+                    tabPlots.className = 'px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30';
+                }
+                if (tabConsole) {
+                    tabConsole.className = 'px-3 py-1 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 bg-slate-800 text-slate-400 hover:text-white border border-slate-700';
+                }
+            }
+        }
+
+        function insertPlotTemplate() {
+            const textarea = document.getElementById('compiler-code-input');
+            const snippet = `\n# --- Matplotlib Plot Visualization Template ---
+import matplotlib.pyplot as plt
+
+categories = ['Pandas', 'NumPy', 'Matplotlib', 'Scikit-Learn']
+values = [92, 88, 95, 90]
+
+plt.figure(figsize=(7, 4))
+plt.bar(categories, values, color=['#2dd4bf', '#38bdf8', '#818cf8', '#34d399'], edgecolor='#020617')
+plt.title("Data Science Library Proficiency", fontsize=12, fontweight='bold', pad=10)
+plt.ylabel("Score (%)")
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()
+
+print("Plot generated successfully! Check Visual Graphs tab.")
+`;
+            textarea.value += snippet;
+            textarea.scrollTop = textarea.scrollHeight;
+        }
+
+        function renderPlots(plotsArray) {
+            currentPlots = plotsArray || [];
+            const badge = document.getElementById('comp-plots-badge');
+            const gallery = document.getElementById('compiler-plots-gallery');
+            if (!gallery) return;
+
+            if (currentPlots.length === 0) {
+                if (badge) badge.classList.add('hidden');
+                gallery.innerHTML = `
+                    <div class="text-center py-12 text-slate-500 space-y-2">
+                        <i class="fa-solid fa-chart-line text-4xl text-slate-700"></i>
+                        <p class="text-xs font-semibold text-slate-400">No Visual Graphs Generated</p>
+                        <p class="text-[11px] text-slate-500 max-w-xs mx-auto">To see plots, include <code class="text-cyan-400">import matplotlib.pyplot as plt</code> and call <code class="text-cyan-400">plt.show()</code>.</p>
+                    </div>
+                `;
+            } else {
+                if (badge) {
+                    badge.innerText = currentPlots.length;
+                    badge.classList.remove('hidden');
+                }
+                let html = '';
+                currentPlots.forEach((b64, idx) => {
+                    const dataUrl = 'data:image/png;base64,' + b64;
+                    html += `
+                        <div class="bg-slate-900/90 rounded-2xl border border-teal-500/30 p-4 shadow-xl space-y-3">
+                            <div class="flex items-center justify-between border-b border-teal-500/20 pb-2">
+                                <span class="text-xs font-bold text-teal-400 flex items-center">
+                                    <i class="fa-solid fa-chart-area mr-1.5"></i> Visual Graph #${idx + 1}
+                                </span>
+                                <div class="flex items-center space-x-2">
+                                    <a href="${dataUrl}" download="plot_${idx + 1}.png" class="px-2.5 py-1 rounded-lg bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 text-[11px] font-semibold border border-teal-500/30 flex items-center space-x-1 transition">
+                                        <i class="fa-solid fa-download text-[10px]"></i>
+                                        <span>Download PNG</span>
+                                    </a>
+                                    <a href="${dataUrl}" target="_blank" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold border border-slate-700 flex items-center space-x-1 transition">
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                        <span>Full Size</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex justify-center bg-white rounded-xl p-2 overflow-hidden shadow-inner">
+                                <img src="${dataUrl}" alt="Generated Plot" class="max-w-full h-auto object-contain rounded-lg">
+                            </div>
+                        </div>
+                    `;
+                });
+                gallery.innerHTML = html;
+                switchCompilerTab('plots');
+            }
+        }
 
         function openCompilerModal(expId, subId) {
             activeCompileExpId = expId;
@@ -2172,11 +2291,11 @@ pd.read_csv = safe_read_csv
             const outputPre = document.getElementById('compiler-output-pre');
 
             if (!pyodideReady || !pyodideInstance) {
-                outputPre.innerText = "⏳ Please wait: Pyodide environment and Pandas are still loading from CDN...\nOnce the badge turns green ('Ready'), click 'Run Code & Get Output' again.";
+                outputPre.innerText = "⏳ Please wait: Pyodide environment and Pandas are still loading from CDN...\nOnce the badge turns green ('Ready'), click 'Run Code & Plot' again.";
                 return;
             }
 
-            outputPre.innerText = "Executing Python code...\n";
+            outputPre.innerText = "Executing Python code & rendering visual graphs...\n";
 
             const exp = state.experiments.find(e => e.id === activeCompileExpId);
             const sub = exp ? exp.subExperiments.find(s => s.id === activeCompileSubId) : null;
@@ -2185,19 +2304,70 @@ pd.read_csv = safe_read_csv
                 saveState();
             }
 
-            updateCompilerStatus('running', 'Running Script...');
+            updateCompilerStatus('running', 'Running Script & Plots...');
 
             try {
+                // Auto-load packages from user imports if needed
+                try {
+                    await pyodideInstance.loadPackagesFromImports(code);
+                } catch(e) {}
+
+                // Initialize standard output capture and Matplotlib figure interceptor
                 pyodideInstance.runPython(`
-import sys, io
+import sys, io, base64
+
 sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
+
+_captured_plots_b64 = []
+
+try:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    def _custom_show(*args, **kwargs):
+        for num in plt.get_fignums():
+            fig = plt.figure(num)
+            buf = io.BytesIO()
+            fig.savefig(buf, format='png', bbox_inches='tight', dpi=120)
+            buf.seek(0)
+            _captured_plots_b64.append(base64.b64encode(buf.read()).decode('ascii'))
+        plt.close('all')
+
+    plt.show = _custom_show
+except Exception:
+    pass
                 `);
 
                 await pyodideInstance.runPythonAsync(code);
 
+                // Harvest any unclosed figures
+                pyodideInstance.runPython(`
+try:
+    import matplotlib.pyplot as plt
+    if plt.get_fignums():
+        for num in plt.get_fignums():
+            fig = plt.figure(num)
+            buf = io.BytesIO()
+            fig.savefig(buf, format='png', bbox_inches='tight', dpi=120)
+            buf.seek(0)
+            _captured_plots_b64.append(base64.b64encode(buf.read()).decode('ascii'))
+        plt.close('all')
+except Exception:
+    pass
+                `);
+
                 const stdout = pyodideInstance.runPython("sys.stdout.getvalue()");
                 const stderr = pyodideInstance.runPython("sys.stderr.getvalue()");
+                const rawPlots = pyodideInstance.runPython("_captured_plots_b64");
+
+                let plots = [];
+                if (rawPlots && rawPlots.toJs) {
+                    plots = rawPlots.toJs();
+                } else if (Array.isArray(rawPlots)) {
+                    plots = rawPlots;
+                }
 
                 let outputText = "";
                 if (stdout && stdout.trim() !== "") outputText += stdout;
@@ -2207,16 +2377,25 @@ sys.stderr = io.StringIO()
                     outputText = "Script executed successfully with no printed output.";
                 }
 
+                if (plots && plots.length > 0) {
+                    outputText += `\n\n📊 ${plots.length} visual graph(s) generated! Click the 'Visual Graphs' tab above to view.`;
+                    renderPlots(plots);
+                } else {
+                    renderPlots([]);
+                    switchCompilerTab('console');
+                }
+
                 outputPre.innerText = outputText;
-                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy + Matplotlib Ready');
             } catch (err) {
-                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy Ready');
+                updateCompilerStatus('ready', 'Python 3.11 + Pandas + NumPy + Matplotlib Ready');
                 let errString = String(err);
                 let helpfulAdvice = "";
                 if (errString.includes("URLError") || errString.includes("unknown url type") || errString.includes("NetworkError") || errString.includes("CORS")) {
                     helpfulAdvice = "\n\n💡 Tip: When reading CSVs in the browser, either use the built-in local datasets ('students.csv', 'iris.csv', 'data.csv') or click 'Upload Custom CSV' above to add your own lab data!";
                 }
                 outputPre.innerText = "Execution Error:\n" + errString + helpfulAdvice;
+                switchCompilerTab('console');
             }
         }
 
@@ -2319,55 +2498,56 @@ sys.stderr = io.StringIO()
                 <div class="space-y-8">
                     <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
                         <div>
-                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-toolbox text-cyan-400 mr-2"></i> Python Ecosystem Tools (10 Essential Libraries)</h2>
-                            <p class="text-xs text-slate-400 mt-1">Data science libraries and student project repositories.</p>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-toolbox text-cyan-400 mr-2"></i> Python Ecosystem Tools (${state.tools ? state.tools.length : 10} Essential Libraries)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Core libraries and packages powering modern data science, analysis, and machine learning.</p>
                         </div>
-                        <button onclick="openAddModalFor('tool')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center space-x-2 shadow-lg">
-                            <i class="fa-solid fa-plus"></i><span>Add Tool/Project</span>
-                        </button>
                     </div>
                     <div>
-                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Python Ecosystem Tools</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             `;
-            state.tools.forEach(tool => {
+            (state.tools || []).forEach(tool => {
                 html += `
-                    <div class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-3">
+                    <div class="bg-[#070b19] p-5 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-3 hover:border-cyan-500/40 transition">
                         <div>
                             <div class="flex justify-between items-start">
-                                <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
                                     <i class="fa-solid ${tool.icon || 'fa-code'}"></i>
                                 </div>
-                                <div class="flex items-center space-x-2">
-                                    ${tool.github ? `<a href="${tool.github}" target="_blank" class="text-slate-400 hover:text-cyan-400 text-xs"><i class="fa-brands fa-github"></i></a>` : ''}
-                                    <button onclick="openEditModal('tool', ${tool.id})" class="text-slate-400 hover:text-teal-400 text-xs" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="deleteTool(${tool.id})" class="text-slate-500 hover:text-rose-400 text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                                </div>
+                                ${tool.github ? `<a href="${tool.github}" target="_blank" class="text-slate-400 hover:text-cyan-400 text-xs px-2 py-1 bg-slate-800/80 rounded-lg border border-slate-700 flex items-center space-x-1 transition"><i class="fa-brands fa-github"></i><span class="text-[10px] font-mono">Repo</span></a>` : ''}
                             </div>
                             <h4 class="text-xs font-extrabold text-white mt-3">${tool.name}</h4>
-                            <p class="text-[10px] text-slate-400 mt-1">${tool.desc}</p>
+                            <p class="text-[10px] text-slate-400 mt-1 leading-relaxed">${tool.desc}</p>
                         </div>
-                        <span class="text-[10px] text-cyan-400 font-mono bg-cyan-500/10 px-2 py-0.5 rounded-full self-start">${tool.category}</span>
+                        <span class="text-[10px] text-cyan-400 font-mono bg-cyan-500/10 px-2 py-0.5 rounded-full self-start border border-cyan-500/20">${tool.category}</span>
                     </div>
                 `;
             });
-            html += `</div></div><div class="pt-4">
-                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Student Projects</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
-            state.projects.forEach(proj => {
+            html += `</div></div></div>`;
+            return html;
+        }
+
+        function renderProjectsView() {
+            let html = `
+                <div class="space-y-8">
+                    <div class="flex justify-between items-center bg-[#070b19] p-6 rounded-3xl border border-teal-500/25 shadow-xl">
+                        <div>
+                            <h2 class="text-base font-extrabold text-white"><i class="fa-solid fa-diagram-project text-amber-400 mr-2"></i> Student Capstone & Course Projects (${state.projects ? state.projects.length : 2} Repositories)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Full-stack software applications and civic portals developed by Kotapati Poojitha.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            `;
+            (state.projects || []).forEach(proj => {
                 html += `
-                    <div class="bg-[#070b19] p-6 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-4">
+                    <div class="bg-[#070b19] p-6 rounded-2xl border border-teal-500/20 shadow-lg flex flex-col justify-between space-y-4 hover:border-amber-500/40 transition">
                         <div>
                             <div class="flex justify-between items-start">
-                                <span class="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] rounded-full border border-emerald-500/30 font-mono">${proj.category}</span>
-                                <div class="flex items-center space-x-2">
-                                    ${proj.github ? `<a href="${proj.github}" target="_blank" class="text-slate-300 hover:text-teal-400 text-xs font-semibold flex items-center space-x-1 bg-slate-800 px-2 py-1 rounded-lg border border-slate-700"><i class="fa-brands fa-github"></i><span>Repo</span></a>` : ''}
-                                    <button onclick="openEditModal('project', ${proj.id})" class="text-slate-400 hover:text-teal-400 text-xs p-1" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="deleteProject(${proj.id})" class="text-slate-500 hover:text-rose-400 text-xs p-1" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                                </div>
+                                <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-400 text-[10px] rounded-full border border-amber-500/30 font-mono font-bold">${proj.category}</span>
+                                ${proj.github ? `<a href="${proj.github}" target="_blank" class="text-slate-300 hover:text-amber-400 text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 px-3 py-1 rounded-lg border border-slate-700 transition"><i class="fa-brands fa-github"></i><span>Repository</span></a>` : ''}
                             </div>
                             <h4 class="text-sm font-extrabold text-white mt-3">${proj.name}</h4>
-                            <p class="text-xs text-slate-400 mt-1">${proj.desc}</p>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">${proj.desc}</p>
                         </div>
                     </div>
                 `;
@@ -2481,51 +2661,14 @@ sys.stderr = io.StringIO()
         function viewModulePDF(moduleId) {
             const mod = (state.modules || []).find(m => m.id === moduleId);
             if (!mod) return;
-
-            // 1. If base64 data was custom uploaded by user, convert to Blob URL to bypass browser top-level data: URL blocks
-            if (mod.pdfData && typeof mod.pdfData === 'string' && mod.pdfData.startsWith('data:')) {
-                try {
-                    const parts = mod.pdfData.split(';base64,');
-                    const contentType = parts[0].replace('data:', '') || 'application/pdf';
-                    const raw = window.atob(parts[1]);
-                    const uInt8Array = new Uint8Array(raw.length);
-                    for (let i = 0; i < raw.length; ++i) {
-                        uInt8Array[i] = raw.charCodeAt(i);
-                    }
-                    const blob = new Blob([uInt8Array], { type: contentType });
-                    const blobUrl = URL.createObjectURL(blob);
-                    const win = window.open(blobUrl, '_blank');
-                    if (!win || win.closed || typeof win.closed === 'undefined') {
-                        const a = document.createElement('a');
-                        a.href = blobUrl;
-                        a.target = '_blank';
-                        a.rel = 'noopener noreferrer';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                    }
-                    return;
-                } catch(e) {
-                    console.warn("Base64 to blob conversion failed:", e);
-                }
-            }
-
-            // 2. Open repository PDF file (Module1.pdf ... Module5.pdf) directly in a new tab!
-            // Works 100% on all laptops, phones, Chrome, Edge, Safari, Firefox.
-            const pdfFile = mod.pdfName || ('Module' + mod.id + '.pdf');
-            const win = window.open(pdfFile, '_blank');
-            if (!win || win.closed || typeof win.closed === 'undefined') {
-                const a = document.createElement('a');
-                a.href = pdfFile;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            }
+            openFlipbook(mod.pdfName || ('Module' + mod.id + '.pdf'), mod.title);
         }
 
-        function handleSearch(query) {
+        function openFlipbook(pdfName, title) {
+            const url = 'flipbook.html?pdf=' + encodeURIComponent(pdfName) + '&title=' + encodeURIComponent(title);
+            window.open(url, '_blank');
+        }
+                function handleSearch(query) {
             if (!query || query.trim() === '') {
                 renderContent();
                 return;
