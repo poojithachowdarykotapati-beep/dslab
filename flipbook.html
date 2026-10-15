@@ -9,11 +9,11 @@
     <title>3D Module Flipbook - Data Science Digital Library</title>
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <!-- PageFlip 3D Book Engine -->
+    <!-- PageFlip 3D Engine -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
 
     <style>
@@ -25,7 +25,6 @@
         }
 
         body {
-            background: #020617;
             background-color: #020617;
             color: #f1f5f9;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -38,37 +37,37 @@
             flex-direction: column;
         }
 
-        /* Fixed Top Navigation Bar */
+        /* Top Fixed Navigation Bar */
         .top-navbar {
-            height: 64px;
-            min-height: 64px;
+            height: 56px;
+            min-height: 56px;
             width: 100%;
-            background: rgba(7, 11, 25, 0.96);
+            background: rgba(7, 11, 25, 0.98);
             border-bottom: 1px solid rgba(45, 212, 191, 0.25);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 16px;
             z-index: 100;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             min-width: 0;
         }
 
         .btn-back {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 7px 14px;
-            border-radius: 12px;
-            background: rgba(45, 212, 191, 0.1);
+            gap: 7px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            background: rgba(45, 212, 191, 0.12);
             border: 1px solid rgba(45, 212, 191, 0.35);
             color: #2dd4bf;
             text-decoration: none;
@@ -79,7 +78,7 @@
         }
 
         .btn-back:hover {
-            background: rgba(45, 212, 191, 0.2);
+            background: rgba(45, 212, 191, 0.25);
             color: #ffffff;
             border-color: #2dd4bf;
             transform: translateX(-2px);
@@ -88,7 +87,7 @@
         .title-block {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
             min-width: 0;
         }
 
@@ -100,14 +99,13 @@
         }
 
         .badge-flipbook {
-            padding: 2px 8px;
+            padding: 2px 7px;
             border-radius: 9999px;
-            background: rgba(45, 212, 191, 0.12);
+            background: rgba(45, 212, 191, 0.15);
             color: #2dd4bf;
             font-family: 'Fira Code', monospace;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.05em;
             border: 1px solid rgba(45, 212, 191, 0.3);
             text-transform: uppercase;
             white-space: nowrap;
@@ -120,58 +118,33 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 440px;
+            max-width: 360px;
             margin: 0;
-            letter-spacing: -0.01em;
         }
 
         .cache-status {
-            font-size: 11px;
+            font-size: 10px;
             color: #5eead4;
             opacity: 0.85;
             font-family: 'Fira Code', monospace;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 440px;
+            max-width: 360px;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .page-pill {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 12px;
-            background: #020617;
-            border: 1px solid rgba(45, 212, 191, 0.3);
-            font-family: 'Fira Code', monospace;
-            font-size: 12px;
-            color: #94a3b8;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
-        }
-
-        .page-pill .curr {
-            color: #2dd4bf;
-            font-weight: 700;
-        }
-
-        .page-pill .tot {
-            color: #f1f5f9;
+            gap: 8px;
         }
 
         .btn-ctrl {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 12px;
-            border-radius: 12px;
+            padding: 6px 12px;
+            border-radius: 10px;
             background: #1e293b;
             border: 1px solid #334155;
             color: #cbd5e1;
@@ -188,18 +161,24 @@
             border-color: rgba(45, 212, 191, 0.4);
         }
 
+        .btn-ctrl.active-mode {
+            background: rgba(45, 212, 191, 0.18);
+            border-color: #2dd4bf;
+            color: #2dd4bf;
+        }
+
         .btn-download {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 14px;
-            border-radius: 12px;
+            padding: 6px 14px;
+            border-radius: 10px;
             background: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%);
             color: #020617;
             font-size: 12px;
             font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 4px 14px rgba(45, 212, 191, 0.35);
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.35);
             transition: all 0.2s ease;
             white-space: nowrap;
         }
@@ -207,35 +186,22 @@
         .btn-download:hover {
             opacity: 0.92;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(45, 212, 191, 0.5);
         }
 
         /* Main Workspace Stage */
         .main-stage {
             flex: 1;
             width: 100%;
-            height: calc(100vh - 64px);
+            height: calc(100vh - 56px);
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            /* Premium digital desk ambient gradient */
-            background: radial-gradient(circle at 50% 48%, #0d1b38 0%, #060e22 55%, #020617 100%);
+            background: radial-gradient(circle at 50% 50%, #0d1b38 0%, #060e22 55%, #020617 100%);
         }
 
-        /* Subtle ambient backdrop grid or glow behind book */
-        .stage-backdrop-glow {
-            position: absolute;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, rgba(13, 27, 56, 0) 70%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Flipbook Container */
+        /* Flipbook Stage Container: Dead Center, Zero Overflow */
         #book-container {
             position: relative;
             z-index: 10;
@@ -244,22 +210,22 @@
             align-items: center;
             width: 100%;
             height: 100%;
-            padding: 18px;
+            padding: 8px;
         }
 
         .flip-book {
-            box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.95), 0 0 45px rgba(45, 212, 191, 0.12);
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.95), 0 0 40px rgba(45, 212, 191, 0.12);
             border-radius: 6px;
             background: #0f172a;
-            transition: transform 0.25s ease;
+            margin: auto;
         }
 
         /* Page styling: Pure White Crisp Document Sheets */
         .page {
             background-color: #ffffff !important;
             overflow: hidden;
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.07);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.09);
         }
 
         .page-content {
@@ -283,22 +249,21 @@
 
         .page-footer {
             position: absolute;
-            bottom: 6px;
+            bottom: 4px;
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 10px;
+            font-size: 9px;
             font-family: 'Fira Code', monospace;
             font-weight: 600;
             color: #64748b;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(4px);
-            padding: 2px 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* Floating Nav Buttons */
+        /* Floating Nav Buttons (Side Chevrons) */
         .nav-floating-btn {
             position: absolute;
             top: 50%;
@@ -306,29 +271,81 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: rgba(7, 11, 25, 0.9);
+            background: rgba(7, 11, 25, 0.92);
             border: 1.5px solid rgba(45, 212, 191, 0.45);
             color: #2dd4bf;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
             z-index: 50;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
         }
 
         .nav-floating-btn:hover {
             background: #2dd4bf;
             color: #020617;
             transform: translateY(-50%) scale(1.12);
-            box-shadow: 0 0 30px rgba(45, 212, 191, 0.7);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.7);
         }
 
-        .nav-prev-btn { left: 24px; }
-        .nav-next-btn { right: 24px; }
+        .nav-prev-btn { left: 16px; }
+        .nav-next-btn { right: 16px; }
+
+        /* Bottom Floating Control Bar (Always Accessible & Visible) */
+        .bottom-controls-bar {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(7, 11, 25, 0.94);
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            padding: 5px 16px;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            z-index: 60;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-bottom-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 9999px;
+            background: rgba(45, 212, 191, 0.12);
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            color: #2dd4bf;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-bottom-nav:hover {
+            background: #2dd4bf;
+            color: #020617;
+            transform: translateY(-1px);
+        }
+
+        .bottom-page-text {
+            font-size: 11px;
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        .bottom-page-text span.active-num {
+            color: #2dd4bf;
+            font-weight: 700;
+        }
 
         /* Fullscreen Overlay for Loading */
         #loading-overlay {
@@ -340,19 +357,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
         }
 
         .loading-icon-box {
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             background: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #020617;
-            font-size: 26px;
+            font-size: 24px;
             box-shadow: 0 0 35px rgba(45, 212, 191, 0.45);
             animation: pulse-glow 1.5s infinite alternate;
         }
@@ -363,21 +380,20 @@
         }
 
         .loading-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: -0.01em;
         }
 
         .loading-desc {
-            font-size: 12px;
+            font-size: 11px;
             color: #2dd4bf;
             font-family: 'Fira Code', monospace;
         }
 
         .loading-bar-track {
-            width: 240px;
-            height: 6px;
+            width: 220px;
+            height: 5px;
             border-radius: 9999px;
             background: #1e293b;
             overflow: hidden;
@@ -408,33 +424,21 @@
             border: 0;
         }
 
-        /* Bottom watermark pill */
-        .bottom-watermark {
-            position: absolute;
-            bottom: 12px;
-            font-size: 10px;
-            font-family: 'Fira Code', monospace;
-            color: rgba(148, 163, 184, 0.5);
-            pointer-events: none;
-            z-index: 5;
-            letter-spacing: 0.05em;
-        }
-
-        /* Utility classes */
+        /* Responsive styling */
         .hidden { display: none !important; }
 
         @media (max-width: 900px) {
-            .book-title { max-width: 200px; }
+            .book-title { max-width: 180px; }
             .cache-status { display: none; }
-            .nav-prev-btn { left: 8px; width: 42px; height: 42px; font-size: 15px; }
-            .nav-next-btn { right: 8px; width: 42px; height: 42px; font-size: 15px; }
+            .nav-prev-btn { left: 8px; width: 40px; height: 40px; font-size: 15px; }
+            .nav-next-btn { right: 8px; width: 40px; height: 40px; font-size: 15px; }
             .btn-ctrl span { display: none; }
         }
 
         @media (max-width: 600px) {
-            .top-navbar { padding: 0 12px; }
+            .top-navbar { padding: 0 10px; }
             .btn-back span { display: none; }
-            .book-title { max-width: 140px; font-size: 12px; }
+            .book-title { max-width: 130px; font-size: 12px; }
         }
     </style>
 </head>
@@ -453,22 +457,14 @@
                     <span class="badge-flipbook">3D FLIPBOOK</span>
                     <h1 id="book-title" class="book-title">Data Science Module Syllabus</h1>
                 </div>
-                <p id="background-cache-status" class="cache-status">Single page mode • Click corners or use arrows ← →</p>
+                <p id="background-cache-status" class="cache-status">One page after another mode • Click edges or buttons to flip</p>
             </div>
         </div>
 
-        <!-- Right: Page Pill & Action Controls -->
+        <!-- Right: Mode Switcher & Action Controls -->
         <div class="nav-right">
-            <!-- Page Number Indicator -->
-            <div class="page-pill">
-                <span>Page</span>
-                <span id="current-page" class="curr">1</span>
-                <span>/</span>
-                <span id="total-pages" class="tot">--</span>
-            </div>
-
-            <!-- Single Page / Two Pages Mode Switcher -->
-            <button onclick="togglePageSpread()" id="btn-spread" class="btn-ctrl" title="Toggle Single Page / Double Page Mode">
+            <!-- Single Page / Two Pages Mode Switcher (100% Functional!) -->
+            <button onclick="togglePageSpread()" id="btn-spread" class="btn-ctrl active-mode" title="Toggle Single Page / Double Page Mode">
                 <i class="fa-solid fa-file" id="spread-icon"></i>
                 <span id="spread-label">Single Page</span>
             </button>
@@ -498,10 +494,7 @@
 
     <!-- Main Workspace Stage -->
     <main class="main-stage">
-        <!-- Ambient stage background glow -->
-        <div class="stage-backdrop-glow"></div>
-
-        <!-- Floating Navigation Prev / Next Buttons -->
+        <!-- Floating Navigation Prev / Next Buttons (Large Chevrons) -->
         <button onclick="prevPage()" id="btn-prev-float" class="nav-floating-btn nav-prev-btn" title="Previous Page (←)">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
@@ -516,8 +509,18 @@
             </div>
         </div>
 
-        <!-- Watermark -->
-        <div class="bottom-watermark">Mohan Babu University • CSE Data Science Digital Library</div>
+        <!-- Bottom Controls Bar (Quick Next/Prev + Page Counter) -->
+        <div class="bottom-controls-bar">
+            <button onclick="prevPage()" class="btn-bottom-nav">
+                <i class="fa-solid fa-chevron-left"></i> Prev
+            </button>
+            <div class="bottom-page-text">
+                Page <span id="current-page" class="active-num">1</span> / <span id="total-pages">--</span>
+            </div>
+            <button onclick="nextPage()" class="btn-bottom-nav">
+                Next <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
 
         <!-- Standard PDF View Container (Fallback) -->
         <div id="standard-pdf-container">
@@ -561,8 +564,10 @@
         let soundEnabled = true;
         let totalPdfPages = 0;
         let isStandardView = false;
-        let isSinglePageMode = true; // Default: Single Page / Portrait View ("one page after another")
+        let isSinglePageMode = true; // Default: Single Page (One page after another)
         let pdfDocGlobal = null;
+        let pdfDocAspect = 0.707; // Default A4 aspect ratio (width / height)
+        let pageCanvases = {}; // In-memory cached canvas map { pageNum: HTMLCanvasElement }
         let renderedPages = new Set();
 
         // 2. Realistic Audio Synthesizer (Zero External Audio File Dependency)
@@ -641,23 +646,6 @@
             }
         }
 
-        function togglePageSpread() {
-            isSinglePageMode = !isSinglePageMode;
-            const label = document.getElementById('spread-label');
-            const icon = document.getElementById('spread-icon');
-
-            if (isSinglePageMode) {
-                label.innerText = 'Single Page';
-                icon.className = 'fa-solid fa-file';
-            } else {
-                label.innerText = 'Two Pages';
-                icon.className = 'fa-solid fa-book-open';
-            }
-
-            // Re-mount flipbook with new orientation
-            initPageFlip();
-        }
-
         function prevPage() {
             if (pageFlipInstance) {
                 pageFlipInstance.flipPrev();
@@ -684,85 +672,155 @@
         // 3. Fast Asynchronous Single Page Renderer
         async function renderSinglePdfPage(pageNum) {
             if (renderedPages.has(pageNum) || !pdfDocGlobal) return;
-            const canvas = document.getElementById(`page-canvas-${pageNum}`);
-            if (!canvas) return;
-
             try {
                 const page = await pdfDocGlobal.getPage(pageNum);
                 // Balanced scale for crisp text readability
-                const viewport = page.getViewport({ scale: 1.5 });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-                const ctx = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale: 1.6 });
+
+                // Detect actual PDF aspect ratio from Page 1
+                if (pageNum === 1 && viewport.width && viewport.height) {
+                    pdfDocAspect = viewport.width / viewport.height;
+                }
+
+                const offCanvas = document.createElement('canvas');
+                offCanvas.width = viewport.width;
+                offCanvas.height = viewport.height;
+                const ctx = offCanvas.getContext('2d');
                 await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                pageCanvases[pageNum] = offCanvas;
                 renderedPages.add(pageNum);
+
+                // Copy to visible DOM canvas if it already exists
+                const domCanvas = document.getElementById(`page-canvas-${pageNum}`);
+                if (domCanvas) {
+                    domCanvas.width = offCanvas.width;
+                    domCanvas.height = offCanvas.height;
+                    const dCtx = domCanvas.getContext('2d');
+                    dCtx.drawImage(offCanvas, 0, 0);
+                }
             } catch(e) {
                 console.warn(`Page ${pageNum} render notice:`, e);
             }
         }
 
-        // 4. Initialize St.PageFlip
-        function initPageFlip() {
-            const flipbookEl = document.getElementById('flipbook');
+        // 4. Rebuild DOM and Mount St.PageFlip (Guarantees zero crashes & perfect fitting)
+        function rebuildAndMountFlipbook(targetPageIdx = 0) {
             if (pageFlipInstance) {
                 try { pageFlipInstance.destroy(); } catch(e) {}
+                pageFlipInstance = null;
             }
 
+            const container = document.getElementById('book-container');
+            container.innerHTML = '<div id="flipbook" class="flip-book"></div>';
+            const flipbookEl = document.getElementById('flipbook');
+
+            // Inject pages
+            for (let i = 1; i <= totalPdfPages; i++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'page';
+                pageDiv.id = `page-wrapper-${i}`;
+
+                const pageContent = document.createElement('div');
+                pageContent.className = 'page-content';
+
+                const canvas = document.createElement('canvas');
+                canvas.id = `page-canvas-${i}`;
+                canvas.className = 'page-canvas';
+
+                // If already cached, draw instantly!
+                if (pageCanvases[i]) {
+                    canvas.width = pageCanvases[i].width;
+                    canvas.height = pageCanvases[i].height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(pageCanvases[i], 0, 0);
+                }
+
+                pageContent.appendChild(canvas);
+
+                const pageFooter = document.createElement('div');
+                pageFooter.className = 'page-footer';
+                pageFooter.innerText = `Page ${i}`;
+                pageContent.appendChild(pageFooter);
+
+                pageDiv.appendChild(pageContent);
+                flipbookEl.appendChild(pageDiv);
+            }
+
+            // Screen Available Dimensions
             const containerWidth = window.innerWidth;
-            const containerHeight = window.innerHeight - 64; // 64px header
+            const containerHeight = window.innerHeight - 56; // 56px top header
+            const availH = containerHeight - 52; // 52px for bottom controls & breathing margin
+            const availW = containerWidth - 120; // 120px for side floating buttons
+            const aspect = pdfDocAspect || 0.707;
 
-            // Standard A4 aspect ratio 1 : 1.414 (w/h = 0.707)
-            const availableHeight = containerHeight - 36;
-            const availableWidth = containerWidth - 60;
-
-            let targetHeight = Math.min(availableHeight, 840);
-            let targetWidth = Math.round(targetHeight * 0.707);
-
-            if (targetWidth > availableWidth * 0.90) {
-                targetWidth = Math.round(availableWidth * 0.90);
-                targetHeight = Math.round(targetWidth / 0.707);
-            }
+            let pageWidth, pageHeight;
 
             if (isSinglePageMode) {
-                // SINGLE PAGE PORTRAIT MODE ("One page after another")
-                // Setting minWidth: 9999 ensures St.PageFlip internal orientation calculation evaluates:
-                // (containerWidth < 2 * minWidth) -> ALWAYS TRUE -> orientation: 'portrait'!
+                // SINGLE PAGE MODE (One page after another)
+                pageHeight = availH;
+                pageWidth = Math.round(pageHeight * aspect);
+
+                if (pageWidth > availW) {
+                    pageWidth = availW;
+                    pageHeight = Math.round(pageWidth / aspect);
+                }
+
+                // Explicit container sizing prevents any stretching or blowing up!
+                flipbookEl.style.width = pageWidth + 'px';
+                flipbookEl.style.height = pageHeight + 'px';
+
                 pageFlipInstance = new St.PageFlip(flipbookEl, {
-                    width: targetWidth,
-                    height: targetHeight,
-                    size: 'stretch',
-                    minWidth: 9999,
-                    maxWidth: targetWidth,
-                    minHeight: 300,
-                    maxHeight: targetHeight,
-                    maxShadowOpacity: 0.5,
+                    width: pageWidth,
+                    height: pageHeight,
+                    size: 'fixed',
+                    minWidth: pageWidth,
+                    maxWidth: pageWidth,
+                    minHeight: pageHeight,
+                    maxHeight: pageHeight,
+                    autoSize: false,
                     showCover: false, // Single page mode flips page by page cleanly
+                    usePortrait: true, // Forces single-page portrait layout!
+                    maxShadowOpacity: 0.5,
                     mobileScrollSupport: false,
                     useMouseEvents: true,
                     clickEventForward: true,
-                    usePortrait: true,
-                    swipeDistance: 25
+                    swipeDistance: 20,
+                    startPage: targetPageIdx
                 });
             } else {
                 // TWO PAGES LANDSCAPE SPREAD MODE
-                let spreadWidth = Math.min(Math.round((availableWidth * 0.92) / 2), Math.round(targetHeight * 0.707));
-                let spreadHeight = Math.round(spreadWidth / 0.707);
+                let spreadW = Math.round(availW / 2);
+                let spreadH = Math.round(spreadW / aspect);
+
+                if (spreadH > availH) {
+                    spreadH = availH;
+                    spreadW = Math.round(spreadH * aspect);
+                }
+
+                pageWidth = spreadW;
+                pageHeight = spreadH;
+
+                flipbookEl.style.width = (spreadW * 2) + 'px';
+                flipbookEl.style.height = spreadH + 'px';
 
                 pageFlipInstance = new St.PageFlip(flipbookEl, {
-                    width: spreadWidth,
-                    height: spreadHeight,
-                    size: 'stretch',
-                    minWidth: 200,
-                    maxWidth: spreadWidth,
-                    minHeight: 300,
-                    maxHeight: spreadHeight,
+                    width: pageWidth,
+                    height: pageHeight,
+                    size: 'fixed',
+                    minWidth: pageWidth,
+                    maxWidth: pageWidth,
+                    minHeight: pageHeight,
+                    maxHeight: pageHeight,
+                    autoSize: false,
+                    showCover: true, // Book cover + 2-page spreads
+                    usePortrait: false,
                     maxShadowOpacity: 0.5,
-                    showCover: true,
                     mobileScrollSupport: false,
                     useMouseEvents: true,
                     clickEventForward: true,
-                    usePortrait: false,
-                    swipeDistance: 25
+                    swipeDistance: 20,
+                    startPage: targetPageIdx
                 });
             }
 
@@ -773,9 +831,8 @@
                 document.getElementById('current-page').innerText = currentIdx + 1;
                 playFlipSound();
 
-                // Proactively pre-render next 3 pages in advance
-                const targetPage = currentIdx + 1;
-                for (let p = targetPage; p <= Math.min(targetPage + 3, totalPdfPages); p++) {
+                // Proactively pre-render next 4 pages in advance
+                for (let p = currentIdx + 1; p <= Math.min(currentIdx + 4, totalPdfPages); p++) {
                     renderSinglePdfPage(p);
                 }
             });
@@ -787,11 +844,34 @@
             });
         }
 
-        // 5. Lightning Fast Initializer: Renders Page 1 immediately, opens book, streams rest in background!
+        // 5. Toggle Single Page / Two Pages Spread Mode
+        function togglePageSpread() {
+            isSinglePageMode = !isSinglePageMode;
+            const btn = document.getElementById('btn-spread');
+            const label = document.getElementById('spread-label');
+            const icon = document.getElementById('spread-icon');
+            const statusEl = document.getElementById('background-cache-status');
+
+            if (isSinglePageMode) {
+                label.innerText = 'Single Page';
+                icon.className = 'fa-solid fa-file';
+                btn.classList.add('active-mode');
+                if (statusEl) statusEl.innerText = 'One page after another mode • Click edges or buttons to flip';
+            } else {
+                label.innerText = 'Two Pages';
+                icon.className = 'fa-solid fa-book-open';
+                btn.classList.remove('active-mode');
+                if (statusEl) statusEl.innerText = 'Two pages open book spread • Click edges or buttons to flip';
+            }
+
+            const currentIdx = pageFlipInstance ? pageFlipInstance.getCurrentPageIndex() : 0;
+            rebuildAndMountFlipbook(currentIdx);
+        }
+
+        // 6. Lightning Fast Initializer: Renders Page 1 immediately, opens book, streams rest in background!
         async function loadFlipbookFast() {
             const statusText = document.getElementById('loading-status-text');
             const progressBar = document.getElementById('loading-progress-bar');
-            const flipbookEl = document.getElementById('flipbook');
 
             try {
                 statusText.innerText = `Fetching ${pdfFile}...`;
@@ -801,31 +881,6 @@
                 pdfDocGlobal = await loadingTask.promise;
                 totalPdfPages = pdfDocGlobal.numPages;
                 document.getElementById('total-pages').innerText = totalPdfPages;
-
-                flipbookEl.innerHTML = '';
-
-                // Build lightweight page DOM shells instantly
-                for (let i = 1; i <= totalPdfPages; i++) {
-                    const pageDiv = document.createElement('div');
-                    pageDiv.className = 'page';
-                    pageDiv.id = `page-wrapper-${i}`;
-
-                    const pageContent = document.createElement('div');
-                    pageContent.className = 'page-content';
-
-                    const canvas = document.createElement('canvas');
-                    canvas.id = `page-canvas-${i}`;
-                    canvas.className = 'page-canvas';
-                    pageContent.appendChild(canvas);
-
-                    const pageFooter = document.createElement('div');
-                    pageFooter.className = 'page-footer';
-                    pageFooter.innerText = `Page ${i}`;
-                    pageContent.appendChild(pageFooter);
-
-                    pageDiv.appendChild(pageContent);
-                    flipbookEl.appendChild(pageDiv);
-                }
 
                 statusText.innerText = 'Rendering Page 1...';
                 progressBar.style.width = '70%';
@@ -840,7 +895,7 @@
                 statusText.innerText = 'Ready!';
 
                 // Initialize 3D book immediately!
-                initPageFlip();
+                rebuildAndMountFlipbook(0);
 
                 // Dismiss loading screen right away!
                 setTimeout(() => {
@@ -856,13 +911,6 @@
                 (async function streamRemainingPages() {
                     for (let p = 3; p <= totalPdfPages; p++) {
                         await renderSinglePdfPage(p);
-                        const cachedCount = renderedPages.size;
-                        const statusEl = document.getElementById('background-cache-status');
-                        if (statusEl && cachedCount < totalPdfPages) {
-                            statusEl.innerText = `Pages ready: ${cachedCount}/${totalPdfPages} • One page after another mode`;
-                        } else if (statusEl) {
-                            statusEl.innerText = `All ${totalPdfPages} pages ready • Single page 3D mode`;
-                        }
                     }
                 })();
 
@@ -880,7 +928,8 @@
         window.addEventListener('load', loadFlipbookFast);
         window.addEventListener('resize', () => {
             if (pageFlipInstance) {
-                initPageFlip();
+                const currentIdx = pageFlipInstance.getCurrentPageIndex();
+                rebuildAndMountFlipbook(currentIdx);
             }
         });
     </script>
