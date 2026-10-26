@@ -1095,7 +1095,8 @@ pd.read_csv = safe_read_csv
                 "code": "import pandas as pd\nstudents_data={\"Roll No\":[101,102,103],\"Name\":[\"Anusha\",\"Babitha\",\"Charitha\"],\"Department\":[\"IT\",\"IT\",\"CSE\"],\"Percentage\":[89,92,88]}\ncourses_data={\"Course ID\":[\"C101\",\"C102\",\"C103\"],\"Course Name\":[\"Python\",\"Data Science\",\"Machine Learning\"],\"Credits\":[4,3,4]}\nexcel_data={\"Students\":pd.DataFrame(students_data),\"Courses\":pd.DataFrame(courses_data)}\nprint(\"Available Excel Sheets:\")\nprint(list(excel_data.keys()))\nprint(\"\\nIn Student Sheet:\")\nprint(excel_data[\"Students\"])\nprint(\"\\nIn Course Sheet:\")\nprint(excel_data[\"Courses\"])\nprint(\"\\nAll sheets read successfully!\")\n"
             }
         ],
-        "desc": "Data Science Lab Experiment"
+        "desc": "Data Science Lab Experiment",
+        "pdfName": "Experiment1.pdf"
     },
     {
         "id": 2,
@@ -1113,7 +1114,8 @@ pd.read_csv = safe_read_csv
                 "code": "import pandas as pd\nstudents=pd.DataFrame({\"id\":[1,2,3],\"name\":[\"John\",\"Alice\",\"Bob\"]})\nprint(\"Student Records:\")\nprint(students)\nstudents.loc[students[\"id\"]==1,\"name\"]=\"David\"\nprint(\"\\nAfter Update:\")\nprint(students)\nstudents=students[students[\"id\"]!=2]\nprint(\"\\nAfter Delete:\")\nprint(students)\nprint(\"\\nDatabase operations completed successfully!\")\n"
             }
         ],
-        "desc": "Data Science Lab Experiment"
+        "desc": "Data Science Lab Experiment",
+        "pdfName": "Experiment2.pdf"
     },
     {
         "id": 1791558547890,
@@ -1141,7 +1143,8 @@ pd.read_csv = safe_read_csv
                 "code": "import re\ntext = \"This is 1 test\"\nsplit_text = re.split(r'\\s+', text)\nprint(split_text)\n"
             }
         ],
-        "desc": "Data Science Lab Experiment"
+        "desc": "Data Science Lab Experiment",
+        "pdfName": "Experiment3.pdf"
     },
     {
         "id": 1791736841977,
@@ -1164,7 +1167,8 @@ pd.read_csv = safe_read_csv
                 "name": "4c-1:Merging DataFrames with Pandas",
                 "code": "import pandas as pd\nimport numpy as np\ndf1 = pd.DataFrame({\n    'a': [1, np.nan, 3],\n    'b': [4, 5, 6]\n})\ndf2 = pd.DataFrame({\n    'a': [7, 8, 9],\n    'b': [np.nan, 11, 12]\n})\nmerged = df1.combine_first(df2)\nprint(merged)"
             }
-        ]
+        ],
+        "pdfName": "Experiment4.pdf"
     },
     {
         "id": 1791737432752,
@@ -1197,7 +1201,8 @@ pd.read_csv = safe_read_csv
                 "name": "5e-1:Analyzing Distributions with Box Plots",
                 "code": "import pandas as pd\nstudy_hours=[1,2,3,4,5,6,7,8,9,10]\nmarks=[42,55,58,60,65,72,75,80,90,95]\ndf=pd.DataFrame({'Study_Hours':study_hours,'Marks':marks})\nprint(\"Data:\")\nprint(df)\nprint(\"\\nRelationship Between Study Hours and Marks\")\nfor h,m in zip(study_hours,marks):\n    print(f\"Study Hours: {h}, Marks: {m}\")\ncorrelation=df['Study_Hours'].corr(df['Marks'])\nprint(\"\\nCorrelation Coefficient:\",round(correlation,2))\nprint(\"There is a strong positive correlation.\")\n\n"
             }
-        ]
+        ],
+        "pdfName": "Experiment5.pdf"
     },
     {
         "id": 1791873065649,
@@ -1240,7 +1245,8 @@ pd.read_csv = safe_read_csv
                 "name": "6g-1:resampling,downsampling,unsampling,methods",
                 "code": "import pandas as pd\ndates=pd.date_range(\n    start='2026-01-01 00:00',\n    periods=12,\n    freq='h'\n)\nvalues=[10,12,15,14,18,20,22,21,25,28,30,32]\ntime_series=pd.Series(\n    values,\n    index=dates\n)\nprint(\"Original Hourly Time Series: \")\nprint(time_series)\nresampled=time_series.resample('3h').mean()\nprint(\"\\nResampled Time Series (3 Hourly Mean):\")\nprint(resampled)\ndownsampled=time_series.resample('4h').sum()\nprint(\"\\nDownsampled Time Series - 4 Hour Sum: \")\nprint(downsampled)\nupsampled=time_series.resample('30min').asfreq()\nprint(\"\\nUpsampled Time Series - 30 Minute:\")\nprint(upsampled)\nupsampled_ffill=time_series.resample('30min').ffill()\nprint(\"\\nUpsampled Time Series using Forward Fill:\")\nprint(upsampled_ffill)\n"
             }
-        ]
+        ],
+        "pdfName": "Experiment6.pdf"
     },
     {
         "id": 1791874151890,
@@ -1263,83 +1269,88 @@ pd.read_csv = safe_read_csv
                 "name": "7c-1:using group() by method",
                 "code": "import pandas as pd\nurl=\"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv\"\ndf=pd.read_csv(url)\nprint(\"First 5 Records:\")\nprint(df.head())\nprint(\"\\nDataset Information:\")\nprint(df.info())\nprint(\"\\nStatistical Summary:\")\nprint(df.describe())\nprint(\"\\n.GroupBy using a Single Column:\")\ngroup_single=df.groupby('species')['sepal_length'].agg(['count','sum','mean','std','min','max'])\nprint(group_single)\nprint(\"\\n2.GroupBy using Multiple Columns:\")\ngroup_multiple=df.groupby(['species','sepal_width'])['sepal_length'].mean()\nprint(group_multiple.head(15))\nprint(\"\\n3.Summary Statistics:\")\nsummary=df.groupby('species').agg({\n    'sepal_length':['mean','std','min','max'],\n    'sepal_width':['mean','std','min','max'],\n    'petal_length':['mean','std','min','max'],\n    'petal_width':['mean','std','min','max'],\n})\nprint(summary)\nprint(\"\\n4\")"
             }
-        ]
+        ],
+        "pdfName": "Experiment7.pdf"
     },
-{
-    "id": 8,
-    "title": "Experiment 8: Web Scraping using Beautiful Soup & EDA of Product Reviews",
-    "desc": "Extract product reviews, perform EDA, generate WordClouds, analyze distributions of stopwords/numerics/wordcount/charactercount/average wordlength, and calculate sentiment polarity with NLTK & VADER.",
-    "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
-    "subExperiments": [
-        {
-            "id": "sub-8a-1",
-            "name": "8a-1: Web Scraping Product Reviews using Beautiful Soup",
-            "code": "from bs4 import BeautifulSoup\nimport pandas as pd\n\n# 1. Read HTML content (authorized local file or page content)\ntry:\n    with open(\"reviews.html\", \"r\", encoding=\"utf-8\") as f:\n        html_content = f.read()\nexcept Exception:\n    html_content = \"\"\"\n    <div class=\"review\"><span class=\"review-title\">Great product</span><span class=\"rating\">5 out of 5</span><span class=\"review-text\">Excellent quality and very durable. Highly recommended!</span></div>\n    <div class=\"review\"><span class=\"review-title\">Not satisfied</span><span class=\"rating\">2 out of 5</span><span class=\"review-text\">The product stopped working after two days. Very poor experience.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Worth buying</span><span class=\"rating\">4 out of 5</span><span class=\"review-text\">Good performance, comfortable design, and fast delivery.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Decent Value</span><span class=\"rating\">3 out of 5</span><span class=\"review-text\">Average build quality but works as expected for the affordable price.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Terrible Customer Service</span><span class=\"rating\">1 out of 5</span><span class=\"review-text\">Broken package arrived and support was unresponsive. Horrible experience.</span></div>\n    \"\"\"\n\n# 2. Parse HTML with BeautifulSoup\nsoup = BeautifulSoup(html_content, \"html.parser\")\nreview_blocks = soup.select(\".review\")\nrecords = []\n\nfor block in review_blocks:\n    review_el = block.select_one(\".review-text\")\n    rating_el = block.select_one(\".rating\")\n    title_el = block.select_one(\".review-title\")\n    records.append({\n        \"title\": title_el.get_text(strip=True) if title_el else \"\",\n        \"review\": review_el.get_text(\" \", strip=True) if review_el else \"\",\n        \"rating\": rating_el.get_text(strip=True) if rating_el else \"\"\n    })\n\ndf = pd.DataFrame(records)\ndf.to_csv(\"product_reviews.csv\", index=False, encoding=\"utf-8-sig\")\n\nprint(\"--- Extracted Product Reviews ---\")\nprint(df.to_string(index=False))\nprint(\"\\nTotal reviews extracted:\", len(df))\nprint(\"Saved to product_reviews.csv\")\n"
-        },
-        {
-            "id": "sub-8b-1",
-            "name": "8b-1: Exploratory Data Analysis & WordCloud Generation",
-            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom collections import Counter\nimport re\n\n# Load extracted reviews\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"review\": [\n            \"Great product excellent quality durable love it\",\n            \"Not satisfied terrible quality stopped working poor experience\",\n            \"Worth buying good performance comfortable fast delivery\",\n            \"Decent value average build quality acceptable\",\n            \"Broken package unresponsive support horrible experience\"\n        ],\n        \"sentiment\": [\"Positive\", \"Negative\", \"Positive\", \"Neutral\", \"Negative\"]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\n\npositive_words = {\"great\", \"excellent\", \"worth\", \"good\", \"love\", \"superb\", \"best\", \"recommended\", \"durable\"}\nnegative_words = {\"poor\", \"terrible\", \"bad\", \"broken\", \"stopped\", \"waste\", \"defective\", \"horrible\"}\n\ndef classify_sentiment(text):\n    words = set(re.findall(r\"\\b\\w+\\b\", text.lower()))\n    pos = len(words & positive_words)\n    neg = len(words & negative_words)\n    if pos > neg: return \"Positive\"\n    elif neg > pos: return \"Negative\"\n    return \"Neutral\"\n\nif \"sentiment\" not in df.columns:\n    df[\"sentiment\"] = df[\"review\"].apply(classify_sentiment)\n\nprint(\"Sentiment Counts:\")\nprint(df[\"sentiment\"].value_counts())\n\ntry:\n    from wordcloud import WordCloud\n    cloud = WordCloud(width=800, height=400, background_color=\"white\", max_words=50).generate(\" \".join(df[\"review\"]))\n    plt.figure(figsize=(10, 5))\n    plt.imshow(cloud, interpolation=\"bilinear\")\n    plt.axis(\"off\")\n    plt.title(\"WordCloud - Product Reviews\", fontsize=14)\n    plt.tight_layout()\n    plt.show()\nexcept Exception:\n    all_words = re.findall(r\"\\b[A-Za-z]{3,}\\b\", \" \".join(df[\"review\"]).lower())\n    stop = {\"and\", \"the\", \"for\", \"was\", \"with\", \"out\"}\n    freq = Counter(w for w in all_words if w not in stop)\n    top_words = freq.most_common(8)\n    plt.figure(figsize=(9, 4.5))\n    words, counts = zip(*top_words)\n    plt.barh(words, counts, color=\"teal\")\n    plt.xlabel(\"Frequency\")\n    plt.title(\"Top Keyword Frequencies (Product Reviews)\")\n    plt.gca().invert_yaxis()\n    plt.tight_layout()\n    plt.show()\n\nprint(\"Word frequency analysis and visualization generated successfully.\")\n"
-        },
-        {
-            "id": "sub-8c-1",
-            "name": "8c-1: Distribution of Stopwords, Numerics, Word & Character Count",
-            "code": "import re\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"title\": [\"Great product\", \"Poor\", \"Good\", \"Decent\", \"Terrible\"],\n        \"review\": [\n            \"Great product excellent quality durable love it 5 out of 5\",\n            \"Not satisfied stopped working poor experience 2 stars\",\n            \"Worth buying good performance comfortable 100 percent recommended\",\n            \"Decent value average build quality 3 stars\",\n            \"Broken package support was unresponsive 1 out of 5 horrible\"\n        ]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\ncommon_stopwords = {\"the\", \"and\", \"is\", \"of\", \"to\", \"in\", \"a\", \"it\", \"was\", \"for\", \"but\", \"with\", \"as\", \"at\"}\n\ndef analyze_review(text):\n    tokens = re.findall(r\"\\b[\\w']+\\b\", text.lower())\n    words = re.findall(r\"\\b[A-Za-z]+\\b\", text)\n    numeric_tokens = re.findall(r\"\\b\\d+(?:\\.\\d+)?\\b\", text)\n    stopwords_found = [t for t in tokens if t in common_stopwords]\n    return pd.Series({\n        \"word_count\": len(tokens),\n        \"character_count\": len(text),\n        \"numeric_count\": len(numeric_tokens),\n        \"stopword_count\": len(stopwords_found),\n        \"average_word_length\": round(sum(len(w) for w in words) / max(len(words), 1), 2)\n    })\n\nstats_df = df[\"review\"].apply(analyze_review)\ndf = pd.concat([df, stats_df], axis=1)\n\nprint(\"--- Review Text Statistics Summary ---\")\nprint(df[[\"word_count\", \"character_count\", \"numeric_count\", \"stopword_count\", \"average_word_length\"]])\n\nfig, axes = plt.subplots(2, 2, figsize=(10, 8))\naxes[0, 0].hist(df[\"word_count\"], bins=5, color=\"skyblue\", edgecolor=\"black\")\naxes[0, 0].set_title(\"Word Count Distribution\")\n\naxes[0, 1].hist(df[\"character_count\"], bins=5, color=\"salmon\", edgecolor=\"black\")\naxes[0, 1].set_title(\"Character Count Distribution\")\n\naxes[1, 0].hist(df[\"stopword_count\"], bins=5, color=\"lightgreen\", edgecolor=\"black\")\naxes[1, 0].set_title(\"Stopword Count Distribution\")\n\naxes[1, 1].hist(df[\"average_word_length\"], bins=5, color=\"gold\", edgecolor=\"black\")\naxes[1, 1].set_title(\"Average Word Length Distribution\")\n\nplt.tight_layout()\nplt.show()\nprint(\"\\nDistribution plots created successfully.\")\n"
-        },
-        {
-            "id": "sub-8d-1",
-            "name": "8d-1: Sentiment Analysis Using NLTK and VADER",
-            "code": "import pandas as pd\n\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"title\": [\"Great\", \"Bad\", \"Good\", \"Terrible\"],\n        \"review\": [\n            \"Excellent quality durable and fast delivery\",\n            \"Stopped working very poor experience\",\n            \"Worth buying good performance\",\n            \"Broken package unresponsive support horrible\"\n        ]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\n\ntry:\n    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer\n    analyzer = SentimentIntensityAnalyzer()\nexcept ImportError:\n    try:\n        import nltk\n        nltk.download(\"vader_lexicon\", quiet=True)\n        from nltk.sentiment.vader import SentimentIntensityAnalyzer\n        analyzer = SentimentIntensityAnalyzer()\n    except Exception:\n        class SimpleVADER:\n            def polarity_scores(self, text):\n                t = text.lower()\n                pos = sum(t.count(w) for w in [\"great\", \"excellent\", \"worth\", \"good\", \"durable\", \"love\", \"best\"])\n                neg = sum(t.count(w) for w in [\"poor\", \"terrible\", \"bad\", \"broken\", \"stopped\", \"horrible\"])\n                tot = max(pos + neg + 1, 1)\n                comp = round((pos - neg) / tot, 4)\n                return {\"neg\": round(neg/tot, 2), \"neu\": 0.5, \"pos\": round(pos/tot, 2), \"compound\": comp}\n        analyzer = SimpleVADER()\n\ndef classify(score):\n    if score >= 0.05: return \"Positive\"\n    elif score <= -0.05: return \"Negative\"\n    return \"Neutral\"\n\nscores = df[\"review\"].apply(analyzer.polarity_scores)\ndf[\"compound\"] = scores.apply(lambda x: x[\"compound\"])\ndf[\"pos\"] = scores.apply(lambda x: x[\"pos\"])\ndf[\"neg\"] = scores.apply(lambda x: x[\"neg\"])\ndf[\"sentiment\"] = df[\"compound\"].apply(classify)\n\nprint(\"--- Sentiment Polarity Table ---\")\nprint(df[[\"review\", \"compound\", \"sentiment\"]].to_string(index=False))\n\nprint(\"\\nSentiment Distribution:\")\nprint(df[\"sentiment\"].value_counts())\n\ndf.to_csv(\"sentiment_analysis_results.csv\", index=False)\nprint(\"\\nSaved results to sentiment_analysis_results.csv\")\n"
-        },
-        {
-            "id": "sub-8e-1",
-            "name": "8e-1: Scatter Intensity Plot of Sentiments",
-            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ntry:\n    df = pd.read_csv(\"sentiment_analysis_results.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"review\": [\"Great product\", \"Poor experience\", \"Worth buying\", \"Average item\", \"Broken unit\"],\n        \"compound\": [0.65, -0.45, 0.40, 0.02, -0.72],\n        \"sentiment\": [\"Positive\", \"Negative\", \"Positive\", \"Neutral\", \"Negative\"]\n    })\n\ndf[\"review_index\"] = range(1, len(df) + 1)\ncolors = {\"Positive\": \"green\", \"Negative\": \"red\", \"Neutral\": \"gray\"}\n\nplt.figure(figsize=(10, 5))\nfor sent, color in colors.items():\n    subset = df[df[\"sentiment\"] == sent]\n    plt.scatter(subset[\"review_index\"], subset[\"compound\"], color=color, label=sent, s=80, alpha=0.85)\n\n# Classification thresholds\nplt.axhline(y=0.05, color=\"green\", linestyle=\"--\", label=\"Positive threshold (+0.05)\")\nplt.axhline(y=-0.05, color=\"red\", linestyle=\"--\", label=\"Negative threshold (-0.05)\")\nplt.axhline(y=0, color=\"black\", linestyle=\":\", label=\"Neutral reference\")\n\nplt.ylim(-1.05, 1.05)\nplt.xlabel(\"Review Index\", fontsize=11)\nplt.ylabel(\"VADER Compound Sentiment Score\", fontsize=11)\nplt.title(\"Sentiment Intensity of Product Reviews\", fontsize=12)\nplt.legend(loc=\"best\")\nplt.grid(True, alpha=0.25)\nplt.tight_layout()\nplt.show()\n\nprint(\"Scatter intensity plot generated successfully.\")\n"
-        },
-        {
-            "id": "sub-8f-1",
-            "name": "8f-1: Scrape Amazon Reviews with Requests & BeautifulSoup",
-            "code": "import requests\nfrom bs4 import BeautifulSoup\n\nheaders = {\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"}\nurl = \"https://www.amazon.in/product-reviews/B09G9BL5CP/\"\n\ntry:\n    r = requests.get(url, headers=headers, timeout=5)\n    soup = BeautifulSoup(r.content, 'html.parser')\n    reviews = soup.find_all('span', {'data-hook': 'review-body'})\n    print(f\"Total reviews extracted from Amazon: {len(reviews)}\")\n    for i, review in enumerate(reviews[:5], 1):\n        print(f\"{i}. {review.text.strip()}\")\nexcept Exception as e:\n    print(\"Direct Amazon request blocked or timed out (Note: Amazon uses anti-bot protection):\")\n    print(f\"Error detail: {e}\")\n    print(\"\\nRunning offline BeautifulSoup parser demo on sample Amazon review HTML structure:\")\n    sample_html = '<span data-hook=\"review-body\"><span>The sound quality and battery life are amazing!</span></span>'\n    soup = BeautifulSoup(sample_html, 'html.parser')\n    rev = soup.find('span', {'data-hook': 'review-body'})\n    print(\"Parsed Review:\", rev.text.strip())\n"
-        }
-    ]
-},
-{
-    "id": 9,
-    "title": "Experiment 9: Case Study - Customer Personality Analysis",
-    "desc": "Analyze customer segments based on purchasing behavior using K-Means clustering, feature standardization, Elbow method, and Silhouette analysis.",
-    "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
-    "subExperiments": [
-        {
-            "id": "sub-9a-1",
-            "name": "9a-1: Customer Segmentation using K-Means (Mall Customers)",
-            "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.cluster import KMeans\n\n# 1. Load dataset\nurl = \"https://raw.githubusercontent.com/selva86/datasets/master/Mall_Customers.csv\"\ntry:\n    df = pd.read_csv(url)\nexcept Exception:\n    df = pd.read_csv(\"Mall_Customers.csv\")\n\n# 2. Select features for clustering\nX = df[['Annual Income (k$)', 'Spending Score (1-100)']]\n\n# 3. Apply KMeans clustering (5 clusters)\nkmeans = KMeans(n_clusters=5, random_state=0, n_init=10)\ndf['Cluster'] = kmeans.fit_predict(X)\n\n# 4. Plot the clusters\nplt.figure(figsize=(9, 5))\ncolors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']\nfor cluster_id in range(5):\n    sub = df[df['Cluster'] == cluster_id]\n    plt.scatter(sub['Annual Income (k$)'], sub['Spending Score (1-100)'],\n                label=f'Cluster {cluster_id}', color=colors[cluster_id], s=60, alpha=0.8)\n\n# Plot Centroids\ncentroids = kmeans.cluster_centers_\nplt.scatter(centroids[:, 0], centroids[:, 1], s=180, c='black', marker='X', label='Centroids')\n\nplt.title(\"Customer Segments (K-Means Clustering)\", fontsize=13)\nplt.xlabel(\"Annual Income (k$)\")\nplt.ylabel(\"Spending Score (1-100)\")\nplt.legend()\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\nprint(\"--- Cluster Distribution ---\")\nprint(df['Cluster'].value_counts().sort_index())\n"
-        },
-        {
-            "id": "sub-9b-1",
-            "name": "9b-1: Customer Personality Analysis with Feature Scaling & Elbow Method",
-            "code": "import pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import KMeans\nfrom sklearn.metrics import silhouette_score\n\n# 1. Load the dataset\ntry:\n    df = pd.read_csv(\"marketing_campaign.csv\", sep=\"\\t\")\nexcept Exception:\n    np.random.seed(42)\n    df = pd.DataFrame({\n        \"Income\": np.random.normal(52000, 18000, 150).clip(15000, 100000),\n        \"MntWines\": np.random.exponential(250, 150).clip(5, 1000),\n        \"MntFruits\": np.random.exponential(25, 150).clip(1, 120),\n        \"MntMeatProducts\": np.random.exponential(140, 150).clip(5, 700),\n        \"MntFishProducts\": np.random.exponential(35, 150).clip(1, 180),\n        \"MntSweetProducts\": np.random.exponential(25, 150).clip(1, 120),\n        \"MntGoldProds\": np.random.exponential(40, 150).clip(1, 150)\n    })\n\n# 2. Select customer features\nfeatures = [\"Income\", \"MntWines\", \"MntFruits\", \"MntMeatProducts\", \"MntFishProducts\", \"MntSweetProducts\", \"MntGoldProds\"]\ndata = df[features].copy()\ndata = data.fillna(data.median())\ndata = data.clip(lower=data.quantile(0.01), upper=data.quantile(0.99), axis=1)\n\n# 3. Standardize features\nscaler = StandardScaler()\nX = scaler.fit_transform(data)\n\n# 4. Find suitable number of clusters (Elbow Method)\ninertias, scores = [], []\nk_range = range(2, 7)\nfor k in k_range:\n    model = KMeans(n_clusters=k, random_state=42, n_init=10)\n    labels = model.fit_predict(X)\n    inertias.append(model.inertia_)\n    scores.append(round(silhouette_score(X, labels), 3))\n\nprint(\"Silhouette scores for K in [2..6]:\", dict(zip(k_range, scores)))\n\n# Plot Elbow Curve\nplt.figure(figsize=(8, 4))\nplt.plot(list(k_range), inertias, marker=\"o\", color=\"teal\", linewidth=2)\nplt.xlabel(\"Number of Clusters (K)\")\nplt.ylabel(\"Inertia\")\nplt.title(\"Elbow Method for Optimal K\")\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n# 5. Fit model with best silhouette score\nbest_k = list(k_range)[scores.index(max(scores))]\nkmeans = KMeans(n_clusters=best_k, random_state=42, n_init=10)\ndf[\"Customer_Segment\"] = kmeans.fit_predict(X)\n\nprint(f\"\\n--- Customer Segment Summary (K={best_k}) ---\")\nsummary = df.groupby(\"Customer_Segment\")[features].mean().round(2)\nprint(summary)\n\n# 6. Visualize Segments: Income vs Wine Spending\nplt.figure(figsize=(8, 5))\nfor seg in sorted(df[\"Customer_Segment\"].unique()):\n    sub = df[df[\"Customer_Segment\"] == seg]\n    plt.scatter(sub[\"Income\"], sub[\"MntWines\"], label=f\"Segment {seg}\", s=60, alpha=0.8)\nplt.xlabel(\"Annual Income\")\nplt.ylabel(\"Wine Spending (MntWines)\")\nplt.title(\"Customer Segments: Income vs Wine Spending\")\nplt.legend()\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\ndf.to_csv(\"customer_segments.csv\", index=False)\nprint(\"Analysis complete. Saved to customer_segments.csv\")\n"
-        }
-    ]
-},
-{
-    "id": 10,
-    "title": "Experiment 10: Case Study - Text Emotion Detection",
-    "desc": "Detect emotional tones in text messages and predict emojis using NLP, CountVectorizer, Naive Bayes, and TF-IDF Logistic Regression pipeline.",
-    "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
-    "subExperiments": [
-        {
-            "id": "sub-10a-1",
-            "name": "10a-1: Text Emotion Detection with CountVectorizer & Naive Bayes",
-            "code": "from sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.naive_bayes import MultinomialNB\n\n# Sample training data\ntexts = [\n    'I am happy', 'This is wonderful', 'I am so thrilled',\n    'I am angry', 'This is frustrating', 'I hate this',\n    'I feel sad', 'I am very depressed', 'I feel lonely',\n    'I love this', 'I adore you', 'You mean the world to me'\n]\nlabels = [\n    'happy', 'happy', 'happy',\n    'angry', 'angry', 'angry',\n    'sad', 'sad', 'sad',\n    'love', 'love', 'love'\n]\n\n# 1. Vectorization\nvec = CountVectorizer()\nX = vec.fit_transform(texts)\n\n# 2. Train Multinomial Naive Bayes model\nmodel = MultinomialNB()\nmodel.fit(X, labels)\n\n# 3. Test predictions on new sentences\ntest_sentences = [\n    'I am so sad today',\n    'I am happy to meet you',\n    'I feel angry right now',\n    'I love my project'\n]\n\nprint(\"--- Naive Bayes Emotion Classification Results ---\")\nfor sent in test_sentences:\n    test_vec = vec.transform([sent])\n    pred = model.predict(test_vec)[0]\n    print(f\"Input: \\\"{sent}\\\" --> Emotion: {pred}\")\n"
-        },
-        {
-            "id": "sub-10b-1",
-            "name": "10b-1: Text Emotion Detection & Emoji Prediction with TF-IDF Pipeline",
-            "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score, classification_report\n\n# 1. Labeled Dataset\ndata = {\n    \"text\": [\n        \"I am very happy today\", \"This is a wonderful day\", \"I feel cheerful and excited\",\n        \"I am sad and lonely\", \"I feel very disappointed\", \"I miss my family so much\",\n        \"I am angry with you\", \"This makes me furious\", \"I hate this situation\",\n        \"I am scared of the dark\", \"I am afraid of losing\", \"I feel nervous and frightened\",\n        \"I love you so much\", \"You mean everything to me\", \"I adore spending time with you\",\n        \"Wow this is unbelievable\", \"I did not expect this surprise\", \"What an amazing unexpected gift\"\n    ],\n    \"emotion\": [\n        \"happy\", \"happy\", \"happy\",\n        \"sadness\", \"sadness\", \"sadness\",\n        \"anger\", \"anger\", \"anger\",\n        \"fear\", \"fear\", \"fear\",\n        \"love\", \"love\", \"love\",\n        \"surprise\", \"surprise\", \"surprise\"\n    ]\n}\ndf = pd.DataFrame(data)\n\n# 2. Train / Test Split\nX_train, X_test, y_train, y_test = train_test_split(\n    df[\"text\"], df[\"emotion\"], test_size=0.33, random_state=42, stratify=df[\"emotion\"]\n)\n\n# 3. Build ML Pipeline: TF-IDF + Logistic Regression\nmodel = Pipeline([\n    (\"tfidf\", TfidfVectorizer(ngram_range=(1, 2))),\n    (\"classifier\", LogisticRegression(max_iter=1000))\n])\n\n# 4. Train Model\nmodel.fit(X_train, y_train)\n\n# 5. Evaluate Model\npredictions = model.predict(X_test)\nprint(f\"Test Accuracy: {accuracy_score(y_test, predictions) * 100:.2f}%\\n\")\nprint(\"Classification Report:\")\nprint(classification_report(y_test, predictions, zero_division=0))\n\n# 6. Emoji Mapping\nemoji_map = {\n    \"happy\": \"\ud83d\ude0a\",\n    \"sadness\": \"\ud83d\ude22\",\n    \"anger\": \"\ud83d\ude20\",\n    \"fear\": \"\ud83d\ude28\",\n    \"love\": \"\u2764\ufe0f\",\n    \"surprise\": \"\ud83d\ude32\"\n}\n\n# 7. Predict Emotion and Display Emoji\ndef detect_emotion(text):\n    emotion = model.predict([text])[0]\n    emoji = emoji_map.get(emotion, \"\u2728\")\n    print(f\"Input:            \\\"{text}\\\"\")\n    print(f\"Predicted Emotion: {emotion}\")\n    print(f\"Emoji:             {emoji}\\n\")\n\n# 8. Test the Application\nprint(\"--- Live Emotion & Emoji Predictions ---\")\ndetect_emotion(\"I am happy to see you\")\ndetect_emotion(\"I feel lonely today\")\ndetect_emotion(\"I love my family\")\ndetect_emotion(\"This makes me furious\")\ndetect_emotion(\"I am scared of what comes next\")\n"
-        }
-    ]
-}
+    {
+        "id": 8,
+        "title": "Experiment 8: Web Scraping using Beautiful Soup & EDA of Product Reviews",
+        "desc": "Extract product reviews, perform EDA, generate WordClouds, analyze distributions of stopwords/numerics/wordcount/charactercount/average wordlength, and calculate sentiment polarity with NLTK & VADER.",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-8a-1",
+                "name": "8a-1: Web Scraping Product Reviews using Beautiful Soup",
+                "code": "from bs4 import BeautifulSoup\nimport pandas as pd\n\n# 1. Read HTML content (authorized local file or page content)\ntry:\n    with open(\"reviews.html\", \"r\", encoding=\"utf-8\") as f:\n        html_content = f.read()\nexcept Exception:\n    html_content = \"\"\"\n    <div class=\"review\"><span class=\"review-title\">Great product</span><span class=\"rating\">5 out of 5</span><span class=\"review-text\">Excellent quality and very durable. Highly recommended!</span></div>\n    <div class=\"review\"><span class=\"review-title\">Not satisfied</span><span class=\"rating\">2 out of 5</span><span class=\"review-text\">The product stopped working after two days. Very poor experience.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Worth buying</span><span class=\"rating\">4 out of 5</span><span class=\"review-text\">Good performance, comfortable design, and fast delivery.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Decent Value</span><span class=\"rating\">3 out of 5</span><span class=\"review-text\">Average build quality but works as expected for the affordable price.</span></div>\n    <div class=\"review\"><span class=\"review-title\">Terrible Customer Service</span><span class=\"rating\">1 out of 5</span><span class=\"review-text\">Broken package arrived and support was unresponsive. Horrible experience.</span></div>\n    \"\"\"\n\n# 2. Parse HTML with BeautifulSoup\nsoup = BeautifulSoup(html_content, \"html.parser\")\nreview_blocks = soup.select(\".review\")\nrecords = []\n\nfor block in review_blocks:\n    review_el = block.select_one(\".review-text\")\n    rating_el = block.select_one(\".rating\")\n    title_el = block.select_one(\".review-title\")\n    records.append({\n        \"title\": title_el.get_text(strip=True) if title_el else \"\",\n        \"review\": review_el.get_text(\" \", strip=True) if review_el else \"\",\n        \"rating\": rating_el.get_text(strip=True) if rating_el else \"\"\n    })\n\ndf = pd.DataFrame(records)\ndf.to_csv(\"product_reviews.csv\", index=False, encoding=\"utf-8-sig\")\n\nprint(\"--- Extracted Product Reviews ---\")\nprint(df.to_string(index=False))\nprint(\"\\nTotal reviews extracted:\", len(df))\nprint(\"Saved to product_reviews.csv\")\n"
+            },
+            {
+                "id": "sub-8b-1",
+                "name": "8b-1: Exploratory Data Analysis & WordCloud Generation",
+                "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom collections import Counter\nimport re\n\n# Load extracted reviews\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"review\": [\n            \"Great product excellent quality durable love it\",\n            \"Not satisfied terrible quality stopped working poor experience\",\n            \"Worth buying good performance comfortable fast delivery\",\n            \"Decent value average build quality acceptable\",\n            \"Broken package unresponsive support horrible experience\"\n        ],\n        \"sentiment\": [\"Positive\", \"Negative\", \"Positive\", \"Neutral\", \"Negative\"]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\n\npositive_words = {\"great\", \"excellent\", \"worth\", \"good\", \"love\", \"superb\", \"best\", \"recommended\", \"durable\"}\nnegative_words = {\"poor\", \"terrible\", \"bad\", \"broken\", \"stopped\", \"waste\", \"defective\", \"horrible\"}\n\ndef classify_sentiment(text):\n    words = set(re.findall(r\"\\b\\w+\\b\", text.lower()))\n    pos = len(words & positive_words)\n    neg = len(words & negative_words)\n    if pos > neg: return \"Positive\"\n    elif neg > pos: return \"Negative\"\n    return \"Neutral\"\n\nif \"sentiment\" not in df.columns:\n    df[\"sentiment\"] = df[\"review\"].apply(classify_sentiment)\n\nprint(\"Sentiment Counts:\")\nprint(df[\"sentiment\"].value_counts())\n\ntry:\n    from wordcloud import WordCloud\n    cloud = WordCloud(width=800, height=400, background_color=\"white\", max_words=50).generate(\" \".join(df[\"review\"]))\n    plt.figure(figsize=(10, 5))\n    plt.imshow(cloud, interpolation=\"bilinear\")\n    plt.axis(\"off\")\n    plt.title(\"WordCloud - Product Reviews\", fontsize=14)\n    plt.tight_layout()\n    plt.show()\nexcept Exception:\n    all_words = re.findall(r\"\\b[A-Za-z]{3,}\\b\", \" \".join(df[\"review\"]).lower())\n    stop = {\"and\", \"the\", \"for\", \"was\", \"with\", \"out\"}\n    freq = Counter(w for w in all_words if w not in stop)\n    top_words = freq.most_common(8)\n    plt.figure(figsize=(9, 4.5))\n    words, counts = zip(*top_words)\n    plt.barh(words, counts, color=\"teal\")\n    plt.xlabel(\"Frequency\")\n    plt.title(\"Top Keyword Frequencies (Product Reviews)\")\n    plt.gca().invert_yaxis()\n    plt.tight_layout()\n    plt.show()\n\nprint(\"Word frequency analysis and visualization generated successfully.\")\n"
+            },
+            {
+                "id": "sub-8c-1",
+                "name": "8c-1: Distribution of Stopwords, Numerics, Word & Character Count",
+                "code": "import re\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"title\": [\"Great product\", \"Poor\", \"Good\", \"Decent\", \"Terrible\"],\n        \"review\": [\n            \"Great product excellent quality durable love it 5 out of 5\",\n            \"Not satisfied stopped working poor experience 2 stars\",\n            \"Worth buying good performance comfortable 100 percent recommended\",\n            \"Decent value average build quality 3 stars\",\n            \"Broken package support was unresponsive 1 out of 5 horrible\"\n        ]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\ncommon_stopwords = {\"the\", \"and\", \"is\", \"of\", \"to\", \"in\", \"a\", \"it\", \"was\", \"for\", \"but\", \"with\", \"as\", \"at\"}\n\ndef analyze_review(text):\n    tokens = re.findall(r\"\\b[\\w']+\\b\", text.lower())\n    words = re.findall(r\"\\b[A-Za-z]+\\b\", text)\n    numeric_tokens = re.findall(r\"\\b\\d+(?:\\.\\d+)?\\b\", text)\n    stopwords_found = [t for t in tokens if t in common_stopwords]\n    return pd.Series({\n        \"word_count\": len(tokens),\n        \"character_count\": len(text),\n        \"numeric_count\": len(numeric_tokens),\n        \"stopword_count\": len(stopwords_found),\n        \"average_word_length\": round(sum(len(w) for w in words) / max(len(words), 1), 2)\n    })\n\nstats_df = df[\"review\"].apply(analyze_review)\ndf = pd.concat([df, stats_df], axis=1)\n\nprint(\"--- Review Text Statistics Summary ---\")\nprint(df[[\"word_count\", \"character_count\", \"numeric_count\", \"stopword_count\", \"average_word_length\"]])\n\nfig, axes = plt.subplots(2, 2, figsize=(10, 8))\naxes[0, 0].hist(df[\"word_count\"], bins=5, color=\"skyblue\", edgecolor=\"black\")\naxes[0, 0].set_title(\"Word Count Distribution\")\n\naxes[0, 1].hist(df[\"character_count\"], bins=5, color=\"salmon\", edgecolor=\"black\")\naxes[0, 1].set_title(\"Character Count Distribution\")\n\naxes[1, 0].hist(df[\"stopword_count\"], bins=5, color=\"lightgreen\", edgecolor=\"black\")\naxes[1, 0].set_title(\"Stopword Count Distribution\")\n\naxes[1, 1].hist(df[\"average_word_length\"], bins=5, color=\"gold\", edgecolor=\"black\")\naxes[1, 1].set_title(\"Average Word Length Distribution\")\n\nplt.tight_layout()\nplt.show()\nprint(\"\\nDistribution plots created successfully.\")\n"
+            },
+            {
+                "id": "sub-8d-1",
+                "name": "8d-1: Sentiment Analysis Using NLTK and VADER",
+                "code": "import pandas as pd\n\ntry:\n    df = pd.read_csv(\"product_reviews.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"title\": [\"Great\", \"Bad\", \"Good\", \"Terrible\"],\n        \"review\": [\n            \"Excellent quality durable and fast delivery\",\n            \"Stopped working very poor experience\",\n            \"Worth buying good performance\",\n            \"Broken package unresponsive support horrible\"\n        ]\n    })\n\ndf[\"review\"] = df[\"review\"].fillna(\"\").astype(str)\n\ntry:\n    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer\n    analyzer = SentimentIntensityAnalyzer()\nexcept ImportError:\n    try:\n        import nltk\n        nltk.download(\"vader_lexicon\", quiet=True)\n        from nltk.sentiment.vader import SentimentIntensityAnalyzer\n        analyzer = SentimentIntensityAnalyzer()\n    except Exception:\n        class SimpleVADER:\n            def polarity_scores(self, text):\n                t = text.lower()\n                pos = sum(t.count(w) for w in [\"great\", \"excellent\", \"worth\", \"good\", \"durable\", \"love\", \"best\"])\n                neg = sum(t.count(w) for w in [\"poor\", \"terrible\", \"bad\", \"broken\", \"stopped\", \"horrible\"])\n                tot = max(pos + neg + 1, 1)\n                comp = round((pos - neg) / tot, 4)\n                return {\"neg\": round(neg/tot, 2), \"neu\": 0.5, \"pos\": round(pos/tot, 2), \"compound\": comp}\n        analyzer = SimpleVADER()\n\ndef classify(score):\n    if score >= 0.05: return \"Positive\"\n    elif score <= -0.05: return \"Negative\"\n    return \"Neutral\"\n\nscores = df[\"review\"].apply(analyzer.polarity_scores)\ndf[\"compound\"] = scores.apply(lambda x: x[\"compound\"])\ndf[\"pos\"] = scores.apply(lambda x: x[\"pos\"])\ndf[\"neg\"] = scores.apply(lambda x: x[\"neg\"])\ndf[\"sentiment\"] = df[\"compound\"].apply(classify)\n\nprint(\"--- Sentiment Polarity Table ---\")\nprint(df[[\"review\", \"compound\", \"sentiment\"]].to_string(index=False))\n\nprint(\"\\nSentiment Distribution:\")\nprint(df[\"sentiment\"].value_counts())\n\ndf.to_csv(\"sentiment_analysis_results.csv\", index=False)\nprint(\"\\nSaved results to sentiment_analysis_results.csv\")\n"
+            },
+            {
+                "id": "sub-8e-1",
+                "name": "8e-1: Scatter Intensity Plot of Sentiments",
+                "code": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ntry:\n    df = pd.read_csv(\"sentiment_analysis_results.csv\")\nexcept Exception:\n    df = pd.DataFrame({\n        \"review\": [\"Great product\", \"Poor experience\", \"Worth buying\", \"Average item\", \"Broken unit\"],\n        \"compound\": [0.65, -0.45, 0.40, 0.02, -0.72],\n        \"sentiment\": [\"Positive\", \"Negative\", \"Positive\", \"Neutral\", \"Negative\"]\n    })\n\ndf[\"review_index\"] = range(1, len(df) + 1)\ncolors = {\"Positive\": \"green\", \"Negative\": \"red\", \"Neutral\": \"gray\"}\n\nplt.figure(figsize=(10, 5))\nfor sent, color in colors.items():\n    subset = df[df[\"sentiment\"] == sent]\n    plt.scatter(subset[\"review_index\"], subset[\"compound\"], color=color, label=sent, s=80, alpha=0.85)\n\n# Classification thresholds\nplt.axhline(y=0.05, color=\"green\", linestyle=\"--\", label=\"Positive threshold (+0.05)\")\nplt.axhline(y=-0.05, color=\"red\", linestyle=\"--\", label=\"Negative threshold (-0.05)\")\nplt.axhline(y=0, color=\"black\", linestyle=\":\", label=\"Neutral reference\")\n\nplt.ylim(-1.05, 1.05)\nplt.xlabel(\"Review Index\", fontsize=11)\nplt.ylabel(\"VADER Compound Sentiment Score\", fontsize=11)\nplt.title(\"Sentiment Intensity of Product Reviews\", fontsize=12)\nplt.legend(loc=\"best\")\nplt.grid(True, alpha=0.25)\nplt.tight_layout()\nplt.show()\n\nprint(\"Scatter intensity plot generated successfully.\")\n"
+            },
+            {
+                "id": "sub-8f-1",
+                "name": "8f-1: Scrape Amazon Reviews with Requests & BeautifulSoup",
+                "code": "import requests\nfrom bs4 import BeautifulSoup\n\nheaders = {\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"}\nurl = \"https://www.amazon.in/product-reviews/B09G9BL5CP/\"\n\ntry:\n    r = requests.get(url, headers=headers, timeout=5)\n    soup = BeautifulSoup(r.content, 'html.parser')\n    reviews = soup.find_all('span', {'data-hook': 'review-body'})\n    print(f\"Total reviews extracted from Amazon: {len(reviews)}\")\n    for i, review in enumerate(reviews[:5], 1):\n        print(f\"{i}. {review.text.strip()}\")\nexcept Exception as e:\n    print(\"Direct Amazon request blocked or timed out (Note: Amazon uses anti-bot protection):\")\n    print(f\"Error detail: {e}\")\n    print(\"\\nRunning offline BeautifulSoup parser demo on sample Amazon review HTML structure:\")\n    sample_html = '<span data-hook=\"review-body\"><span>The sound quality and battery life are amazing!</span></span>'\n    soup = BeautifulSoup(sample_html, 'html.parser')\n    rev = soup.find('span', {'data-hook': 'review-body'})\n    print(\"Parsed Review:\", rev.text.strip())\n"
+            }
+        ],
+        "pdfName": "Experiment8.pdf"
+    },
+    {
+        "id": 9,
+        "title": "Experiment 9: Case Study - Customer Personality Analysis",
+        "desc": "Analyze customer segments based on purchasing behavior using K-Means clustering, feature standardization, Elbow method, and Silhouette analysis.",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-9a-1",
+                "name": "9a-1: Customer Segmentation using K-Means (Mall Customers)",
+                "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.cluster import KMeans\n\n# 1. Load dataset\nurl = \"https://raw.githubusercontent.com/selva86/datasets/master/Mall_Customers.csv\"\ntry:\n    df = pd.read_csv(url)\nexcept Exception:\n    df = pd.read_csv(\"Mall_Customers.csv\")\n\n# 2. Select features for clustering\nX = df[['Annual Income (k$)', 'Spending Score (1-100)']]\n\n# 3. Apply KMeans clustering (5 clusters)\nkmeans = KMeans(n_clusters=5, random_state=0, n_init=10)\ndf['Cluster'] = kmeans.fit_predict(X)\n\n# 4. Plot the clusters\nplt.figure(figsize=(9, 5))\ncolors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']\nfor cluster_id in range(5):\n    sub = df[df['Cluster'] == cluster_id]\n    plt.scatter(sub['Annual Income (k$)'], sub['Spending Score (1-100)'],\n                label=f'Cluster {cluster_id}', color=colors[cluster_id], s=60, alpha=0.8)\n\n# Plot Centroids\ncentroids = kmeans.cluster_centers_\nplt.scatter(centroids[:, 0], centroids[:, 1], s=180, c='black', marker='X', label='Centroids')\n\nplt.title(\"Customer Segments (K-Means Clustering)\", fontsize=13)\nplt.xlabel(\"Annual Income (k$)\")\nplt.ylabel(\"Spending Score (1-100)\")\nplt.legend()\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\nprint(\"--- Cluster Distribution ---\")\nprint(df['Cluster'].value_counts().sort_index())\n"
+            },
+            {
+                "id": "sub-9b-1",
+                "name": "9b-1: Customer Personality Analysis with Feature Scaling & Elbow Method",
+                "code": "import pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import KMeans\nfrom sklearn.metrics import silhouette_score\n\n# 1. Load the dataset\ntry:\n    df = pd.read_csv(\"marketing_campaign.csv\", sep=\"\\t\")\nexcept Exception:\n    np.random.seed(42)\n    df = pd.DataFrame({\n        \"Income\": np.random.normal(52000, 18000, 150).clip(15000, 100000),\n        \"MntWines\": np.random.exponential(250, 150).clip(5, 1000),\n        \"MntFruits\": np.random.exponential(25, 150).clip(1, 120),\n        \"MntMeatProducts\": np.random.exponential(140, 150).clip(5, 700),\n        \"MntFishProducts\": np.random.exponential(35, 150).clip(1, 180),\n        \"MntSweetProducts\": np.random.exponential(25, 150).clip(1, 120),\n        \"MntGoldProds\": np.random.exponential(40, 150).clip(1, 150)\n    })\n\n# 2. Select customer features\nfeatures = [\"Income\", \"MntWines\", \"MntFruits\", \"MntMeatProducts\", \"MntFishProducts\", \"MntSweetProducts\", \"MntGoldProds\"]\ndata = df[features].copy()\ndata = data.fillna(data.median())\ndata = data.clip(lower=data.quantile(0.01), upper=data.quantile(0.99), axis=1)\n\n# 3. Standardize features\nscaler = StandardScaler()\nX = scaler.fit_transform(data)\n\n# 4. Find suitable number of clusters (Elbow Method)\ninertias, scores = [], []\nk_range = range(2, 7)\nfor k in k_range:\n    model = KMeans(n_clusters=k, random_state=42, n_init=10)\n    labels = model.fit_predict(X)\n    inertias.append(model.inertia_)\n    scores.append(round(silhouette_score(X, labels), 3))\n\nprint(\"Silhouette scores for K in [2..6]:\", dict(zip(k_range, scores)))\n\n# Plot Elbow Curve\nplt.figure(figsize=(8, 4))\nplt.plot(list(k_range), inertias, marker=\"o\", color=\"teal\", linewidth=2)\nplt.xlabel(\"Number of Clusters (K)\")\nplt.ylabel(\"Inertia\")\nplt.title(\"Elbow Method for Optimal K\")\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n# 5. Fit model with best silhouette score\nbest_k = list(k_range)[scores.index(max(scores))]\nkmeans = KMeans(n_clusters=best_k, random_state=42, n_init=10)\ndf[\"Customer_Segment\"] = kmeans.fit_predict(X)\n\nprint(f\"\\n--- Customer Segment Summary (K={best_k}) ---\")\nsummary = df.groupby(\"Customer_Segment\")[features].mean().round(2)\nprint(summary)\n\n# 6. Visualize Segments: Income vs Wine Spending\nplt.figure(figsize=(8, 5))\nfor seg in sorted(df[\"Customer_Segment\"].unique()):\n    sub = df[df[\"Customer_Segment\"] == seg]\n    plt.scatter(sub[\"Income\"], sub[\"MntWines\"], label=f\"Segment {seg}\", s=60, alpha=0.8)\nplt.xlabel(\"Annual Income\")\nplt.ylabel(\"Wine Spending (MntWines)\")\nplt.title(\"Customer Segments: Income vs Wine Spending\")\nplt.legend()\nplt.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\ndf.to_csv(\"customer_segments.csv\", index=False)\nprint(\"Analysis complete. Saved to customer_segments.csv\")\n"
+            }
+        ],
+        "pdfName": "Experiment9.pdf"
+    },
+    {
+        "id": 10,
+        "title": "Experiment 10: Case Study - Text Emotion Detection",
+        "desc": "Detect emotional tones in text messages and predict emojis using NLP, CountVectorizer, Naive Bayes, and TF-IDF Logistic Regression pipeline.",
+        "github": "https://github.com/poojithachowdarykotapati-beep/DataScience",
+        "subExperiments": [
+            {
+                "id": "sub-10a-1",
+                "name": "10a-1: Text Emotion Detection with CountVectorizer & Naive Bayes",
+                "code": "from sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.naive_bayes import MultinomialNB\n\n# Sample training data\ntexts = [\n    'I am happy', 'This is wonderful', 'I am so thrilled',\n    'I am angry', 'This is frustrating', 'I hate this',\n    'I feel sad', 'I am very depressed', 'I feel lonely',\n    'I love this', 'I adore you', 'You mean the world to me'\n]\nlabels = [\n    'happy', 'happy', 'happy',\n    'angry', 'angry', 'angry',\n    'sad', 'sad', 'sad',\n    'love', 'love', 'love'\n]\n\n# 1. Vectorization\nvec = CountVectorizer()\nX = vec.fit_transform(texts)\n\n# 2. Train Multinomial Naive Bayes model\nmodel = MultinomialNB()\nmodel.fit(X, labels)\n\n# 3. Test predictions on new sentences\ntest_sentences = [\n    'I am so sad today',\n    'I am happy to meet you',\n    'I feel angry right now',\n    'I love my project'\n]\n\nprint(\"--- Naive Bayes Emotion Classification Results ---\")\nfor sent in test_sentences:\n    test_vec = vec.transform([sent])\n    pred = model.predict(test_vec)[0]\n    print(f\"Input: \\\"{sent}\\\" --> Emotion: {pred}\")\n"
+            },
+            {
+                "id": "sub-10b-1",
+                "name": "10b-1: Text Emotion Detection & Emoji Prediction with TF-IDF Pipeline",
+                "code": "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score, classification_report\n\n# 1. Labeled Dataset\ndata = {\n    \"text\": [\n        \"I am very happy today\", \"This is a wonderful day\", \"I feel cheerful and excited\",\n        \"I am sad and lonely\", \"I feel very disappointed\", \"I miss my family so much\",\n        \"I am angry with you\", \"This makes me furious\", \"I hate this situation\",\n        \"I am scared of the dark\", \"I am afraid of losing\", \"I feel nervous and frightened\",\n        \"I love you so much\", \"You mean everything to me\", \"I adore spending time with you\",\n        \"Wow this is unbelievable\", \"I did not expect this surprise\", \"What an amazing unexpected gift\"\n    ],\n    \"emotion\": [\n        \"happy\", \"happy\", \"happy\",\n        \"sadness\", \"sadness\", \"sadness\",\n        \"anger\", \"anger\", \"anger\",\n        \"fear\", \"fear\", \"fear\",\n        \"love\", \"love\", \"love\",\n        \"surprise\", \"surprise\", \"surprise\"\n    ]\n}\ndf = pd.DataFrame(data)\n\n# 2. Train / Test Split\nX_train, X_test, y_train, y_test = train_test_split(\n    df[\"text\"], df[\"emotion\"], test_size=0.33, random_state=42, stratify=df[\"emotion\"]\n)\n\n# 3. Build ML Pipeline: TF-IDF + Logistic Regression\nmodel = Pipeline([\n    (\"tfidf\", TfidfVectorizer(ngram_range=(1, 2))),\n    (\"classifier\", LogisticRegression(max_iter=1000))\n])\n\n# 4. Train Model\nmodel.fit(X_train, y_train)\n\n# 5. Evaluate Model\npredictions = model.predict(X_test)\nprint(f\"Test Accuracy: {accuracy_score(y_test, predictions) * 100:.2f}%\\n\")\nprint(\"Classification Report:\")\nprint(classification_report(y_test, predictions, zero_division=0))\n\n# 6. Emoji Mapping\nemoji_map = {\n    \"happy\": \"\ud83d\ude0a\",\n    \"sadness\": \"\ud83d\ude22\",\n    \"anger\": \"\ud83d\ude20\",\n    \"fear\": \"\ud83d\ude28\",\n    \"love\": \"\u2764\ufe0f\",\n    \"surprise\": \"\ud83d\ude32\"\n}\n\n# 7. Predict Emotion and Display Emoji\ndef detect_emotion(text):\n    emotion = model.predict([text])[0]\n    emoji = emoji_map.get(emotion, \"\u2728\")\n    print(f\"Input:            \\\"{text}\\\"\")\n    print(f\"Predicted Emotion: {emotion}\")\n    print(f\"Emoji:             {emoji}\\n\")\n\n# 8. Test the Application\nprint(\"--- Live Emotion & Emoji Predictions ---\")\ndetect_emotion(\"I am happy to see you\")\ndetect_emotion(\"I feel lonely today\")\ndetect_emotion(\"I love my family\")\ndetect_emotion(\"This makes me furious\")\ndetect_emotion(\"I am scared of what comes next\")\n"
+            }
+        ],
+        "pdfName": "Experiment10.pdf"
+    }
 ];
+
 
         const defaultTools = [
     {
@@ -1445,10 +1456,11 @@ pd.read_csv = safe_read_csv
         // DETERMINISTIC PERSISTENCE & STORAGE ENGINE
         // (Clean Single-Master LocalStorage + Emergency Backup + IndexedDB)
         // ==========================================
-        const PRIMARY_STORAGE_KEY = 'poojitha_library_data_v2026_exp8_9_10';
+        const PRIMARY_STORAGE_KEY = 'poojitha_library_data_v2026_exp_pdfs_v4';
 
         // Stale legacy keys to aggressively purge so user has full 5MB free quota
         const LEGACY_STORAGE_KEYS = [
+            'poojitha_library_data_v2026_exp8_9_10',
             'poojitha_library_data_v2026_final',
             'poojitha_portal_data_v2026_exp7',
             'poojitha_portal_data_v2026',
@@ -1553,11 +1565,13 @@ pd.read_csv = safe_read_csv
             const userExps = Array.isArray(s.experiments) ? s.experiments : [];
 
             // Merge user changes or custom sub-experiments into baseDefaults
-            baseDefaults.forEach(defExp => {
+            baseDefaults.forEach((defExp, dIdx) => {
+                defExp.pdfName = defExp.pdfName || (`Experiment${dIdx + 1}.pdf`);
                 const userExp = userExps.find(x => x.id == defExp.id || (x.title && x.title.toLowerCase().trim() === defExp.title.toLowerCase().trim()));
                 if (userExp) {
                     if (userExp.github) defExp.github = userExp.github;
                     if (userExp.desc) defExp.desc = userExp.desc;
+                    if (userExp.pdfName) defExp.pdfName = userExp.pdfName;
                     // Merge any additional sub-experiments the user might have added locally
                     if (Array.isArray(userExp.subExperiments)) {
                         userExp.subExperiments.forEach(userSub => {
@@ -2164,38 +2178,63 @@ pd.read_csv = safe_read_csv
                     </div>
                 `;
             } else {
-                state.experiments.forEach(exp => {
+                state.experiments.forEach((exp, expIdx) => {
                     let isExpanded = exp.id === expandedExpId;
+                    const pdfFile = exp.pdfName || (`Experiment${expIdx + 1}.pdf`);
                     html += `
                         <div class="bg-[#070b19] rounded-3xl border border-teal-500/25 shadow-xl overflow-hidden transition">
                             <div onclick="toggleExperimentAccordion(${exp.id})" class="p-6 flex justify-between items-center cursor-pointer hover:bg-teal-500/5 transition">
-                                <div class="flex items-center space-x-3.5">
-                                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
+                                <div class="flex items-center space-x-3.5 min-w-0 pr-2">
+                                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold shrink-0">
                                         <i class="fa-solid ${isExpanded ? 'fa-folder-open' : 'fa-folder'} text-base"></i>
                                     </div>
-                                    <div>
-                                        <h3 class="text-sm font-extrabold text-white">${exp.title}</h3>
-                                        <p class="text-[10px] text-teal-400 font-mono mt-0.5">${exp.subExperiments ? exp.subExperiments.length : 0} Sub-experiments</p>
+                                    <div class="truncate">
+                                        <h3 class="text-sm font-extrabold text-white truncate">${exp.title}</h3>
+                                        <p class="text-[10px] text-teal-400 font-mono mt-0.5 flex items-center space-x-2">
+                                            <span>${exp.subExperiments ? exp.subExperiments.length : 0} Sub-experiments</span>
+                                            <span>*</span>
+                                            <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-file-pdf mr-1"></i>${pdfFile}</span>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <button onclick="event.stopPropagation(); openLabRecordModal(${exp.id})" class="text-teal-400 hover:text-white text-xs px-2.5 py-1 rounded-xl bg-teal-500/10 hover:bg-teal-500/25 border border-teal-500/30 flex items-center space-x-1.5 transition" title="View Lab Record, Aim, Theory & Results">
-                                        <i class="fa-solid fa-book-open text-[11px]"></i>
-                                        <span class="text-[10px] font-semibold">Lab Record</span>
+                                <div class="flex items-center space-x-2 shrink-0">
+                                    <button onclick="event.stopPropagation(); openFlipbook('${pdfFile}', '${exp.title.replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-xl text-xs flex items-center space-x-1.5 shadow-md hover:opacity-90 active:scale-95 transition" title="Read Lab Record in 3D Flipbook">
+                                        <i class="fa-solid fa-book-open text-xs"></i>
+                                        <span class="hidden sm:inline">Read Flipbook</span>
+                                        <span class="sm:hidden">Flipbook</span>
                                     </button>
-                                    ${exp.github ? `<a href="${exp.github}" target="_blank" onclick="event.stopPropagation();" class="text-slate-400 hover:text-teal-400 text-xs px-2.5 py-1 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center space-x-1" title="Experiment GitHub Repo"><i class="fa-brands fa-github"></i><span class="text-[10px] font-mono">Repo</span></a>` : ''}
-                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-400 text-xs"></i>
+                                    <a href="${pdfFile}" download="${pdfFile}" onclick="event.stopPropagation();" class="text-teal-400 hover:text-white text-xs px-2.5 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/25 border border-teal-500/30 flex items-center space-x-1 transition" title="Download Lab Record PDF">
+                                        <i class="fa-solid fa-download text-[11px]"></i>
+                                        <span class="text-[10px] font-mono">PDF</span>
+                                    </a>
+                                    ${exp.github ? `<a href="${exp.github}" target="_blank" onclick="event.stopPropagation();" class="text-slate-400 hover:text-teal-400 text-xs px-2 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 hidden md:flex items-center space-x-1" title="Experiment GitHub Repo"><i class="fa-brands fa-github"></i></a>` : ''}
+                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-400 text-xs ml-1"></i>
                                 </div>
                             </div>
 
                             ${isExpanded ? `
                                 <div class="p-6 pt-0 space-y-3 border-t border-teal-500/15 bg-[#020617]/50">
-                                    <div class="p-3.5 bg-teal-500/5 border border-teal-500/15 rounded-2xl text-xs text-slate-300 mt-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
-                                        <p class="leading-relaxed"><span class="text-teal-400 font-semibold uppercase text-[10px] tracking-wider block mb-0.5">Aim & Overview</span>${exp.desc || 'Data Science Lab Experiment'}</p>
-                                        <button onclick="openLabRecordModal(${exp.id})" class="shrink-0 px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-xl border border-emerald-500/30 text-[11px] font-bold flex items-center space-x-1.5 transition self-start md:self-auto">
-                                            <i class="fa-solid fa-book-open text-xs"></i>
-                                            <span>Full Lab Record</span>
-                                        </button>
+                                    <div class="p-4 bg-teal-500/5 border border-teal-500/15 rounded-2xl text-xs text-slate-300 mt-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                        <div>
+                                            <span class="text-teal-400 font-bold uppercase text-[10px] tracking-wider flex items-center mb-1">
+                                                <i class="fa-solid fa-file-pdf text-emerald-400 mr-1.5"></i> Lab Record PDF Available
+                                            </span>
+                                            <p class="leading-relaxed">${exp.desc || 'Complete laboratory practical manual with aim, theoretical concepts, code, outputs, and results.'}</p>
+                                        </div>
+                                        <div class="flex items-center space-x-2 shrink-0 self-start md:self-auto">
+                                            <button onclick="openFlipbook('${pdfFile}', '${exp.title.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow hover:opacity-90 transition">
+                                                <i class="fa-solid fa-book-open text-xs"></i>
+                                                <span>3D Flipbook</span>
+                                            </button>
+                                            <a href="${pdfFile}" download="${pdfFile}" class="px-3 py-1.5 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 font-semibold rounded-xl text-xs border border-teal-500/30 flex items-center space-x-1.5 transition">
+                                                <i class="fa-solid fa-download text-xs"></i>
+                                                <span>Download PDF</span>
+                                            </a>
+                                            <button onclick="openLabRecordModal(${exp.id})" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs border border-slate-700 flex items-center space-x-1 transition" title="Preview Lab Record & PDF">
+                                                <i class="fa-solid fa-file-lines text-xs"></i>
+                                                <span>Preview</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="space-y-2 mt-3">
                             ` : ''}
@@ -2600,13 +2639,43 @@ print("Plot generated successfully! Check Visual Graphs tab.")
             const exp = (state.experiments || []).find(e => e.id == expId) || defaultExperiments.find(e => e.id == expId);
             if (!exp) return;
             
+            const expIdx = (state.experiments || defaultExperiments).findIndex(e => e.id == expId);
+            const pdfFile = exp.pdfName || (`Experiment${(expIdx >= 0 ? expIdx + 1 : 1)}.pdf`);
+            
             const titleEl = document.getElementById('lab-record-title');
             const contentEl = document.getElementById('lab-record-content');
             if (titleEl) titleEl.innerText = exp.title;
             
+            const pdfActionBar = `
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-[#020617] p-3.5 rounded-2xl border border-teal-500/25 mb-4 shadow-lg">
+                    <div class="flex items-center space-x-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-white block">Official Laboratory Record PDF</span>
+                            <span class="text-[10px] text-teal-400 font-mono">${pdfFile}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="openFlipbook('${pdfFile}', '${exp.title.replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs flex items-center space-x-1.5 shadow hover:opacity-90 active:scale-95 transition">
+                            <i class="fa-solid fa-book-open text-xs"></i>
+                            <span>Open 3D Flipbook</span>
+                        </button>
+                        <a href="${pdfFile}" download="${pdfFile}" class="px-3.5 py-1.5 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 font-semibold rounded-xl text-xs border border-teal-500/30 flex items-center space-x-1.5 transition">
+                            <i class="fa-solid fa-download text-xs"></i>
+                            <span>Download PDF</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-full h-[52vh] rounded-2xl overflow-hidden border border-teal-500/20 bg-[#020617] mb-5 shadow-inner hidden md:block">
+                    <iframe src="${pdfFile}#toolbar=1" class="w-full h-full border-0"></iframe>
+                </div>
+            `;
+            
             const record = EXPERIMENT_RECORDS[exp.id] || EXPERIMENT_RECORDS[String(exp.id)];
             if (record && contentEl) {
-                contentEl.innerHTML = record;
+                contentEl.innerHTML = pdfActionBar + record;
             } else if (contentEl) {
                 let subList = (exp.subExperiments || []).map(s => `
                     <div class="p-3.5 bg-[#070b19] rounded-2xl border border-teal-500/20 flex justify-between items-center">
