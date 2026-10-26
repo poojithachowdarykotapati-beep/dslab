@@ -16,7 +16,7 @@ The Data Science Lab Digital Portal provides a simple and interactive platform f
 
 - **Dashboard:** Access the main sections of the Data Science Lab portal.
 - **Learning Modules:** Explore Data Science learning materials and topics.
-- **Experiments Hub:** Browse and organize laboratory experiments.
+- **Experiments Hub:** Browse, organize, and execute 10 comprehensive laboratory experiments (including Web Scraping with Beautiful Soup, Customer Personality Clustering, and Text Emotion Detection).
 - **Python Code Editor:** Write and execute Python programs directly in the browser.
 - **Live Output:** View the output of Python programs in the console.
 - **Pandas and NumPy Support:** Perform basic data analysis operations.
